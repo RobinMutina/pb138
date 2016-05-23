@@ -53,3 +53,4 @@ nbactions.xml
 .nb-gradle/
 
 # Created by .ignore support plugin (hsz.mobi)
+/JobDB/target/
