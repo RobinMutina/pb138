@@ -5,7 +5,7 @@
  */
 package cz.muni.fi.pb138.project;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -16,8 +16,8 @@ public class JobDone {
     private Long id;
     private Long userId;
     private Long jobTypeId;
-    private LocalDate startTime;
-    private LocalDate endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     
     public void setId(Long id){
         this.id = id;
@@ -40,17 +40,17 @@ public class JobDone {
         return jobTypeId;
     }
     
-    public void setStrartTime(LocalDate startTime){
+    public void setStrartTime(LocalDateTime startTime){
         this.startTime = startTime;
     }
-    public LocalDate getStartTime(){
+    public LocalDateTime getStartTime(){
         return startTime;
     }
     
-    public void setEndTime(LocalDate endTime){
+    public void setEndTime(LocalDateTime endTime){
         this.endTime = endTime;
     }
-    public LocalDate getEndTime(){
+    public LocalDateTime getEndTime(){
         return endTime;
     }
     

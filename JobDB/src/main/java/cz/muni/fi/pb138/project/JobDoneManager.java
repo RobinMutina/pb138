@@ -5,7 +5,7 @@
  */
 package cz.muni.fi.pb138.project;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -70,7 +70,7 @@ public interface JobDoneManager {
      * @return return List of JobDone elements for current user at a specified time period
      * @throws ServiceFailureException when db operations fails
      */
-    List<JobDone> findAllJobDoneByUserAtTime(long id, LocalDate startTime, LocalDate endTime) throws ServiceFailureException;
+    List<JobDone> findAllJobDoneByUserAtTime(long id, LocalDateTime startTime, LocalDateTime endTime) throws ServiceFailureException;
     
     /**
      * Gets the total salary of specified user
@@ -88,5 +88,5 @@ public interface JobDoneManager {
      * @return return total salary at a specified time
      * @throws ServiceFailureException when db operations fails
      */
-    double getUserSalaryAtTime(Long id, LocalDate startTime, LocalDate endTime) throws ServiceFailureException;
+    double getUserSalaryAtTime(Long id, LocalDateTime startTime, LocalDateTime endTime) throws ServiceFailureException;
 }
