@@ -23,7 +23,11 @@ public class JobTypeManagerImpl implements JobTypeManager {
      */
     @Override
     public void createJobType(JobType jobType) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try{
+            jobTypeDAO.createJobType(jobType);
+        } catch (ServiceFailureException ex){
+            throw new ServiceFailureException("Creation of jobType failed.", ex);
+        }
     }
 
     /**
@@ -34,7 +38,11 @@ public class JobTypeManagerImpl implements JobTypeManager {
      */
     @Override
     public void updateJobType(JobType jobType) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try{
+            jobTypeDAO.updateJobType(jobType);
+        } catch (ServiceFailureException ex){
+            throw new ServiceFailureException("Update of jobType failed.", ex);
+        }
     }
 
     /**
@@ -45,7 +53,15 @@ public class JobTypeManagerImpl implements JobTypeManager {
      */
     @Override
     public void deleteJobType(Long id) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try{
+            if (id == null || id < 0) {
+                throw new IllegalArgumentException("id is invalid.");
+            }
+
+            jobTypeDAO.deleteJobType(id);
+        } catch (IllegalArgumentException | ServiceFailureException ex){
+            throw new ServiceFailureException("Creation of jobType failed.", ex);
+        }
     }
 
     /**
@@ -57,7 +73,15 @@ public class JobTypeManagerImpl implements JobTypeManager {
      */
     @Override
     public JobType getJobType(Long id) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try{
+            if (id == null || id < 0) {
+                throw new IllegalArgumentException("id is invalid.");
+            }
+
+            return jobTypeDAO.getJobType(id);
+        } catch (IllegalArgumentException | ServiceFailureException ex){
+            throw new ServiceFailureException("Creation of jobType failed.", ex);
+        }
     }
 
     /**
@@ -68,6 +92,10 @@ public class JobTypeManagerImpl implements JobTypeManager {
      */
     @Override
     public List<JobType> getAllJobTypes() throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try{
+            return jobTypeDAO.getAllJobTypes();
+        } catch (ServiceFailureException ex){
+            throw new ServiceFailureException("Creation of jobType failed.", ex);
+        }
     }
 }

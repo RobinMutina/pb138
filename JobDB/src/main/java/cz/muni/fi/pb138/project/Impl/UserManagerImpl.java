@@ -2,6 +2,7 @@ package cz.muni.fi.pb138.project.Impl;
 
 import cz.muni.fi.pb138.project.Entities.User;
 import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
+import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 import cz.muni.fi.pb138.project.Impl.DataAccess.UserDAO;
 import cz.muni.fi.pb138.project.Interfaces.UserManager;
 
@@ -24,7 +25,11 @@ public class UserManagerImpl implements UserManager {
      */
     @Override
     public void createUser(User user) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try {
+            userDAO.createUser(user);
+        } catch (ServiceFailureException ex){
+            throw new ServiceFailureException("Creating user failed.", ex);
+        }
     }
 
     /**
@@ -35,7 +40,11 @@ public class UserManagerImpl implements UserManager {
      */
     @Override
     public void updateUser(User user) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try {
+            userDAO.updateUser(user);
+        } catch (ServiceFailureException ex){
+            throw new ServiceFailureException("Updating user failed.", ex);
+        }
     }
 
     /**
@@ -46,7 +55,16 @@ public class UserManagerImpl implements UserManager {
      */
     @Override
     public void deleteUser(Long id) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+
+        try {
+            if (id == null || id < 0) {
+                throw new IllegalArgumentException("id is invalid.");
+            }
+
+            userDAO.deleteUser(id);
+        } catch (IllegalArgumentException | ServiceFailureException ex){
+            throw new ServiceFailureException("Deleting user failed.", ex);
+        }
     }
 
     /**
@@ -58,7 +76,15 @@ public class UserManagerImpl implements UserManager {
      */
     @Override
     public User getUser(Long id) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try {
+            if (id == null || id < 0) {
+                throw new IllegalArgumentException("id is invalid.");
+            }
+
+            return userDAO.getUser(id);
+        } catch (IllegalArgumentException | ServiceFailureException ex){
+            throw new ServiceFailureException("Getting user failed.", ex);
+        }
     }
 
     /**
@@ -69,6 +95,10 @@ public class UserManagerImpl implements UserManager {
      */
     @Override
     public List<User> getAllUsers() throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try {
+            return userDAO.getAllUsers();
+        } catch (ServiceFailureException ex){
+            throw new ServiceFailureException("Deleting user failed.", ex);
+        }
     }
 }

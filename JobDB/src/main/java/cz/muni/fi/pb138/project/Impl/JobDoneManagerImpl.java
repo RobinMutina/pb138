@@ -2,6 +2,7 @@ package cz.muni.fi.pb138.project.Impl;
 
 import cz.muni.fi.pb138.project.Entities.JobDone;
 import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
+import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 import cz.muni.fi.pb138.project.Impl.DataAccess.JobDoneDAO;
 import cz.muni.fi.pb138.project.Interfaces.JobDoneManager;
 
@@ -25,7 +26,11 @@ public class JobDoneManagerImpl implements JobDoneManager {
      */
     @Override
     public void createJobDone(JobDone jobDone) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try {
+            jobDoneDAO.createJobDone(jobDone);
+        } catch (ServiceFailureException ex){
+            throw new ServiceFailureException("Creating jobDone failed.", ex);
+        }
     }
 
     /**
@@ -37,7 +42,11 @@ public class JobDoneManagerImpl implements JobDoneManager {
      */
     @Override
     public void updateJobDone(JobDone jobDone) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try {
+            jobDoneDAO.updateJobDone(jobDone);
+        } catch (ServiceFailureException ex){
+            throw new ServiceFailureException("Updating jobDone failed.", ex);
+        }
     }
 
     /**
@@ -48,7 +57,15 @@ public class JobDoneManagerImpl implements JobDoneManager {
      */
     @Override
     public void deleteJobDone(Long id) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try {
+            if (id == null || id < 0){
+                throw new IllegalArgumentException("id is invalid");
+            }
+
+            jobDoneDAO.deleteJobDone(id);
+        } catch (IllegalArgumentException | ServiceFailureException ex){
+            throw new ServiceFailureException("Deleting jobDone failed.", ex);
+        }
     }
 
     /**
@@ -60,7 +77,15 @@ public class JobDoneManagerImpl implements JobDoneManager {
      */
     @Override
     public JobDone getJobDoneById(Long id) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try {
+            if (id == null || id < 0){
+                throw new IllegalArgumentException("id is invalid");
+            }
+
+            return jobDoneDAO.getJobDoneById(id);
+        } catch (IllegalArgumentException | ServiceFailureException ex){
+            throw new ServiceFailureException("Getting jobDone failed.", ex);
+        }
     }
 
     /**
@@ -71,7 +96,11 @@ public class JobDoneManagerImpl implements JobDoneManager {
      */
     @Override
     public List<JobDone> getAllJobDone() throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try {
+            return jobDoneDAO.getAllJobDone();
+        } catch (ServiceFailureException ex){
+            throw new ServiceFailureException("Getting all jobDone failed.", ex);
+        }
     }
 
     /**
@@ -83,8 +112,16 @@ public class JobDoneManagerImpl implements JobDoneManager {
      * @throws ServiceFailureException when db operations fails
      */
     @Override
-    public List<JobDone> getAllJobDoneByUser(Long id) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+    public List<JobDone> getAllJobDoneByUserId(Long id) throws ServiceFailureException {
+        try {
+            if (id == null || id < 0){
+                throw new IllegalArgumentException("id is invalid");
+            }
+
+            return jobDoneDAO.getAllJobDoneByUserId(id);
+        } catch (IllegalArgumentException | ServiceFailureException ex){
+            throw new ServiceFailureException("Getting all jobDone failed.", ex);
+        }
     }
 
     /**
@@ -97,8 +134,24 @@ public class JobDoneManagerImpl implements JobDoneManager {
      * @throws ServiceFailureException when db operations fails
      */
     @Override
-    public List<JobDone> getAllJobDoneByUserAtTime(long id, LocalDateTime startTime, LocalDateTime endTime) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+    public List<JobDone> getAllJobDoneByUserAtTime(Long id, LocalDateTime startTime, LocalDateTime endTime) throws ServiceFailureException {
+        try {
+            if (id < 0){
+                throw new IllegalArgumentException("id is invalid");
+            }
+
+            if (startTime == null){
+                throw new IllegalArgumentException("startTime is null");
+            }
+
+            if (endTime == null){
+                throw new IllegalArgumentException("endTime is null");
+            }
+
+            return jobDoneDAO.getAllJobDoneByUserAtTime(id, startTime, endTime);
+        } catch (IllegalArgumentException | ServiceFailureException ex){
+            throw new ServiceFailureException("Getting all jobDone failed.", ex);
+        }
     }
 
     /**
@@ -110,7 +163,15 @@ public class JobDoneManagerImpl implements JobDoneManager {
      */
     @Override
     public BigDecimal getUserTotalSalary(Long id) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try {
+            if (id == null || id < 0){
+                throw new IllegalArgumentException("id is invalid");
+            }
+
+            return jobDoneDAO.getUserTotalSalary(id);
+        } catch (IllegalArgumentException | ServiceFailureException ex){
+            throw new ServiceFailureException("Getting all jobDone failed.", ex);
+        }
     }
 
     /**
@@ -124,6 +185,22 @@ public class JobDoneManagerImpl implements JobDoneManager {
      */
     @Override
     public BigDecimal getUserSalaryAtTime(Long id, LocalDateTime startTime, LocalDateTime endTime) throws ServiceFailureException {
-        throw new UnsupportedOperationException();
+        try {
+            if (id < 0){
+                throw new IllegalArgumentException("id is invalid");
+            }
+
+            if (startTime == null){
+                throw new IllegalArgumentException("startTime is null");
+            }
+
+            if (endTime == null){
+                throw new IllegalArgumentException("endTime is null");
+            }
+
+            return jobDoneDAO.getUserSalaryAtTime(id, startTime, endTime);
+        } catch (IllegalArgumentException | ServiceFailureException ex){
+            throw new ServiceFailureException("Getting all jobDone failed.", ex);
+        }
     }
 }

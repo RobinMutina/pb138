@@ -64,7 +64,7 @@ public interface JobDoneManager {
      * @return return current users list of JobDone elements
      * @throws ServiceFailureException when db operations fails
      */
-    List<JobDone> getAllJobDoneByUser(Long id) throws ServiceFailureException;
+    List<JobDone> getAllJobDoneByUserId(Long id) throws ServiceFailureException;
     
     /**
      * Finds all JobDone elements for some specific user at some current time
@@ -74,7 +74,7 @@ public interface JobDoneManager {
      * @return return List of JobDone elements for current user at a specified time period
      * @throws ServiceFailureException when db operations fails
      */
-    List<JobDone> getAllJobDoneByUserAtTime(long id, LocalDateTime startTime, LocalDateTime endTime) throws ServiceFailureException;
+    List<JobDone> getAllJobDoneByUserAtTime(Long id, LocalDateTime startTime, LocalDateTime endTime) throws ServiceFailureException;
     
     /**
      * Gets the total salary of specified user

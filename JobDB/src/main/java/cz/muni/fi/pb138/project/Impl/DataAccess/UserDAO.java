@@ -1,6 +1,9 @@
 package cz.muni.fi.pb138.project.Impl.DataAccess;
 
 import cz.muni.fi.pb138.project.Entities.User;
+import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
+import cz.muni.fi.pb138.project.Exceptions.ValidationException;
+import cz.muni.fi.pb138.project.Validators.UserValidator;
 
 import java.util.List;
 
@@ -10,38 +13,46 @@ import java.util.List;
 public class UserDAO {
 
     public void createUser(User user){
-        if (user == null){
-            throw new IllegalArgumentException("jobDone is null");
+        try {
+            UserValidator.canCreate(user);
+        } catch (ValidationException e) {
+            throw new ServiceFailureException(e);
         }
-
-        //if (DB.contains(user)){
-        //    throw new IllegalArgumentException("DB already contain user");
-        //}
 
         throw new UnsupportedOperationException();
     }
 
     public void updateUser(User user){
-        if (user == null){
-            throw new IllegalArgumentException("jobDone is null");
+        try {
+            UserValidator.canUpdate(user);
+        } catch (ValidationException e) {
+            throw new ServiceFailureException(e);
         }
 
-        //if (!DB.contains(user)){
-        //    throw new IllegalArgumentException("DB doesn't contain user");
-        //}
+        if (this.getUser(user.getId()) == null){
+            throw new IllegalArgumentException("DB doesn't contain user");
+        }
 
         throw new UnsupportedOperationException();
     }
 
     public void deleteUser(long id){
-        //if (!DB.contains(id)){
-        //    throw new IllegalArgumentException("DB doesn't contain user");
-        //}
+        if (id < 0){
+            throw new IllegalArgumentException("id is invalid");
+        }
+
+        if (this.getUser(id) == null){
+            throw new IllegalArgumentException("DB doesn't contain user");
+        }
 
         throw new UnsupportedOperationException();
     }
 
     public User getUser(long id){
+        if (id < 0){
+            throw new IllegalArgumentException("id is invalid");
+        }
+
         //if (!DB.contains(id)){
         //    return null;
         //}
