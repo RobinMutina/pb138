@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pb138.project;
+package cz.muni.fi.pb138.project.Interfaces;
+
+import cz.muni.fi.pb138.project.Entities.User;
+import cz.muni.fi.pb138.project.ServiceFailureException;
 
 import java.util.List;
 
@@ -17,7 +20,7 @@ public interface UserManager {
      * generated and stored into id attribute.
      * 
      * @param user user to be created
-     * @throws ServiceFailureException when db operations fails 
+     * @throws ServiceFailureException when db operations fails
      */
     void createUser(User user) throws ServiceFailureException;
     

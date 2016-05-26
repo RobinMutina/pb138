@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pb138.project;
+package cz.muni.fi.pb138.project.Entities;
 
 import java.util.Objects;
 
@@ -11,9 +11,10 @@ import java.util.Objects;
  *
  * @author Vladislav Malynych
  */
-public class User {
+public class JobType {
     private Long id;
     private String name;
+    private int pricePerHour;
     
     public Long getId() {
         return id;
@@ -28,10 +29,17 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
-
+    
+    public int getPricePerHour() {
+        return pricePerHour;
+    }
+    public void setPricePerHour(int pricePerHour) {
+        this.pricePerHour = pricePerHour;
+    }
+    
     @Override
     public String toString() {
-        return "JobType{" + "id=" + id + ", name=" + name + "}";
+        return "JobType{" + "id=" + id + ", name=" + name + ", PricePerHour=" + pricePerHour + "}";
     }
 
     @Override
@@ -42,7 +50,7 @@ public class User {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final User other = (User) obj;
+        final JobType other = (JobType) obj;
         if (obj != this && this.id == null) {
             return false;
         }
@@ -52,7 +60,8 @@ public class User {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 19 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.id);
         return hash;
     }
+    
 }
