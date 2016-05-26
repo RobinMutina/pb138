@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.pb138.project.Entities;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Objects;
 public class JobType {
     private Long id;
     private String name;
-    private int pricePerHour;
+    private BigDecimal pricePerHour;
     
     public Long getId() {
         return id;
@@ -30,10 +31,10 @@ public class JobType {
         this.name = name;
     }
     
-    public int getPricePerHour() {
+    public BigDecimal getPricePerHour() {
         return pricePerHour;
     }
-    public void setPricePerHour(int pricePerHour) {
+    public void setPricePerHour(BigDecimal pricePerHour) {
         this.pricePerHour = pricePerHour;
     }
     

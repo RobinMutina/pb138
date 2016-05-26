@@ -6,7 +6,7 @@
 package cz.muni.fi.pb138.project.Interfaces;
 
 import cz.muni.fi.pb138.project.Entities.User;
-import cz.muni.fi.pb138.project.ServiceFailureException;
+import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public interface UserManager {
      * @return user with given id or null if such user does not exist.
      * @throws ServiceFailureException when db operations fails
      */
-    User findUser(Long id) throws ServiceFailureException;
+    User getUser(Long id) throws ServiceFailureException;
     
     /**
      * Returns list of all users in the database.
@@ -55,5 +55,5 @@ public interface UserManager {
      * @return list of all users in database.
      * @throws ServiceFailureException when db operations fails
      */
-    List<User> findAllUsers() throws ServiceFailureException;
+    List<User> getAllUsers() throws ServiceFailureException;
 }

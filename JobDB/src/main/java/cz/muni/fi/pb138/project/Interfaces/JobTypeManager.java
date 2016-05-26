@@ -6,7 +6,7 @@
 package cz.muni.fi.pb138.project.Interfaces;
 
 import cz.muni.fi.pb138.project.Entities.JobType;
-import cz.muni.fi.pb138.project.ServiceFailureException;
+import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public interface JobTypeManager {
      * @return JobType with given id or null if such JobType does not exist.
      * @throws ServiceFailureException when db operations fails
      */
-    JobType findJobType(Long id) throws ServiceFailureException;
+    JobType getJobType(Long id) throws ServiceFailureException;
     
     /**
      * Returns list of all JobTypes in the database.
@@ -55,5 +55,5 @@ public interface JobTypeManager {
      * @return list of all JobTypes in database.
      * @throws ServiceFailureException when db operations fails
      */
-    List<JobType> findAllJobTypes() throws ServiceFailureException;
+    List<JobType> getAllJobTypes() throws ServiceFailureException;
 }

@@ -6,8 +6,9 @@
 package cz.muni.fi.pb138.project.Interfaces;
 
 import cz.muni.fi.pb138.project.Entities.JobDone;
-import cz.muni.fi.pb138.project.ServiceFailureException;
+import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -47,14 +48,14 @@ public interface JobDoneManager {
      * @return JobDone with given id or null if such does not exist.
      * @throws ServiceFailureException when db operations fails
      */
-    JobDone findJobDone(Long id) throws ServiceFailureException;
+    JobDone getJobDoneById(Long id) throws ServiceFailureException;
     
     /**
      * Finds all JobDone elements at the database
      * @return returns List of all found jobDone elements
      * @throws ServiceFailureException when db operations fails
      */
-    List<JobDone> findAllJobDone() throws ServiceFailureException;
+    List<JobDone> getAllJobDone() throws ServiceFailureException;
     
     /**
      * Finds all JobDone elements for some specific user
@@ -63,7 +64,7 @@ public interface JobDoneManager {
      * @return return current users list of JobDone elements
      * @throws ServiceFailureException when db operations fails
      */
-    List<JobDone> findAllJobDoneByUser(Long id) throws ServiceFailureException;
+    List<JobDone> getAllJobDoneByUser(Long id) throws ServiceFailureException;
     
     /**
      * Finds all JobDone elements for some specific user at some current time
@@ -73,7 +74,7 @@ public interface JobDoneManager {
      * @return return List of JobDone elements for current user at a specified time period
      * @throws ServiceFailureException when db operations fails
      */
-    List<JobDone> findAllJobDoneByUserAtTime(long id, LocalDateTime startTime, LocalDateTime endTime) throws ServiceFailureException;
+    List<JobDone> getAllJobDoneByUserAtTime(long id, LocalDateTime startTime, LocalDateTime endTime) throws ServiceFailureException;
     
     /**
      * Gets the total salary of specified user
@@ -81,7 +82,7 @@ public interface JobDoneManager {
      * @return returns total salary
      * @throws ServiceFailureException when db operations fails
      */
-    double getUserTotalSalary(Long id) throws ServiceFailureException;
+    BigDecimal getUserTotalSalary(Long id) throws ServiceFailureException;
     
     /**
      * Gets specified user salary at some exact period of time
@@ -91,5 +92,5 @@ public interface JobDoneManager {
      * @return return total salary at a specified time
      * @throws ServiceFailureException when db operations fails
      */
-    double getUserSalaryAtTime(Long id, LocalDateTime startTime, LocalDateTime endTime) throws ServiceFailureException;
+    BigDecimal getUserSalaryAtTime(Long id, LocalDateTime startTime, LocalDateTime endTime) throws ServiceFailureException;
 }
