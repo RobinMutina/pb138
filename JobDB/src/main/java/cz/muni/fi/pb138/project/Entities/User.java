@@ -12,14 +12,22 @@ import java.util.Objects;
  * @author Vladislav Malynych
  */
 public class User {
-    private Long id;
+    private final Long NOT_INITIALISED_ID = -1L;
+    private Long id = NOT_INITIALISED_ID;
     private String name;
     
     public Long getId() {
         return id;
     }
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long id) throws IllegalAccessException {
+        if (this.id.equals(NOT_INITIALISED_ID)) {
+            if(id < 0L) {
+                throw new IllegalArgumentException("Id cannot be negative");
+            }
+            this.id = id;
+        }else{
+            throw new IllegalAccessException("id is already set");
+        }
     }
      
     public String getName() {

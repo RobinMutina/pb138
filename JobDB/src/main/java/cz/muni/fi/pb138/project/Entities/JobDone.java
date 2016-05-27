@@ -13,28 +13,50 @@ import java.util.Objects;
  * @author Vladislav Malynych
  */
 public class JobDone {
-    private Long id;
-    private Long userId;
-    private Long jobTypeId;
+    private final Long NOT_INITIALISED_ID = -1L;
+    private Long id = NOT_INITIALISED_ID;
+    private Long userId = NOT_INITIALISED_ID;
+    private Long jobTypeId = NOT_INITIALISED_ID;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     
-    public void setId(Long id){
-        this.id = id;
+    public void setId(Long id) throws IllegalAccessException {
+        if (this.id.equals(NOT_INITIALISED_ID)) {
+            if(id < 0L) {
+                throw new IllegalArgumentException("Id cannot be negative");
+            }
+            this.id = id;
+        }else{
+            throw new IllegalAccessException("id is already set");
+        }
     }
     public long getId(){
         return id;
     }
 
     public void setUserId(Long userId){
-        this.userId = userId;
+        if (this.userId.equals(NOT_INITIALISED_ID)) {
+            if(userId < 0L) {
+                throw new IllegalArgumentException("Id cannot be negative");
+            }
+            this.userId = userId;
+        }else{
+            this.userId = userId;
+        }
     }
     public long getUserId(){
         return userId;
     }
     
     public void setJobTypeId(Long jobTypeId){
-        this.jobTypeId = jobTypeId;
+        if (this.jobTypeId.equals(NOT_INITIALISED_ID)) {
+            if(jobTypeId < 0L) {
+                throw new IllegalArgumentException("Id cannot be negative");
+            }
+            this.jobTypeId = jobTypeId;
+        }else{
+            this.jobTypeId = jobTypeId;
+        }
     }
     public long getJobTypeId(){
         return jobTypeId;
