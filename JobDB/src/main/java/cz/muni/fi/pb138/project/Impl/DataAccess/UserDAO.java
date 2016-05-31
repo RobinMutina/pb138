@@ -1,16 +1,21 @@
 package cz.muni.fi.pb138.project.Impl.DataAccess;
 
+import cz.muni.fi.pb138.project.Entities.JobType;
 import cz.muni.fi.pb138.project.Entities.User;
 import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 import cz.muni.fi.pb138.project.Validators.UserValidator;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.XQueryService;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +92,18 @@ public class UserDAO {
             throw new ServiceFailureException(e);
         }
 
-        throw new UnsupportedOperationException();
+        if (this.getUser(user.getId()) != null){
+            throw new IllegalArgumentException("DB does contain jobType");
+        }
+
+        //TODO validation of ID
+        //TODO set to proper ID
+        try{
+            String query = "update insert " + XMLTransformer.nodeToString(createUserElement(user)) + " into /Users";
+            service.query(query);
+        }catch (XMLDBException | ParserConfigurationException | TransformerException e) {
+            throw new ServiceFailureException("Error creating User.", e);
+        }
     }
 
     public void updateUser(User user){
@@ -101,6 +117,7 @@ public class UserDAO {
             throw new IllegalArgumentException("DB doesn't contain user");
         }
 
+
         throw new UnsupportedOperationException();
     }
 
@@ -113,7 +130,12 @@ public class UserDAO {
             throw new IllegalArgumentException("DB doesn't contain user");
         }
 
-        throw new UnsupportedOperationException();
+        try {
+            String query = "update delete doc('User.xml')/Users/User[@id = \"" + id + "\"]";
+            service.query(query);
+        } catch (XMLDBException e) {
+            throw new ServiceFailureException("Error deleting User.", e);
+        }
     }
 
     public User getUser(long id){
@@ -126,13 +148,16 @@ public class UserDAO {
             ResourceSet result = service.query(xquery);
             ResourceIterator iterator = result.getIterator();
 
-            return getUserFromDocument(ResultDocument.getDocument(
-                    iterator.nextResource().getContent().toString()));
+            while (iterator.hasMoreResources()){
+                return this.getUserFromDocument(ResultDocument.getDocument(
+                        iterator.nextResource().getContent().toString()));
+            }
 
         } catch (XMLDBException | ParserConfigurationException | SAXException |
                 IOException | IllegalArgumentException e){
             throw new ServiceFailureException("Error getting all jobTypes.", e);
         }
+        return null;
     }
 
     public List<User> getAllUsers(){
@@ -156,5 +181,22 @@ public class UserDAO {
 
     private User getUserFromDocument(Document document){
         throw new UnsupportedOperationException();
+    }
+
+    private Element createUserElement(User user) throws ParserConfigurationException {
+        DocumentBuilderFactory dbFactory  = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document document = dBuilder.newDocument();
+
+        Element userElement = document.createElement("User");
+        userElement.setAttribute("id", Long.toString(user.getId()));
+
+        Element nameElement = document.createElement("name");
+        nameElement.setTextContent(user.getName());
+
+        userElement.appendChild(nameElement);
+        document.appendChild(userElement);
+
+        return userElement;
     }
 }

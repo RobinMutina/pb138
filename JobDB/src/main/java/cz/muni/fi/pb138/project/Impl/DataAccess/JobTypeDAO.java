@@ -5,12 +5,16 @@ import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 import cz.muni.fi.pb138.project.Validators.JobTypeValidator;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.XQueryService;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +91,17 @@ public class JobTypeDAO {
             throw new ServiceFailureException(e);
         }
 
-        throw new UnsupportedOperationException();
+        if (this.getJobType(jobType.getId()) != null){
+            throw new IllegalArgumentException("DB does contain jobType");
+        }
+        //TODO validation of ID
+        //TODO set to proper ID
+        try{
+            String query = "update insert " + XMLTransformer.nodeToString(createJobTypeElement(jobType)) + " into /JobTypes";
+            service.query(query);
+        }catch (XMLDBException | ParserConfigurationException | TransformerException e) {
+            throw new ServiceFailureException("Error creating JobType.", e);
+        }
     }
 
     public void updateJobType(JobType jobType){
@@ -113,7 +127,12 @@ public class JobTypeDAO {
             throw new IllegalArgumentException("DB doesn't contain jobType");
         }
 
-        throw new UnsupportedOperationException();
+        try {
+            String query = "update delete doc('JobType.xml')/JobTypes/JobType[@id = \"" + id + "\"]";
+            service.query(query);
+        } catch (XMLDBException e) {
+            throw new ServiceFailureException("Error deleting JobType.", e);
+        }
     }
 
     public JobType getJobType(long id){
@@ -126,13 +145,15 @@ public class JobTypeDAO {
             ResourceSet result = service.query(xquery);
             ResourceIterator iterator = result.getIterator();
 
-            return getJobTypeFromDocument(ResultDocument.getDocument(
-                    iterator.nextResource().getContent().toString()));
-
+            while (iterator.hasMoreResources()){
+                return this.getJobTypeFromDocument(ResultDocument.getDocument(
+                        iterator.nextResource().getContent().toString()));
+            }
         } catch (XMLDBException | ParserConfigurationException | SAXException |
                 IOException | IllegalArgumentException e){
             throw new ServiceFailureException("Error getting all jobTypes.", e);
         }
+        return null;
     }
 
     public List<JobType> getAllJobTypes(){
@@ -159,5 +180,24 @@ public class JobTypeDAO {
         throw new UnsupportedOperationException();
     }
 
+    private Element createJobTypeElement(JobType jobType) throws ParserConfigurationException {
+        DocumentBuilderFactory dbFactory  = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document document = dBuilder.newDocument();
 
+        Element jobTypeElement = document.createElement("JobType");
+        jobTypeElement.setAttribute("id", Long.toString(jobType.getId()));
+
+        Element nameElement = document.createElement("name");
+        nameElement.setTextContent(jobType.getName());
+
+        Element priceElement = document.createElement("pricePerHour");
+        priceElement.setTextContent(jobType.getPricePerHour().toString());
+
+        jobTypeElement.appendChild(nameElement);
+        jobTypeElement.appendChild(priceElement);
+        document.appendChild(jobTypeElement);
+
+        return jobTypeElement;
+    }
 }

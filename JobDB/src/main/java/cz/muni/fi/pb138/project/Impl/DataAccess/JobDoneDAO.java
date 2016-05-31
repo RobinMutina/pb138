@@ -8,16 +8,15 @@ import cz.muni.fi.pb138.project.Validators.JobDoneValidator;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.exist.dom.ElementImpl;
 import org.exist.xmldb.XmldbURI;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xmldb.api.DatabaseManager;
@@ -29,6 +28,12 @@ import org.xmldb.api.modules.XQueryService;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 
 /**
@@ -53,7 +58,13 @@ public class JobDoneDAO {
 
     public static void main(String[] args) throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         JobDoneDAO jobDoneDAO = new JobDoneDAO();
-        jobDoneDAO.getAllJobDone();
+        JobDone jobDone = new JobDone();
+        jobDone.setEndTime(LocalDateTime.MAX);
+        jobDone.setStrartTime(LocalDateTime.MIN);
+        jobDone.setUserId(2L);
+        jobDone.setJobTypeId(2L);
+
+        jobDoneDAO.createJobDone(jobDone);
     }
 
     public JobDoneDAO() throws ServiceFailureException {
@@ -102,14 +113,30 @@ public class JobDoneDAO {
         }
     }
 
-    public void createJobDone(JobDone jobDone){
+    public void createJobDone(JobDone jobDone) throws ServiceFailureException {
         try {
             JobDoneValidator.canCreate(jobDone);
         } catch (ValidationException e) {
             throw new ServiceFailureException(e);
         }
 
-        throw new UnsupportedOperationException();
+        //if (this.getJobDoneById(jobDone.getId()) != null){
+        //    throw new IllegalArgumentException("DB does contain jobDone");
+        //}
+
+        //TODO validation of ID
+        //TODO set to proper ID
+        try{
+
+            jobDone.setId(1L);
+
+            String query = "update insert " +
+                            XMLTransformer.nodeToString(createJobDoneElement(jobDone)) +
+                            " into /JobsDone";
+            service.query(query);
+        }catch (XMLDBException | IllegalAccessException | ParserConfigurationException | TransformerException e) {
+            throw new ServiceFailureException("Error creating JobDone.", e);
+        }
     }
 
     public void updateJobDone(JobDone jobDone){
@@ -135,7 +162,12 @@ public class JobDoneDAO {
             throw new IllegalArgumentException("DB doesn't contain jobDone");
         }
 
-        throw new UnsupportedOperationException();
+        try {
+            String query = "update delete doc('JobDone.xml')/JobsDone/JobDone[@id = \"" + id + "\"]";
+            service.query(query);
+        } catch (XMLDBException e) {
+            throw new ServiceFailureException("Error deleting JobDone.", e);
+        }
     }
 
     public JobDone getJobDoneById(long id){
@@ -148,12 +180,15 @@ public class JobDoneDAO {
             ResourceSet result = service.query(xquery);
             ResourceIterator iterator = result.getIterator();
 
-            return this.getJobDoneFromDocument(ResultDocument.getDocument(
-                    iterator.nextResource().getContent().toString()));
+            while (iterator.hasMoreResources()){
+                return this.getJobDoneFromDocument(ResultDocument.getDocument(
+                        iterator.nextResource().getContent().toString()));
+            }
 
         } catch (XMLDBException | ParserConfigurationException | SAXException | IOException | IllegalArgumentException e) {
             throw new ServiceFailureException("Error getting all JobDone.", e);
         }
+        return null;
     }
 
     public List<JobDone> getAllJobDone(){
@@ -266,5 +301,34 @@ public class JobDoneDAO {
     private JobDone getJobDoneFromDocument(Document document) {
 
         throw new UnsupportedOperationException();
+    }
+
+    private Element createJobDoneElement(JobDone jobDone) throws ParserConfigurationException {
+        DocumentBuilderFactory dbFactory  = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document document = dBuilder.newDocument();
+
+        Element jobDoneElement = document.createElement("JobDone");
+        jobDoneElement.setAttribute("id", Long.toString(jobDone.getId()));
+
+        Element userIdElement = document.createElement("userId");
+        userIdElement.setTextContent(Long.toString(jobDone.getUserId()));
+
+        Element jobTypeIdElement = document.createElement("jobTypeId");
+        jobTypeIdElement.setTextContent(Long.toString(jobDone.getJobTypeId()));
+
+        Element startTimeIdElement = document.createElement("startTime");
+        startTimeIdElement.setTextContent(jobDone.getStartTime().toString());
+
+        Element endTimeIdElement = document.createElement("endTime");
+        endTimeIdElement.setTextContent(jobDone.getEndTime().toString());
+
+        jobDoneElement.appendChild(userIdElement);
+        jobDoneElement.appendChild(jobTypeIdElement);
+        jobDoneElement.appendChild(startTimeIdElement);
+        jobDoneElement.appendChild(endTimeIdElement);
+        document.appendChild(jobDoneElement);
+
+        return jobDoneElement;
     }
 }
