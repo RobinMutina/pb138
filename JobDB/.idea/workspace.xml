@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7e01e4b-2549-41fa-87d7-e64f54211d4d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/ResultDocument.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JobDB.iml" afterPath="$PROJECT_DIR$/JobDB.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java" />
     </list>
     <ignored path="JobDB.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,24 +29,64 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="JobDoneDAO.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JobDoneDAO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.058346838">
-              <caret line="58" column="8" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="58" column="23" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#createJobDone#0;class#JobDoneDAO#0" expanded="false" />
+                <element signature="method#updateJobDone#0;class#JobDoneDAO#0" expanded="false" />
+                <element signature="method#deleteJobDone#0;class#JobDoneDAO#0" expanded="false" />
+                <element signature="method#getAllJobDone#0;class#JobDoneDAO#0" expanded="false" />
+                <element signature="e#5813#5822#0" expanded="true" />
+                <element signature="method#getAllJobDoneByUserId#0;class#JobDoneDAO#0" expanded="false" />
+                <element signature="e#6738#6747#0" expanded="true" />
+                <element signature="method#getAllJobDoneByUserAtTime#0;class#JobDoneDAO#0" expanded="false" />
+                <element signature="e#8138#8147#0" expanded="true" />
+                <element signature="method#getUserTotalSalary#0;class#JobDoneDAO#0" expanded="false" />
+                <element signature="method#getUserSalaryAtTime#0;class#JobDoneDAO#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RemoteResourceSet.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/src/Libraries/exist.jar!/org/exist/xmldb/RemoteResourceSet.class">
+      <file leaf-file-name="JobTypeDAO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="250" column="0" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
-              <folding />
+              <caret line="145" column="49" selection-start-line="145" selection-start-column="12" selection-end-line="145" selection-end-column="49" />
+              <folding>
+                <element signature="docComment;class#JobTypeDAO#0" expanded="false" />
+                <element signature="method#JobTypeDAO#0;class#JobTypeDAO#0" expanded="false" />
+                <element signature="method#createJobType#0;class#JobTypeDAO#0" expanded="false" />
+                <element signature="method#updateJobType#0;class#JobTypeDAO#0" expanded="false" />
+                <element signature="method#deleteJobType#0;class#JobTypeDAO#0" expanded="false" />
+                <element signature="method#getJobType#0;class#JobTypeDAO#0" expanded="false" />
+                <element signature="e#5090#5099#0" expanded="true" />
+                <element signature="e#5868#5869#0" expanded="true" />
+                <element signature="e#5925#5926#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserDAO.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.18314424">
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#UserDAO#0;class#UserDAO#0" expanded="false" />
+                <element signature="method#createUser#0;class#UserDAO#0" expanded="false" />
+                <element signature="method#updateUser#0;class#UserDAO#0" expanded="false" />
+                <element signature="method#deleteUser#0;class#UserDAO#0" expanded="false" />
+                <element signature="method#getUser#0;class#UserDAO#0" expanded="false" />
+                <element signature="method#getAllUsers#0;class#UserDAO#0" expanded="false" />
+                <element signature="e#4985#4991#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -81,14 +122,15 @@
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobTypeManagerImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/UserManagerImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobDoneManagerImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Validators/JobDoneValidator.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobDone.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Export/DocbookGenerator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/ResultDocument.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java" />
       </list>
     </option>
   </component>
@@ -176,6 +218,70 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JobDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JobDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JobDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JobDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataAccess" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -736,23 +842,25 @@
       <workItem from="1464621643854" duration="13000" />
       <workItem from="1464622093765" duration="8815000" />
       <workItem from="1464678317884" duration="6384000" />
-      <workItem from="1464693713563" duration="14000" />
+      <workItem from="1464693713563" duration="15224000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34373000" />
+    <option name="totallyTimeSpent" value="49583000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1366" height="772" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21666667" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -761,15 +869,13 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36321485" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39876354" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -809,7 +915,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="33" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -818,41 +924,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobDone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="61" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
-          <folding>
-            <element signature="method#setId#0;class#JobDone#0" expanded="false" />
-            <element signature="method#setUserId#0;class#JobDone#0" expanded="false" />
-            <element signature="method#setJobTypeId#0;class#JobDone#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="61" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
-          <folding>
-            <element signature="method#setId#0;class#JobType#0" expanded="false" />
-            <element signature="method#toString#0;class#JobType#0" expanded="false" />
-            <element signature="method#equals#0;class#JobType#0" expanded="false" />
-            <element signature="method#hashCode#0;class#JobType#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -866,6 +937,17 @@
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#createJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#updateJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#deleteJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getAllJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="e#5813#5822#0" expanded="true" />
+            <element signature="method#getAllJobDoneByUserId#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="e#6738#6747#0" expanded="true" />
+            <element signature="method#getAllJobDoneByUserAtTime#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="e#8138#8147#0" expanded="true" />
+            <element signature="method#getUserTotalSalary#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getUserSalaryAtTime#0;class#JobDoneDAO#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -881,6 +963,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#UserDAO#0;class#UserDAO#0" expanded="false" />
+            <element signature="method#createUser#0;class#UserDAO#0" expanded="false" />
+            <element signature="method#updateUser#0;class#UserDAO#0" expanded="false" />
+            <element signature="method#deleteUser#0;class#UserDAO#0" expanded="false" />
+            <element signature="method#getUser#0;class#UserDAO#0" expanded="false" />
+            <element signature="method#getAllUsers#0;class#UserDAO#0" expanded="false" />
+            <element signature="e#4985#4991#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -956,6 +1048,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17504051">
           <caret line="10" column="62" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -963,13 +1056,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="99" column="17" selection-start-line="99" selection-start-column="17" selection-end-line="99" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobTypeManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6790924">
-          <caret line="96" column="17" selection-start-line="96" selection-start-column="17" selection-end-line="96" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -984,20 +1070,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37925446">
           <caret line="26" column="79" selection-start-line="26" selection-start-column="79" selection-end-line="26" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobDoneManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6126418">
-          <caret line="84" column="4" selection-start-line="84" selection-start-column="4" selection-end-line="84" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="74" selection-start-line="44" selection-start-column="74" selection-end-line="44" selection-end-column="74" />
+          <folding>
+            <element signature="method#canCreate#0;class#JobDoneValidator#0" expanded="false" />
+            <element signature="method#canUpdate#0;class#JobDoneValidator#0" expanded="false" />
+            <element signature="method#validation#0;class#JobDoneValidator#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1006,13 +1083,6 @@
         <state vertical-scroll-proportion="0.45762712">
           <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1033,18 +1103,6 @@
             <element signature="method#toString#0;class#JobType#0" expanded="false" />
             <element signature="method#equals#0;class#JobType#0" expanded="false" />
             <element signature="method#hashCode#0;class#JobType#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobDone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
-          <folding>
-            <element signature="method#setId#0;class#JobDone#0" expanded="false" />
-            <element signature="method#setUserId#0;class#JobDone#0" expanded="false" />
-            <element signature="method#setJobTypeId#0;class#JobDone#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1203,20 +1261,143 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/src/Libraries/exist.jar!/org/exist/xmldb/RemoteResourceSet.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobDone.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding>
+            <element signature="method#setUserId#0;class#JobDone#0" expanded="false" />
+            <element signature="method#setJobTypeId#0;class#JobDone#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/src/Libraries/exist.jar!/org/exist/xmldb/RemoteXMLResource.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.37931">
+          <caret line="76" column="18" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/org/xml/sax/InputSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
+          <folding>
+            <element signature="e#4635#4636#0" expanded="false" />
+            <element signature="e#4686#4687#0" expanded="false" />
+            <element signature="e#5458#5459#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/src/Libraries/exist.jar!/org/exist/xmldb/RemoteResourceSet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.4827585">
           <caret line="250" column="0" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobTypeManagerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.058346838">
-          <caret line="58" column="8" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
+        <state vertical-scroll-proportion="1.0291734">
+          <caret line="96" column="17" selection-start-line="96" selection-start-column="17" selection-end-line="96" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobDoneManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49756888">
+          <caret line="78" column="74" selection-start-line="78" selection-start-column="74" selection-end-line="78" selection-end-column="74" />
+          <folding>
+            <element signature="docComment;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="docComment;method#createJobDone#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="method#createJobDone#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="docComment;method#updateJobDone#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="method#updateJobDone#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="docComment;method#deleteJobDone#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="method#deleteJobDone#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="docComment;method#getJobDoneById#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="method#getJobDoneById#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="docComment;method#getAllJobDone#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="method#getAllJobDone#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="docComment;method#getAllJobDoneByUserId#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="method#getAllJobDoneByUserId#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="docComment;method#getAllJobDoneByUserAtTime#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="method#getAllJobDoneByUserAtTime#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="docComment;method#getUserTotalSalary#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="method#getUserTotalSalary#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="docComment;method#getUserSalaryAtTime#0;class#JobDoneManagerImpl#0" expanded="false" />
+            <element signature="method#getUserSalaryAtTime#0;class#JobDoneManagerImpl#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/ResultDocument.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7374392">
+          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="58" column="23" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#createJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#updateJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#deleteJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getAllJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="e#5813#5822#0" expanded="true" />
+            <element signature="method#getAllJobDoneByUserId#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="e#6738#6747#0" expanded="true" />
+            <element signature="method#getAllJobDoneByUserAtTime#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="e#8138#8147#0" expanded="true" />
+            <element signature="method#getUserTotalSalary#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getUserSalaryAtTime#0;class#JobDoneDAO#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="145" column="49" selection-start-line="145" selection-start-column="12" selection-end-line="145" selection-end-column="49" />
+          <folding>
+            <element signature="docComment;class#JobTypeDAO#0" expanded="false" />
+            <element signature="method#JobTypeDAO#0;class#JobTypeDAO#0" expanded="false" />
+            <element signature="method#createJobType#0;class#JobTypeDAO#0" expanded="false" />
+            <element signature="method#updateJobType#0;class#JobTypeDAO#0" expanded="false" />
+            <element signature="method#deleteJobType#0;class#JobTypeDAO#0" expanded="false" />
+            <element signature="method#getJobType#0;class#JobTypeDAO#0" expanded="false" />
+            <element signature="e#5090#5099#0" expanded="true" />
+            <element signature="e#5868#5869#0" expanded="true" />
+            <element signature="e#5925#5926#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18314424">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#UserDAO#0;class#UserDAO#0" expanded="false" />
+            <element signature="method#createUser#0;class#UserDAO#0" expanded="false" />
+            <element signature="method#updateUser#0;class#UserDAO#0" expanded="false" />
+            <element signature="method#deleteUser#0;class#UserDAO#0" expanded="false" />
+            <element signature="method#getUser#0;class#UserDAO#0" expanded="false" />
+            <element signature="method#getAllUsers#0;class#UserDAO#0" expanded="false" />
+            <element signature="e#4985#4991#0" expanded="true" />
           </folding>
         </state>
       </provider>
