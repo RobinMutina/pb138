@@ -1,0 +1,8 @@
+<JobsDone>
+	<JobDone id="0">
+		<userId>0</userId>
+		<jobTypeId>0</jobTypeId>
+		<startTime>2016-01-01T00:00:00</startTime>
+		<endTime>2016-01-02T00:00:00</endTime>
+	</JobDone>
+</JobsDone>

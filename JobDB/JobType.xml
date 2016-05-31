@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JobTypes>
+	<JobType id="0">
+		<name>TypPrace</name>
+		<pricePerHour>110.0</pricePerHour>
+	</JobType>
+</JobTypes>
