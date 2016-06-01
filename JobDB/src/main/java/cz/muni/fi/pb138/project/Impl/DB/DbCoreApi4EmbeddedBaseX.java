@@ -29,7 +29,7 @@ public class DbCoreApi4EmbeddedBaseX implements DbCoreApi {
         Context context = new Context();
         String result;
         try {
-            new Open(collection);
+            new Open(collection).execute(context);
             result = new XQuery(query).execute(context);
         }catch (BaseXException e){
             throw new DbException(e);
@@ -43,12 +43,11 @@ public class DbCoreApi4EmbeddedBaseX implements DbCoreApi {
     public void createCollection(String name, String path) throws DbException {
         Context context = new Context();
         try {
-            if (path == null){
+            if (path != null){
                 new CreateDB(name, path).execute(context);
             }else{
                 new CreateDB(name).execute(context);
             }
-
         }catch (BaseXException e){
             throw new DbException(e);
         }finally {
@@ -73,7 +72,7 @@ public class DbCoreApi4EmbeddedBaseX implements DbCoreApi {
     public void dropColection(String name) throws DbException{
         Context context = new Context();
         try {
-            new DropDB("Collection").execute(context);
+            new DropDB(name).execute(context);
 
         }catch (BaseXException e){
             throw new DbException(e);

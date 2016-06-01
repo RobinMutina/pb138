@@ -39,7 +39,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "JobType{" + "id=" + id + ", name=" + name + "}";
+        return "User{" + "id=" + id + ", name=" + name + "}";
     }
 
     @Override
