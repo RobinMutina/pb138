@@ -2,10 +2,8 @@ package cz.muni.fi.pb138.project.Interfaces;
 
 import cz.muni.fi.pb138.project.Exceptions.DbException;
 
-import java.nio.file.Path;
-
 /**
- * Created by xtomasch on 6/1/16.
+ * Intended as abstraction layer, to allow simple querying regardless of the underlying database and connection to it.
  */
 public interface DbCoreApi {
     /**
