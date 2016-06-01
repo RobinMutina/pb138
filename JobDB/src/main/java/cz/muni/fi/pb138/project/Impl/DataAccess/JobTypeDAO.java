@@ -6,6 +6,7 @@ import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 import cz.muni.fi.pb138.project.Validators.JobTypeValidator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.*;
@@ -16,6 +17,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,17 +97,26 @@ public class JobTypeDAO {
         if (this.getJobType(jobType.getId()) != null){
             throw new IllegalArgumentException("DB does contain jobType");
         }
-        //TODO validation of ID
-        //TODO set to proper ID
+
+        long maxId = -1;
+
+        for (JobType type : getAllJobTypes()) {
+            if (type.getId() > maxId) {
+                maxId = type.getId();
+            }
+        }
+
         try{
+            maxId++;
+            jobType.setId(maxId);
             String query = "update insert " + XMLTransformer.nodeToString(createJobTypeElement(jobType)) + " into /JobTypes";
             service.query(query);
-        }catch (XMLDBException | ParserConfigurationException | TransformerException e) {
+        }catch (XMLDBException | ParserConfigurationException | TransformerException | IllegalAccessException e) {
             throw new ServiceFailureException("Error creating JobType.", e);
         }
     }
 
-    public void updateJobType(JobType jobType){
+    public void updateJobType(JobType jobType) throws ServiceFailureException{
         try {
             JobTypeValidator.canUpdate(jobType);
         } catch (ValidationException e) {
@@ -115,7 +127,12 @@ public class JobTypeDAO {
             throw new IllegalArgumentException("DB doesn't contain jobType");
         }
 
-        throw new UnsupportedOperationException();
+        try{
+            String query = "update replace /JobTypes/JobType[@id=\"" + jobType.getId() + "\"] " + "with "+ XMLTransformer.nodeToString(createJobTypeElement(jobType));
+            service.query(query);
+        }catch (XMLDBException | ParserConfigurationException | TransformerException e) {
+            throw new ServiceFailureException("Error updating JobType.", e);
+        }
     }
 
     public void deleteJobType(long id){
@@ -150,7 +167,7 @@ public class JobTypeDAO {
                         iterator.nextResource().getContent().toString()));
             }
         } catch (XMLDBException | ParserConfigurationException | SAXException |
-                IOException | IllegalArgumentException e){
+                IOException | IllegalArgumentException| IllegalAccessException e){
             throw new ServiceFailureException("Error getting all jobTypes.", e);
         }
         return null;
@@ -169,15 +186,38 @@ public class JobTypeDAO {
                         iterator.nextResource().getContent().toString())));
             }
         } catch (XMLDBException | ParserConfigurationException | SAXException |
-                IOException | IllegalArgumentException e){
+                IOException | IllegalArgumentException | IllegalAccessException e){
             throw new ServiceFailureException("Error getting all jobTypes.", e);
         }
 
         return jobTypeList;
     }
 
-    private JobType getJobTypeFromDocument(Document document){
-        throw new UnsupportedOperationException();
+    private JobType getJobTypeFromDocument(Document document) throws IllegalAccessException {
+        if (document == null){
+            throw new IllegalArgumentException("document is null");
+        }
+
+        JobType jobType = new JobType();
+
+        Element root = document.getDocumentElement();
+
+        jobType.setId(Long.parseLong(root.getAttribute("id")));
+
+        for (int i = 0; i < root.getChildNodes().getLength(); i++) {
+            Node node = root.getChildNodes().item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE){
+                switch (node.getNodeName()){
+                    case "pricePerHour":
+                        jobType.setPricePerHour(new BigDecimal(node.getTextContent()));
+                        break;
+                    case "name":
+                        jobType.setName(node.getTextContent());
+                        break;
+                }
+            }
+        }
+        return jobType;
     }
 
     private Element createJobTypeElement(JobType jobType) throws ParserConfigurationException {

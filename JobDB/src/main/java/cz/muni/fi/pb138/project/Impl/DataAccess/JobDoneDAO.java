@@ -58,13 +58,7 @@ public class JobDoneDAO {
 
     public static void main(String[] args) throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         JobDoneDAO jobDoneDAO = new JobDoneDAO();
-        JobDone jobDone = new JobDone();
-        jobDone.setEndTime(LocalDateTime.MAX);
-        jobDone.setStrartTime(LocalDateTime.MIN);
-        jobDone.setUserId(2L);
-        jobDone.setJobTypeId(2L);
-
-        jobDoneDAO.createJobDone(jobDone);
+        jobDoneDAO.getAllJobDone();
     }
 
     public JobDoneDAO() throws ServiceFailureException {
@@ -120,15 +114,31 @@ public class JobDoneDAO {
             throw new ServiceFailureException(e);
         }
 
-        //if (this.getJobDoneById(jobDone.getId()) != null){
-        //    throw new IllegalArgumentException("DB does contain jobDone");
-        //}
+        if (this.getJobDoneById(jobDone.getId()) != null){
+            throw new IllegalArgumentException("DB does contain jobDone");
+        }
 
-        //TODO validation of ID
-        //TODO set to proper ID
+        long maxId = -1;
+        for (JobDone done : getAllJobDone()) {
+            if (done.getId() > maxId) {
+                maxId = done.getId();
+            }
+        }
+
+        UserDAO userDao = new UserDAO();
+        JobTypeDAO jobTypeDAO = new JobTypeDAO();
+
         try{
+            if (userDao.getUser(jobDone.getUserId()) == null) {
+                throw new ServiceFailureException("Database doesn'contain user.");
+            }
 
-            jobDone.setId(1L);
+            if (jobTypeDAO.getJobType(jobDone.getJobTypeId()) == null) {
+                throw new ServiceFailureException("Database doesn'contain jobType.");
+            }
+
+            maxId++;
+            jobDone.setId(maxId);
 
             String query = "update insert " +
                             XMLTransformer.nodeToString(createJobDoneElement(jobDone)) +
@@ -139,18 +149,33 @@ public class JobDoneDAO {
         }
     }
 
-    public void updateJobDone(JobDone jobDone){
+    public void updateJobDone(JobDone jobDone) throws ServiceFailureException {
         try {
             JobDoneValidator.canUpdate(jobDone);
         } catch (ValidationException e) {
             throw new ServiceFailureException(e);
         }
 
-        if (this.getJobDoneById(jobDone.getId()) == null){
-            throw new IllegalArgumentException("DB doesn't contain jobDone");
-        }
+        try{
+            JobDone originalJobDone = this.getJobDoneById(jobDone.getId());
 
-        throw new UnsupportedOperationException();
+            if (originalJobDone == null){
+                throw new IllegalArgumentException("DB doesn't contain jobDone");
+            }
+
+            if (originalJobDone.getUserId() != jobDone.getUserId()){
+                throw new IllegalAccessException("Cannot update userId");
+            }
+
+            if (originalJobDone.getJobTypeId() != jobDone.getJobTypeId()){
+                throw new IllegalAccessException("Cannot update jobTypeId");
+            }
+
+            String query = "update replace /JobsDone/JobDone[@id=\"" + jobDone.getId() + "\"] " + "with "+ XMLTransformer.nodeToString(createJobDoneElement(jobDone));
+            service.query(query);
+        }catch (XMLDBException | ParserConfigurationException | TransformerException | IllegalAccessException e) {
+            throw new ServiceFailureException("Error updating JobDone.", e);
+        }
     }
 
     public void deleteJobDone(long id) {
@@ -185,7 +210,8 @@ public class JobDoneDAO {
                         iterator.nextResource().getContent().toString()));
             }
 
-        } catch (XMLDBException | ParserConfigurationException | SAXException | IOException | IllegalArgumentException e) {
+        } catch (XMLDBException | ParserConfigurationException | SAXException |
+                IOException | IllegalArgumentException | IllegalAccessException e) {
             throw new ServiceFailureException("Error getting all JobDone.", e);
         }
         return null;
@@ -206,7 +232,7 @@ public class JobDoneDAO {
                         ResultDocument.getDocument(iterator.nextResource().getContent().toString())));
             }
         } catch (XMLDBException | ParserConfigurationException | SAXException |
-                IOException | IllegalArgumentException e) {
+                IOException | IllegalAccessException e) {
             throw new ServiceFailureException("Error getting all JobDone.", e);
         }
 
@@ -229,7 +255,8 @@ public class JobDoneDAO {
 
                 jobDoneList.add(this.getJobDoneFromDocument(ResultDocument.getDocument(iterator.nextResource().getContent().toString())));
             }
-        } catch (XMLDBException | ParserConfigurationException | SAXException | IOException | IllegalArgumentException e) {
+        } catch (XMLDBException | ParserConfigurationException | SAXException |
+                IOException | IllegalArgumentException | IllegalAccessException e) {
             throw new ServiceFailureException("Error getting all JobDone.", e);
         }
 
@@ -270,9 +297,9 @@ public class JobDoneDAO {
         if (id < 0){
             throw new IllegalArgumentException("id is invalid");
         }
-
+        //TODO
         //if (!DB.contains(id)){
-        //    throw new IllegalArgumentException("DB doesn't contain jobDone");
+        //    throw new IllegalArgumentException("DB doesn't contain user");
         //}
 
         throw new UnsupportedOperationException();
@@ -290,7 +317,7 @@ public class JobDoneDAO {
         if (endTime == null){
             throw new IllegalArgumentException("endTime is null");
         }
-
+        //TODO
         //if (!DB.contains(id)){
         //    throw new IllegalArgumentException("DB doesn't contain jobDone");
         //}
@@ -298,9 +325,37 @@ public class JobDoneDAO {
         throw new UnsupportedOperationException();
     }
 
-    private JobDone getJobDoneFromDocument(Document document) {
+    private JobDone getJobDoneFromDocument(Document document) throws IllegalAccessException {
+        if (document == null){
+            throw new IllegalArgumentException("document is null");
+        }
 
-        throw new UnsupportedOperationException();
+        JobDone jobDone = new JobDone();
+
+        Element root = document.getDocumentElement();
+
+        jobDone.setId(Long.parseLong(root.getAttribute("id")));
+
+        for (int i = 0; i < root.getChildNodes().getLength(); i++) {
+            Node node = root.getChildNodes().item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE){
+                switch (node.getNodeName()){
+                    case "userId":
+                        jobDone.setUserId(Long.parseLong(node.getTextContent()));
+                        break;
+                    case "jobTypeId":
+                        jobDone.setJobTypeId(Long.parseLong(node.getTextContent()));
+                        break;
+                    case "startTime":
+                        jobDone.setStrartTime(LocalDateTime.parse(node.getTextContent()));
+                        break;
+                    case "endTime":
+                        jobDone.setEndTime(LocalDateTime.parse(node.getTextContent()));
+                        break;
+                }
+            }
+        }
+        return jobDone;
     }
 
     private Element createJobDoneElement(JobDone jobDone) throws ParserConfigurationException {
