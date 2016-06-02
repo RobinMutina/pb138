@@ -3,6 +3,7 @@ package cz.muni.fi.pb138.project.Examples;
 import cz.muni.fi.pb138.project.Entities.User;
 import cz.muni.fi.pb138.project.Exceptions.DbException;
 import cz.muni.fi.pb138.project.Impl.DB.DbCoreApi4EmbeddedBaseX;
+import cz.muni.fi.pb138.project.Impl.DB.EmbeddedBaseXResultIterator;
 import cz.muni.fi.pb138.project.Interfaces.DbCoreApi;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -10,7 +11,9 @@ import org.xml.sax.InputSource;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.StringReader;
+import java.util.Iterator;
 import java.util.Random;
+import java.util.function.Consumer;
 
 /**
  * Proof of concept, showcases use of DbCoreApi, creates db stores 1 user in it and retrieves it.
@@ -18,7 +21,8 @@ import java.util.Random;
  */
 public class SimpleRoundTrip {
     public static void main(String[] args){
-        //Maybe il'l make all the api method static so this is not needed
+        //Maybe i will make all the api method static so this is not needed
+        // EDIT: that can't be done in java - interfaces cannot declare static methods ...
         DbCoreApi dbApi = new DbCoreApi4EmbeddedBaseX();
 
         //Checks if collection exists, and creates new one if needed
@@ -32,7 +36,7 @@ public class SimpleRoundTrip {
 
         // id are generated randomly and checked for uniqueness, because xml dbs do not seem to provide any means of
         // generating new id's, tried generate-id from xslt but that didn't work as expected
-        // FIXME: why limit id to positive numbers ?? and assign -1 default? i thing it's better to leave it null so may throw NullPointerException when not set
+        // FIXME: why limit id to positive numbers ?? and assign -1 default? i thing it's better to leave it null, so it may throw NullPointerException when not set
 
         Random randomno = new Random();
         Long id =  randomno.nextLong();
@@ -69,28 +73,31 @@ public class SimpleRoundTrip {
         }
 
         // this is what we get
-        System.out.println(result+"\n");
+        System.out.println("This is returned from query:\n\n"+result+"\n");
 
-        // use a helper funct to construct DOM from xml string
-        // FIXME: it may be faster and simpler to use regex instead of dom for this parsing
-        Document doc;
-        try {
-            doc = loadXMLFromString(result);
-        } catch (Exception e){
+
+        User a = userFromXmlString(result);
+
+        System.out.println("A User object constucted from that:\n"+a+"\n");
+
+        System.out.println("All users in db:\n");
+        // here note the use of try with resources as EmbeddedBaseXResultIterator holds some recources that need closing
+        // FIXME maybe create new interface witch would fuse both Iterator and Autoclosable or a new base class, cause this forces the use of concrete class
+        try (EmbeddedBaseXResultIterator it = (EmbeddedBaseXResultIterator) dbApi.execXqueryIterated(
+                        ("for $user in //User \n" +
+                        "return $user"),
+                    "test"))
+        {
+            it.forEachRemaining(new Consumer() {
+                @Override
+                public void accept(Object o) {
+                    User b = userFromXmlString(o.toString());
+                    System.out.println(b);
+                }
+            });
+        }catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        User a = new User();
-
-        //get the values from DOM
-        try {
-            a.setId(Long.parseLong(doc.getDocumentElement().getAttribute("id")));
-            a.setName(doc.getDocumentElement().getElementsByTagName("name").item(0).getFirstChild().getNodeValue());
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
-
-        System.out.println(a);
 
         //and u can drop collection like this if u want to
         try {
@@ -138,5 +145,26 @@ public class SimpleRoundTrip {
         DocumentBuilder builder = factory.newDocumentBuilder();
 
         return builder.parse(new InputSource(new StringReader(xml)));
+    }
+
+    public static User userFromXmlString(String string){
+        // FIXME: it may be faster and simpler to use regex instead of dom for this parsing
+        Document doc;
+        try {
+            doc = loadXMLFromString(string);
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+
+        User a = new User();
+
+        //get the values from DOM
+        try {
+            a.setId(Long.parseLong(doc.getDocumentElement().getAttribute("id")));
+            a.setName(doc.getDocumentElement().getElementsByTagName("name").item(0).getFirstChild().getNodeValue());
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        return  a;
     }
 }

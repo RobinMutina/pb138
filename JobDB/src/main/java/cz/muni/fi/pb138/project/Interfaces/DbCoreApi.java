@@ -2,13 +2,15 @@ package cz.muni.fi.pb138.project.Interfaces;
 
 import cz.muni.fi.pb138.project.Exceptions.DbException;
 
+import java.util.Iterator;
+
 /**
  * Intended as abstraction layer, to allow simple querying regardless of the underlying database and connection to it.
  */
 public interface DbCoreApi {
     /**
      * Executes XQuery and retuns result as a string.
-     * @param query a XQuery (v3.0/3.1 for baseX), should contain collection() (or db:open which is baseX specific) to
+     * @param query an XQuery (v3.0/3.1 for baseX), should contain collection() (or db:open which is baseX specific) to
      *              open the database first
      * @return result of the query
      * @throws DbException if something goes wrong
@@ -17,12 +19,21 @@ public interface DbCoreApi {
 
     /**
      * Executes XQuery and retuns result as a string.
-     * @param query a XQuery (v3.0/3.1 for baseX)
+     * @param query an XQuery (v3.0/3.1 for baseX)
      * @param collection designates collection to open and use in queries
      * @return result of the query
      * @throws DbException DbException if something goes wrong
      */
     public String execXquery(String query, String collection) throws DbException;
+
+    /**
+     * Executes XQuery and retuns result as iterator over the result. Useful when using for clause in the query.
+     * @param query an XQuery (v3.0/3.1 for baseX)
+     * @param collection designates collection to open and use in queries
+     * @return iterator which serves the result in parts.
+     * @throws DbException
+     */
+    public Iterator<String> execXqueryIterated(String query, String collection) throws DbException;
 
     /**
      * Creates a collection from xmls at location pointed to by path.

@@ -6,6 +6,8 @@ import org.basex.core.BaseXException;
 import org.basex.core.Context;
 import org.basex.core.cmd.*;
 
+import java.util.Iterator;
+
 /**
  * Created by xtomasch on 6/1/16.
  */
@@ -93,6 +95,15 @@ public class DbCoreApi4EmbeddedBaseX implements DbCoreApi {
             throw new DbException(e);
         }finally {
             context.close();
+        }
+    }
+
+    @Override
+    public Iterator<String> execXqueryIterated(String query, String collection) throws DbException {
+        try (EmbeddedBaseXResultIterator it = new EmbeddedBaseXResultIterator(query, collection)){
+            return it;
+        }catch (Exception e){
+            throw new DbException(e);
         }
     }
 }
