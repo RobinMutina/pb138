@@ -8,6 +8,7 @@
     </parent>
     <groupId>cz.muni.fi.pb138.project</groupId>
     <artifactId>JobDB</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
