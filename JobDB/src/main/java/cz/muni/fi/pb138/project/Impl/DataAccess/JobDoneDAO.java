@@ -1,39 +1,29 @@
 package cz.muni.fi.pb138.project.Impl.DataAccess;
 
 import cz.muni.fi.pb138.project.Entities.JobDone;
+import cz.muni.fi.pb138.project.Exceptions.DbException;
 import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 import cz.muni.fi.pb138.project.Exceptions.ValidationException;
+import cz.muni.fi.pb138.project.Impl.DB.DbCoreApi4EmbeddedBaseX;
+import cz.muni.fi.pb138.project.Impl.DB.EmbeddedBaseXResultIterator;
+import cz.muni.fi.pb138.project.Interfaces.DbCoreApi;
 import cz.muni.fi.pb138.project.Validators.JobDoneValidator;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.exist.dom.ElementImpl;
-import org.exist.xmldb.XmldbURI;
-import org.w3c.dom.*;
-import org.xml.sax.InputSource;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
-import org.xmldb.api.DatabaseManager;
-import org.xmldb.api.base.*;
-import org.xmldb.api.modules.CollectionManagementService;
-import org.xmldb.api.modules.XMLResource;
-import org.xmldb.api.modules.XQueryService;
+import org.xmldb.api.base.XMLDBException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 
 /**
@@ -41,116 +31,96 @@ import javax.xml.transform.stream.StreamResult;
  */
 public class JobDoneDAO {
 
-    public final static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc";
-
-    private static final String fileName = "JobDone.xml";
-
-    private static final String collection = "db/PB138";
-
-    private static String driver = "org.exist.xmldb.DatabaseImpl";
-
-    private XQueryService service;
-
-    protected static void usage() {
-        System.out.println("usage: org.exist.examples.xmldb.Put collection docName");
-        System.exit(0);
-    }
-
     public static void main(String[] args) throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        JobDoneDAO jobDoneDAO = new JobDoneDAO();
+        JobDoneDAO jb = new JobDoneDAO();
+
+        System.out.println("SSSSSSSSSSSSSSSs");
         JobDone jobDone = new JobDone();
         jobDone.setEndTime(LocalDateTime.MAX);
         jobDone.setStrartTime(LocalDateTime.MIN);
-        jobDone.setUserId(2L);
-        jobDone.setJobTypeId(2L);
+        //jobDone.setId(1L);
+        jobDone.setJobTypeId(1L);
+        jobDone.setUserId(1L);
+        jb.createJobDone(jobDone);
 
-        jobDoneDAO.createJobDone(jobDone);
+        System.out.println(jobDone);
     }
 
+    private DbCoreApi dbApi;
+
+    private static final String classSpec = "jobDone";
+
     public JobDoneDAO() throws ServiceFailureException {
-
-        try {
-            Class<?> cl = Class.forName(driver);
-            Database database = (Database)cl.newInstance();
-            DatabaseManager.registerDatabase(database);
-            Collection col = DatabaseManager.getCollection(URI + collection);
-
-            this.service = (XQueryService) col.getService("XQueryService", "1.0");
-            this.service.setProperty("indent", "yes");
-            System.out.println("connected");
-        /*
-        // initialize driver
-        Class<?> cl = Class.forName(driver);
-        Database database = (Database)cl.newInstance();
-        database.setProperty("create-database", "true");
-        DatabaseManager.registerDatabase(database);
-
-        // try to get collection
-        Collection col =
-                DatabaseManager.getCollection(URI + collection);
-        if(col == null) {
-            // collection does not exist: get root collection and create.
-            // for simplicity, we assume that the new collection is a
-            // direct child of the root collection, e.g. /db/test.
-            // the example will fail otherwise.
-            Collection root = DatabaseManager.getCollection(URI + XmldbURI.ROOT_COLLECTION);
-            CollectionManagementService mgtService =
-                    (CollectionManagementService)root.getService("CollectionManagementService", "1.0");
-            col = mgtService.createCollection(collection.substring((XmldbURI.ROOT_COLLECTION + "/").length()));
+        this.dbApi = new DbCoreApi4EmbeddedBaseX();
+        if (!dbApi.collectionExists(classSpec)) {
+            try {
+                dbApi.createCollection(classSpec, JobDoneDAO.class.getResource("JobDone.xml").getPath());
+            } catch (DbException e) {
+                throw new ServiceFailureException(e);
+            }
         }
-        File f = new File(fileName);
 
-        // create new XMLResource
-        XMLResource document = (XMLResource)col.createResource(f.getName(), "XMLResource");
-
-        document.setContent(f);
-        System.out.print("storing document " + document.getId() + "...");
-        col.storeResource(document);
-        System.out.println("ok.");
-        */
-        }catch (XMLDBException | ClassNotFoundException | IllegalAccessException | InstantiationException e){
-            throw new ServiceFailureException("Setting up database failed.", e);
-        }
     }
 
     public void createJobDone(JobDone jobDone) throws ServiceFailureException {
-        try {
-            JobDoneValidator.canCreate(jobDone);
-        } catch (ValidationException e) {
-            throw new ServiceFailureException(e);
-        }
-
-        //if (this.getJobDoneById(jobDone.getId()) != null){
-        //    throw new IllegalArgumentException("DB does contain jobDone");
-        //}
-
-        //TODO validation of ID
-        //TODO set to proper ID
         try{
+            JobDoneValidator.canCreate(jobDone);
 
-            jobDone.setId(1L);
+            long maxId = -1;
+            for (JobDone done : getAllJobDone()) {
+                if (done.getId() > maxId) {
+                    maxId = done.getId();
+                }
+            }
+
+            UserDAO userDao = new UserDAO();
+            JobTypeDAO jobTypeDAO = new JobTypeDAO();
+
+            if (userDao.getUser(jobDone.getUserId()) == null) {
+                throw new ServiceFailureException("Database doesn'contain user.");
+            }
+
+            if (jobTypeDAO.getJobType(jobDone.getJobTypeId()) == null) {
+                throw new ServiceFailureException("Database doesn'contain jobType.");
+            }
+
+            maxId++;
+            jobDone.setId(maxId);
 
             String query = "update insert " +
-                            XMLTransformer.nodeToString(createJobDoneElement(jobDone)) +
-                            " into /JobsDone";
-            service.query(query);
-        }catch (XMLDBException | IllegalAccessException | ParserConfigurationException | TransformerException e) {
+                    XMLTransformer.nodeToString(createJobDoneElement(jobDone)) +
+                    " into /JobsDone";
+            dbApi.execXquery(query);
+
+        }catch (DbException | ValidationException | IllegalAccessException | ParserConfigurationException | TransformerException e) {
             throw new ServiceFailureException("Error creating JobDone.", e);
         }
     }
 
-    public void updateJobDone(JobDone jobDone){
-        try {
+    public void updateJobDone(JobDone jobDone) throws ServiceFailureException {
+        try{
             JobDoneValidator.canUpdate(jobDone);
-        } catch (ValidationException e) {
-            throw new ServiceFailureException(e);
-        }
 
-        if (this.getJobDoneById(jobDone.getId()) == null){
-            throw new IllegalArgumentException("DB doesn't contain jobDone");
-        }
+            JobDone originalJobDone = this.getJobDoneById(jobDone.getId());
 
-        throw new UnsupportedOperationException();
+            if (originalJobDone == null){
+                throw new IllegalArgumentException("DB doesn't contain jobDone");
+            }
+
+            if (originalJobDone.getUserId() != jobDone.getUserId()){
+                throw new IllegalAccessException("Cannot update userId");
+            }
+
+            if (originalJobDone.getJobTypeId() != jobDone.getJobTypeId()){
+                throw new IllegalAccessException("Cannot update jobTypeId");
+            }
+
+            String query = "update replace /JobsDone/JobDone[@id=\"" + jobDone.getId() + "\"] " + "with "+ XMLTransformer.nodeToString(createJobDoneElement(jobDone));
+            dbApi.execXquery(query);
+        }catch (DbException | ParserConfigurationException | ValidationException |
+                TransformerException | IllegalAccessException e) {
+            throw new ServiceFailureException("Error updating JobDone.", e);
+        }
     }
 
     public void deleteJobDone(long id) {
@@ -164,80 +134,82 @@ public class JobDoneDAO {
 
         try {
             String query = "update delete doc('JobDone.xml')/JobsDone/JobDone[@id = \"" + id + "\"]";
-            service.query(query);
-        } catch (XMLDBException e) {
+            dbApi.execXquery(query);
+        } catch (DbException e) {
             throw new ServiceFailureException("Error deleting JobDone.", e);
         }
     }
 
     public JobDone getJobDoneById(long id){
-        if (id < 0){
-            throw new IllegalArgumentException("id is invalid");
-        }
-
         try {
-            String xquery = "for $jobDone in /JobsDone/JobDone let $jobDoneId := $jobDone/@id where $jobDoneId = \""+ id + "\" return $jobDone";
-            ResourceSet result = service.query(xquery);
-            ResourceIterator iterator = result.getIterator();
-
-            while (iterator.hasMoreResources()){
-                return this.getJobDoneFromDocument(ResultDocument.getDocument(
-                        iterator.nextResource().getContent().toString()));
+            if (id < 0){
+                throw new IllegalArgumentException("id is invalid");
             }
 
-        } catch (XMLDBException | ParserConfigurationException | SAXException | IOException | IllegalArgumentException e) {
+            String xquery = "for $jobDone in /JobsDone/JobDone let $jobDoneId := $jobDone/@id where $jobDoneId = \""+ id + "\" return $jobDone";
+            String result = dbApi.execXquery(xquery);
+
+            if (result.isEmpty()){
+                return null;
+            }
+
+            return this.getJobDoneFromDocument(ResultDocument.getDocument(result));
+
+        } catch (DbException | ParserConfigurationException | SAXException |
+                IOException | IllegalArgumentException | IllegalAccessException e) {
             throw new ServiceFailureException("Error getting all JobDone.", e);
         }
-        return null;
     }
 
     public List<JobDone> getAllJobDone(){
 
-        List<JobDone> jobDoneList = new ArrayList<JobDone>();
+        String xquery = "for $jobDone in /JobsDone/JobDone return $jobDone";
 
-        try {
-            String xquery = "for $jobDone in /JobsDone/JobDone return $jobDone";
-            ResourceSet result = service.query(xquery);
-            ResourceIterator iterator = result.getIterator();
-
-            while (iterator.hasMoreResources()){
-
-                jobDoneList.add(this.getJobDoneFromDocument(
-                        ResultDocument.getDocument(iterator.nextResource().getContent().toString())));
-            }
-        } catch (XMLDBException | ParserConfigurationException | SAXException |
-                IOException | IllegalArgumentException e) {
-            throw new ServiceFailureException("Error getting all JobDone.", e);
-        }
-
-        return jobDoneList;
+        return this.getJobsDone(xquery);
     }
 
     public List<JobDone> getAllJobDoneByUserId(long id){
+
+        String xquery = "for $jobDone in /JobsDone/JobDone let $userId := $jobDone/userId where $userId = \""+ id + "\" return $jobDone";
+
         if (id < 0){
             throw new IllegalArgumentException("id is invalid");
         }
 
+        return this.getJobsDone(xquery);
+    }
+
+    private List<JobDone> getJobsDone(String query){
         List<JobDone> jobDoneList = new ArrayList<JobDone>();
 
-        try {
-            String xquery = "for $jobDone in /JobsDone/JobDone let $userId := $jobDone/userId where $userId = \""+ id + "\" return $jobDone";
-            ResourceSet result = service.query(xquery);
-            ResourceIterator iterator = result.getIterator();
+        if (query == null || query.isEmpty()){
+            throw new IllegalArgumentException("query is null or empty");
+        }
 
-            while (iterator.hasMoreResources()){
+        try (EmbeddedBaseXResultIterator it = (EmbeddedBaseXResultIterator) dbApi.execXqueryIterated(
+                query,
+                classSpec))
+        {
 
-                jobDoneList.add(this.getJobDoneFromDocument(ResultDocument.getDocument(iterator.nextResource().getContent().toString())));
-            }
-        } catch (XMLDBException | ParserConfigurationException | SAXException | IOException | IllegalArgumentException e) {
-            throw new ServiceFailureException("Error getting all JobDone.", e);
+            it.forEachRemaining(new Consumer() {
+                @Override
+                public void accept(Object o) {
+                    try {
+                        jobDoneList.add(getJobDoneFromDocument(ResultDocument.getDocument(o.toString())));
+                    } catch (ParserConfigurationException | SAXException |
+                            IOException | IllegalArgumentException | IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }catch (Exception e) {
+            throw new ServiceFailureException("Error getting all jobsDone.", e);
         }
 
         return jobDoneList;
     }
 
     public List<JobDone> getAllJobDoneByUserAtTime(long id, LocalDateTime startTime, LocalDateTime endTime){
-
         if (id < 0){
             throw new IllegalArgumentException("id is invalid");
         }
@@ -271,9 +243,7 @@ public class JobDoneDAO {
             throw new IllegalArgumentException("id is invalid");
         }
 
-        //if (!DB.contains(id)){
-        //    throw new IllegalArgumentException("DB doesn't contain jobDone");
-        //}
+
 
         throw new UnsupportedOperationException();
     }
@@ -290,7 +260,7 @@ public class JobDoneDAO {
         if (endTime == null){
             throw new IllegalArgumentException("endTime is null");
         }
-
+        //TODO
         //if (!DB.contains(id)){
         //    throw new IllegalArgumentException("DB doesn't contain jobDone");
         //}
@@ -298,9 +268,37 @@ public class JobDoneDAO {
         throw new UnsupportedOperationException();
     }
 
-    private JobDone getJobDoneFromDocument(Document document) {
+    private JobDone getJobDoneFromDocument(Document document) throws IllegalAccessException {
+        if (document == null){
+            throw new IllegalArgumentException("document is null");
+        }
 
-        throw new UnsupportedOperationException();
+        JobDone jobDone = new JobDone();
+
+        Element root = document.getDocumentElement();
+
+        jobDone.setId(Long.parseLong(root.getAttribute("id")));
+
+        for (int i = 0; i < root.getChildNodes().getLength(); i++) {
+            Node node = root.getChildNodes().item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE){
+                switch (node.getNodeName()){
+                    case "userId":
+                        jobDone.setUserId(Long.parseLong(node.getTextContent()));
+                        break;
+                    case "jobTypeId":
+                        jobDone.setJobTypeId(Long.parseLong(node.getTextContent()));
+                        break;
+                    case "startTime":
+                        jobDone.setStrartTime(LocalDateTime.parse(node.getTextContent()));
+                        break;
+                    case "endTime":
+                        jobDone.setEndTime(LocalDateTime.parse(node.getTextContent()));
+                        break;
+                }
+            }
+        }
+        return jobDone;
     }
 
     private Element createJobDoneElement(JobDone jobDone) throws ParserConfigurationException {
