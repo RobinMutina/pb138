@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7e01e4b-2549-41fa-87d7-e64f54211d4d" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/DbConnection.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/ResultDocument.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/ResultDocument.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/XMLTransformer.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/XMLTransformer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java" />
@@ -27,27 +31,50 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="JobDoneDAO.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JobDoneDAO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.59158415">
-              <caret line="307" column="98" selection-start-line="307" selection-start-column="98" selection-end-line="307" selection-end-column="98" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="411" column="126" selection-start-line="411" selection-start-column="126" selection-end-line="411" selection-end-column="126" />
               <folding>
                 <element signature="docComment;class#JobDoneDAO#0" expanded="false" />
-                <element signature="method#usage#0;class#JobDoneDAO#0" expanded="false" />
-                <element signature="method#main#0;class#JobDoneDAO#0" expanded="false" />
                 <element signature="method#JobDoneDAO#0;class#JobDoneDAO#0" expanded="false" />
                 <element signature="method#createJobDone#0;class#JobDoneDAO#0" expanded="false" />
                 <element signature="method#updateJobDone#0;class#JobDoneDAO#0" expanded="false" />
                 <element signature="method#deleteJobDone#0;class#JobDoneDAO#0" expanded="false" />
                 <element signature="method#getJobDoneById#0;class#JobDoneDAO#0" expanded="false" />
                 <element signature="method#getAllJobDone#0;class#JobDoneDAO#0" expanded="false" />
-                <element signature="method#getAllJobDoneByUserId#0;class#JobDoneDAO#0" expanded="false" />
                 <element signature="method#getAllJobDoneByUserAtTime#0;class#JobDoneDAO#0" expanded="false" />
                 <element signature="method#getUserTotalSalary#0;class#JobDoneDAO#0" expanded="false" />
                 <element signature="method#getUserSalaryAtTime#0;class#JobDoneDAO#0" expanded="false" />
                 <element signature="method#getJobDoneFromDocument#0;class#JobDoneDAO#0" expanded="false" />
                 <element signature="method#createJobDoneElement#0;class#JobDoneDAO#0" expanded="false" />
+                <element signature="method#getWageFromDocument#0;class#JobDoneDAO#0" expanded="false" />
+                <element signature="method#getWageFromDocument#1;class#JobDoneDAO#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResultDocument.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/ResultDocument.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="26" column="66" selection-start-line="25" selection-start-column="8" selection-end-line="26" selection-end-column="66" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="XMLTransformer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/XMLTransformer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.47487843">
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -91,9 +118,11 @@
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/ResultDocument.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobDoneManagerImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/XMLTransformer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/DbConnection.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/XMLTransformer.java" />
       </list>
     </option>
   </component>
@@ -139,9 +168,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -300,6 +326,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -313,15 +342,15 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="cz.muni.fi.pb138.project.Impl.DataAccess" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB" />
       <recent name="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl" />
       <recent name="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/DataAccess" />
       <recent name="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Exceptions" />
       <recent name="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Interfaces" />
-      <recent name="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="cz.muni.fi.pb138.project.Impl.DataAccess" />
     </key>
   </component>
   <component name="RunManager" selected="Application.JobDoneDAO">
@@ -808,11 +837,12 @@
       <workItem from="1464693713563" duration="15224000" />
       <workItem from="1464712129277" duration="9366000" />
       <workItem from="1464776790160" duration="7644000" />
+      <workItem from="1465040131947" duration="6827000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66593000" />
+    <option name="totallyTimeSpent" value="73420000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -828,7 +858,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -837,9 +867,8 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21666667" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21666667" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -850,6 +879,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -889,7 +919,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="55" />
+      <option name="time" value="60" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -898,30 +928,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#usage#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#main#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#JobDoneDAO#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#createJobDone#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#updateJobDone#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#deleteJobDone#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getJobDoneById#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getAllJobDone#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getAllJobDoneByUserId#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getAllJobDoneByUserAtTime#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getUserTotalSalary#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getUserSalaryAtTime#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getJobDoneFromDocument#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#createJobDoneElement#0;class#JobDoneDAO#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -935,7 +941,6 @@
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="docComment;class#UserDAO#0" expanded="false" />
-            <element signature="method#usage#0;class#UserDAO#0" expanded="false" />
             <element signature="method#UserDAO#0;class#UserDAO#0" expanded="false" />
             <element signature="method#updateUser#0;class#UserDAO#0" expanded="false" />
             <element signature="method#deleteUser#0;class#UserDAO#0" expanded="false" />
@@ -960,13 +965,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="61" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
           <folding>
-            <element signature="e#992#993#0" expanded="true" />
-            <element signature="e#1017#1018#0" expanded="true" />
             <element signature="method#setUserId#0;class#JobDone#0" expanded="false" />
-            <element signature="e#1361#1362#0" expanded="true" />
-            <element signature="e#1390#1391#0" expanded="true" />
             <element signature="method#setJobTypeId#0;class#JobDone#0" expanded="false" />
-            <element signature="e#1797#1798#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1263,16 +1263,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/ResultDocument.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="66" selection-start-line="25" selection-start-column="8" selection-end-line="26" selection-end-column="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobDoneManagerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33168316">
@@ -1300,21 +1290,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/XMLTransformer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/src/Libraries/exist.jar!/org/exist/xmldb/RemoteXPathQueryService.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35977337">
           <caret line="43" column="23" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1329,14 +1308,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/DbConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2225131">
-          <caret line="107" column="8" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="105" selection-start-line="41" selection-start-column="105" selection-end-line="41" selection-end-column="105" />
           <folding>
             <element signature="docComment;class#UserDAO#0" expanded="false" />
-            <element signature="method#usage#0;class#UserDAO#0" expanded="false" />
-            <element signature="method#UserDAO#0;class#UserDAO#0" expanded="false" />
             <element signature="method#updateUser#0;class#UserDAO#0" expanded="false" />
             <element signature="method#deleteUser#0;class#UserDAO#0" expanded="false" />
             <element signature="method#getUser#0;class#UserDAO#0" expanded="false" />
@@ -1349,17 +1336,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52879584">
-          <caret line="106" column="9" selection-start-line="100" selection-start-column="8" selection-end-line="106" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.44570503">
+          <caret line="166" column="85" selection-start-line="166" selection-start-column="48" selection-end-line="166" selection-end-column="85" />
           <folding>
             <element signature="docComment;class#JobTypeDAO#0" expanded="false" />
-            <element signature="method#usage#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="method#JobTypeDAO#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="method#updateJobType#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="method#deleteJobType#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="method#getJobType#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="method#getAllJobTypes#0;class#JobTypeDAO#0" expanded="false" />
-            <element signature="method#getJobTypeFromDocument#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="method#createJobTypeElement#0;class#JobTypeDAO#0" expanded="false" />
           </folding>
         </state>
@@ -1367,24 +1352,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59158415">
-          <caret line="307" column="98" selection-start-line="307" selection-start-column="98" selection-end-line="307" selection-end-column="98" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="411" column="126" selection-start-line="411" selection-start-column="126" selection-end-line="411" selection-end-column="126" />
           <folding>
             <element signature="docComment;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#usage#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#main#0;class#JobDoneDAO#0" expanded="false" />
             <element signature="method#JobDoneDAO#0;class#JobDoneDAO#0" expanded="false" />
             <element signature="method#createJobDone#0;class#JobDoneDAO#0" expanded="false" />
             <element signature="method#updateJobDone#0;class#JobDoneDAO#0" expanded="false" />
             <element signature="method#deleteJobDone#0;class#JobDoneDAO#0" expanded="false" />
             <element signature="method#getJobDoneById#0;class#JobDoneDAO#0" expanded="false" />
             <element signature="method#getAllJobDone#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getAllJobDoneByUserId#0;class#JobDoneDAO#0" expanded="false" />
             <element signature="method#getAllJobDoneByUserAtTime#0;class#JobDoneDAO#0" expanded="false" />
             <element signature="method#getUserTotalSalary#0;class#JobDoneDAO#0" expanded="false" />
             <element signature="method#getUserSalaryAtTime#0;class#JobDoneDAO#0" expanded="false" />
             <element signature="method#getJobDoneFromDocument#0;class#JobDoneDAO#0" expanded="false" />
             <element signature="method#createJobDoneElement#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getWageFromDocument#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getWageFromDocument#1;class#JobDoneDAO#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/ResultDocument.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="66" selection-start-line="25" selection-start-column="8" selection-end-line="26" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/XMLTransformer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47487843">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

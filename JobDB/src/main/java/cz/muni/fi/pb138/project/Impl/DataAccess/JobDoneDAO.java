@@ -3,37 +3,27 @@ package cz.muni.fi.pb138.project.Impl.DataAccess;
 import cz.muni.fi.pb138.project.Entities.JobDone;
 import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 import cz.muni.fi.pb138.project.Exceptions.ValidationException;
+import cz.muni.fi.pb138.project.Impl.DataAccess.DB.DbConnection;
+import cz.muni.fi.pb138.project.Impl.DataAccess.DB.ResultDocument;
+import cz.muni.fi.pb138.project.Impl.DataAccess.DB.XMLTransformer;
 import cz.muni.fi.pb138.project.Validators.JobDoneValidator;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.exist.dom.ElementImpl;
-import org.exist.xmldb.XmldbURI;
 import org.w3c.dom.*;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.*;
-import org.xmldb.api.modules.CollectionManagementService;
-import org.xmldb.api.modules.XMLResource;
 import org.xmldb.api.modules.XQueryService;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 
 /**
@@ -51,60 +41,18 @@ public class JobDoneDAO {
 
     private XQueryService service;
 
-    protected static void usage() {
-        System.out.println("usage: org.exist.examples.xmldb.Put collection docName");
-        System.exit(0);
-    }
-
     public static void main(String[] args) throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        LocalDateTime x = LocalDateTime.MAX;
+        String date = x.toLocalDate().toString();
+        String time = x.toLocalTime().toString();
+
         JobDoneDAO jobDoneDAO = new JobDoneDAO();
-        jobDoneDAO.getAllJobDone();
+        List<JobDone> jb = jobDoneDAO.getAllJobDone();
+        System.out.println(jb);
     }
 
     public JobDoneDAO() throws ServiceFailureException {
-
-        try {
-            Class<?> cl = Class.forName(driver);
-            Database database = (Database)cl.newInstance();
-            DatabaseManager.registerDatabase(database);
-            Collection col = DatabaseManager.getCollection(URI + collection);
-
-            this.service = (XQueryService) col.getService("XQueryService", "1.0");
-            this.service.setProperty("indent", "yes");
-            System.out.println("connected");
-        /*
-        // initialize driver
-        Class<?> cl = Class.forName(driver);
-        Database database = (Database)cl.newInstance();
-        database.setProperty("create-database", "true");
-        DatabaseManager.registerDatabase(database);
-
-        // try to get collection
-        Collection col =
-                DatabaseManager.getCollection(URI + collection);
-        if(col == null) {
-            // collection does not exist: get root collection and create.
-            // for simplicity, we assume that the new collection is a
-            // direct child of the root collection, e.g. /db/test.
-            // the example will fail otherwise.
-            Collection root = DatabaseManager.getCollection(URI + XmldbURI.ROOT_COLLECTION);
-            CollectionManagementService mgtService =
-                    (CollectionManagementService)root.getService("CollectionManagementService", "1.0");
-            col = mgtService.createCollection(collection.substring((XmldbURI.ROOT_COLLECTION + "/").length()));
-        }
-        File f = new File(fileName);
-
-        // create new XMLResource
-        XMLResource document = (XMLResource)col.createResource(f.getName(), "XMLResource");
-
-        document.setContent(f);
-        System.out.print("storing document " + document.getId() + "...");
-        col.storeResource(document);
-        System.out.println("ok.");
-        */
-        }catch (XMLDBException | ClassNotFoundException | IllegalAccessException | InstantiationException e){
-            throw new ServiceFailureException("Setting up database failed.", e);
-        }
+        this.service = DbConnection.getConnection(this.driver, this.URI, this.collection, this.fileName);
     }
 
     public void createJobDone(JobDone jobDone) throws ServiceFailureException {
@@ -297,12 +245,30 @@ public class JobDoneDAO {
         if (id < 0){
             throw new IllegalArgumentException("id is invalid");
         }
-        //TODO
-        //if (!DB.contains(id)){
-        //    throw new IllegalArgumentException("DB doesn't contain user");
-        //}
 
-        throw new UnsupportedOperationException();
+        String query = "for $jobDone in /JobsDone/JobDone let $jobTypeId := $jobDone/jobTypeId \n" +
+                "where $jobDone/userId = \"" + id + "\" \n" +
+                "return \n" +
+                "<Work>\n" +
+                "{$jobDone/startTime}\n" +
+                "{$jobDone/endTime}\n" +
+                "{/JobTypes/JobType[@id = $jobTypeId]/pricePerHour}\n" +
+                "</Work>";
+
+        BigDecimal totalWage = new BigDecimal(0);
+        try {
+            ResourceSet result = service.query(query);
+            ResourceIterator iterator = result.getIterator();
+
+            while (iterator.hasMoreResources()){
+                totalWage.add(this.getWageFromDocument(ResultDocument.getDocument(
+                        iterator.nextResource().getContent().toString())));
+            }
+
+            return totalWage;
+        } catch (XMLDBException | ParserConfigurationException | IOException | SAXException e) {
+            throw new ServiceFailureException("Error getting users wage.", e);
+        }
     }
 
     public BigDecimal getUserSalaryAtTime(Long id, LocalDateTime startTime, LocalDateTime endTime){
@@ -317,12 +283,29 @@ public class JobDoneDAO {
         if (endTime == null){
             throw new IllegalArgumentException("endTime is null");
         }
-        //TODO
-        //if (!DB.contains(id)){
-        //    throw new IllegalArgumentException("DB doesn't contain jobDone");
-        //}
+        String query = "for $jobDone in /JobsDone/JobDone let $jobTypeId := $jobDone/jobTypeId \n" +
+                "where $jobDone/userId = \"" + id + "\" \n" +
+                "return \n" +
+                "<Work>\n" +
+                "{$jobDone/startTime}\n" +
+                "{$jobDone/endTime}\n" +
+                "{/JobTypes/JobType[@id = $jobTypeId]/pricePerHour}\n" +
+                "</Work>";
 
-        throw new UnsupportedOperationException();
+        BigDecimal totalWage = new BigDecimal(0);
+        try {
+            ResourceSet result = service.query(query);
+            ResourceIterator iterator = result.getIterator();
+
+            while (iterator.hasMoreResources()){
+                totalWage.add(this.getWageFromDocument(ResultDocument.getDocument(
+                        iterator.nextResource().getContent().toString()), startTime, endTime));
+            }
+
+            return totalWage;
+        } catch (XMLDBException | ParserConfigurationException | IOException | SAXException e) {
+            throw new ServiceFailureException("Error getting users wage.", e);
+        }
     }
 
     private JobDone getJobDoneFromDocument(Document document) throws IllegalAccessException {
@@ -385,5 +368,89 @@ public class JobDoneDAO {
         document.appendChild(jobDoneElement);
 
         return jobDoneElement;
+    }
+
+    private BigDecimal getWageFromDocument(Document document) {
+        if (document == null){
+            throw new IllegalArgumentException("document is null");
+        }
+
+        Element root = document.getDocumentElement();
+
+        LocalDateTime startTime = null;
+        LocalDateTime endTime = null;
+        BigDecimal pricePerHour = null;
+
+        for (int i = 0; i < root.getChildNodes().getLength(); i++) {
+            Node node = root.getChildNodes().item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                switch (node.getNodeName()) {
+                    case "pricePerHour":
+                        pricePerHour = new BigDecimal(node.getTextContent());
+                        if (pricePerHour.compareTo(BigDecimal.ZERO) < 0)
+                            return BigDecimal.ZERO;
+                        break;
+                    case "startTime":
+                        startTime = LocalDateTime.parse(node.getTextContent());
+                        break;
+                    case "endTime":
+                        endTime = LocalDateTime.parse(node.getTextContent());
+                        break;
+                }
+            }
+        }
+
+        if (startTime == null || endTime == null || pricePerHour == null){
+            throw new IllegalArgumentException("arguments not initialized");
+        }
+
+        long minutes = ChronoUnit.MINUTES.between(startTime, endTime);
+
+        return pricePerHour.multiply(new BigDecimal((double) minutes / 60.0));
+    }
+
+    private BigDecimal getWageFromDocument(Document document, LocalDateTime startTimeInterval, LocalDateTime endTimeInterval) {
+        if (document == null){
+            throw new IllegalArgumentException("document is null");
+        }
+
+        Element root = document.getDocumentElement();
+
+        LocalDateTime startTime = null;
+        LocalDateTime endTime = null;
+        BigDecimal pricePerHour = null;
+
+        for (int i = 0; i < root.getChildNodes().getLength(); i++) {
+            Node node = root.getChildNodes().item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                switch (node.getNodeName()) {
+                    case "pricePerHour":
+                        pricePerHour = new BigDecimal(node.getTextContent());
+                        if (pricePerHour.compareTo(BigDecimal.ZERO) < 0)
+                            return BigDecimal.ZERO;
+                        break;
+                    case "startTime":
+                        startTime = LocalDateTime.parse(node.getTextContent());
+                        if (startTime.isBefore(startTimeInterval) || startTime.isAfter(endTimeInterval))
+                            return BigDecimal.ZERO;
+                        break;
+                    case "endTime":
+                        endTime = LocalDateTime.parse(node.getTextContent());
+                        if (endTime.isBefore(startTimeInterval))
+                            return BigDecimal.ZERO;
+                        if (endTime.isAfter(endTimeInterval))
+                            endTime = endTimeInterval;
+                        break;
+                }
+            }
+        }
+
+        if (startTime == null || endTime == null || pricePerHour == null){
+            throw new IllegalArgumentException("arguments not initialized");
+        }
+
+        long minutes = ChronoUnit.MINUTES.between(startTime, endTime);
+
+        return pricePerHour.multiply(new BigDecimal((double) minutes / 60.0));
     }
 }

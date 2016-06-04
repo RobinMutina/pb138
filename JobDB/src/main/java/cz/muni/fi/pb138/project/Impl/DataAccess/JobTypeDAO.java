@@ -3,12 +3,14 @@ package cz.muni.fi.pb138.project.Impl.DataAccess;
 import cz.muni.fi.pb138.project.Entities.JobType;
 import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 import cz.muni.fi.pb138.project.Exceptions.ValidationException;
+import cz.muni.fi.pb138.project.Impl.DataAccess.DB.DbConnection;
+import cz.muni.fi.pb138.project.Impl.DataAccess.DB.ResultDocument;
+import cz.muni.fi.pb138.project.Impl.DataAccess.DB.XMLTransformer;
 import cz.muni.fi.pb138.project.Validators.JobTypeValidator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
-import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.XQueryService;
 
@@ -18,7 +20,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,54 +38,8 @@ public class JobTypeDAO {
 
     private XQueryService service;
 
-    protected static void usage() {
-        System.out.println("usage: org.exist.examples.xmldb.Put collection docName");
-        System.exit(0);
-    }
-
     public JobTypeDAO(){
-        try {
-            Class<?> cl = Class.forName(driver);
-            Database database = (Database)cl.newInstance();
-            DatabaseManager.registerDatabase(database);
-            Collection col = DatabaseManager.getCollection(URI + collection);
-
-            this.service = (XQueryService) col.getService("XQueryService", "1.0");
-            this.service.setProperty("indent", "yes");
-            System.out.println("connected");
-        /*
-        // initialize driver
-        Class<?> cl = Class.forName(driver);
-        Database database = (Database)cl.newInstance();
-        database.setProperty("create-database", "true");
-        DatabaseManager.registerDatabase(database);
-
-        // try to get collection
-        Collection col =
-                DatabaseManager.getCollection(URI + collection);
-        if(col == null) {
-            // collection does not exist: get root collection and create.
-            // for simplicity, we assume that the new collection is a
-            // direct child of the root collection, e.g. /db/test.
-            // the example will fail otherwise.
-            Collection root = DatabaseManager.getCollection(URI + XmldbURI.ROOT_COLLECTION);
-            CollectionManagementService mgtService =
-                    (CollectionManagementService)root.getService("CollectionManagementService", "1.0");
-            col = mgtService.createCollection(collection.substring((XmldbURI.ROOT_COLLECTION + "/").length()));
-        }
-        File f = new File(fileName);
-
-        // create new XMLResource
-        XMLResource document = (XMLResource)col.createResource(f.getName(), "XMLResource");
-
-        document.setContent(f);
-        System.out.print("storing document " + document.getId() + "...");
-        col.storeResource(document);
-        System.out.println("ok.");
-        */
-        }catch (XMLDBException | ClassNotFoundException | IllegalAccessException | InstantiationException e){
-            throw new ServiceFailureException("Setting up database failed.", e);
-        }
+        this.service = DbConnection.getConnection(this.driver, this.URI, this.collection, this.fileName);
     }
 
     public void createJobType(JobType jobType){

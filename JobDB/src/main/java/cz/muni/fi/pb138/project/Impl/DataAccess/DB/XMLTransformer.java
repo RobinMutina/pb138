@@ -1,4 +1,4 @@
-package cz.muni.fi.pb138.project.Impl.DataAccess;
+package cz.muni.fi.pb138.project.Impl.DataAccess.DB;
 
 import org.w3c.dom.Node;
 
