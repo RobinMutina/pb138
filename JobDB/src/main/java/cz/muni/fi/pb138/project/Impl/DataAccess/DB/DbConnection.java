@@ -41,6 +41,10 @@ public class DbConnection {
             service.setProperty("indent", "yes");
             System.out.println("connected");
 
+            if (service == null){
+                throw new IllegalArgumentException("service is null");
+            }
+
             return service;
         }catch (XMLDBException | ClassNotFoundException | IllegalAccessException | InstantiationException e){
             throw new ServiceFailureException("Setting up database failed.", e);

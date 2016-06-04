@@ -49,10 +49,14 @@ public class JobDoneDAO {
         JobDoneDAO jobDoneDAO = new JobDoneDAO();
         List<JobDone> jb = jobDoneDAO.getAllJobDone();
         System.out.println(jb);
-    }
+    }//TODO javadoc
 
     public JobDoneDAO() throws ServiceFailureException {
         this.service = DbConnection.getConnection(this.driver, this.URI, this.collection, this.fileName);
+
+        if (service == null){
+            throw new IllegalArgumentException("service is null");
+        }
     }
 
     public void createJobDone(JobDone jobDone) throws ServiceFailureException {

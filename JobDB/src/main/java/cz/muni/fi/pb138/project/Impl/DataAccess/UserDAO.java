@@ -39,6 +39,10 @@ public class UserDAO {
 
     public UserDAO(){
         this.service = DbConnection.getConnection(this.driver, this.URI, this.collection, this.fileName);
+
+        if (service == null){
+            throw new IllegalArgumentException("service is null");
+        }
     }
 
     public void createUser(User user){

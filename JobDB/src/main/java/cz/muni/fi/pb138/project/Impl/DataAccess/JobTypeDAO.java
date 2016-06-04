@@ -40,6 +40,10 @@ public class JobTypeDAO {
 
     public JobTypeDAO(){
         this.service = DbConnection.getConnection(this.driver, this.URI, this.collection, this.fileName);
+
+        if (service == null){
+            throw new IllegalArgumentException("service is null");
+        }
     }
 
     public void createJobType(JobType jobType){
