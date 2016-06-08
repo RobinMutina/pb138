@@ -1,6 +1,7 @@
 package cz.muni.fi.pb138.project.Impl.DataAccess;
 
 import cz.muni.fi.pb138.project.Entities.JobDone;
+import cz.muni.fi.pb138.project.Entities.User;
 import cz.muni.fi.pb138.project.Exceptions.DbException;
 import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 import cz.muni.fi.pb138.project.Exceptions.ValidationException;
@@ -32,26 +33,6 @@ import java.util.function.Consumer;
  */
 public class JobDoneDAO {
     private static final DbCoreApi dbApi = DbCoreApi4EmbeddedBaseX.getInstance();
-
-    public static void main(String[] args){
-        if (!dbApi.collectionExists("test2")) {
-            try {
-                dbApi.createCollection("test2", JobDoneDAO.class.getResource("JobDone.xml").getPath());
-            } catch (DbException e) {
-                throw new RuntimeException(e);
-            }
-        }else {
-            try {
-                dbApi.openCollection("test2");
-            } catch (DbException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        JobDoneDAO jdd = new JobDoneDAO();
-        System.out.println(jdd.getNewUniqueID());
-        System.out.println(jdd.isUniqueID(0L));
-    }
 
     public void createJobDone(JobDone jobDone) throws ServiceFailureException {
         try{
