@@ -138,6 +138,12 @@ public class UserDAO {
             throw new IllegalArgumentException("DB doesn't contain user");
         }
 
+        JobDoneDAO jobDoneDAO = new JobDoneDAO();
+
+        if (!jobDoneDAO.getAllJobDoneByUserId(id).isEmpty()){
+            throw new ServiceFailureException("Cannot delete user, because user has assigned jobDone");
+        }
+
         try {
             String query = "update delete doc('User.xml')/Users/User[@id = \"" + id + "\"]";
             service.query(query);

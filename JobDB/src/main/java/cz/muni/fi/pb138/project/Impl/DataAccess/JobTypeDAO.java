@@ -137,6 +137,12 @@ public class JobTypeDAO {
             throw new IllegalArgumentException("DB doesn't contain jobType");
         }
 
+        JobDoneDAO jobDoneDAO = new JobDoneDAO();
+
+        if (!jobDoneDAO.getAllJobDoneByJobTypeId(id).isEmpty()){
+            throw new ServiceFailureException("Cannot delete jobType, because jobType has assigned jobDone");
+        }
+
         try {
             String query = "update delete doc('JobType.xml')/JobTypes/JobType[@id = \"" + id + "\"]";
             service.query(query);

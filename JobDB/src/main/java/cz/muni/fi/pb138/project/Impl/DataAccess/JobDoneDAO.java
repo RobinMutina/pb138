@@ -240,7 +240,7 @@ public class JobDoneDAO {
 
     /**
      * getter for all jobsDone for specified user
-     * @param id id of jobDone
+     * @param id id of user
      * @return list of jobsDone from db
      * @throws ServiceFailureException if error occurs
      * @throws IllegalArgumentException if id is less than 0
@@ -250,10 +250,45 @@ public class JobDoneDAO {
             throw new IllegalArgumentException("id is invalid");
         }
 
+        return getAllJobDoneBySpecifiedId(id, "userId");
+    }
+
+    /**
+     * getter for all jobsDone for specified jobType
+     * @param id id of jobType
+     * @return list of jobsDone from db
+     * @throws ServiceFailureException if error occurs
+     * @throws IllegalArgumentException if id is less than 0
+     */
+    public List<JobDone> getAllJobDoneByJobTypeId(long id){
+        if (id < 0){
+            throw new IllegalArgumentException("id is invalid");
+        }
+
+        return getAllJobDoneBySpecifiedId(id, "jobTypeId");
+    }
+
+    /**
+     * gets all jobsDone for specified id
+     * @param id id
+     * @param idSpecificator column name
+     * @return list of jobsDone from db
+     * @throws ServiceFailureException if error occurs
+     * @throws IllegalArgumentException if id is less than 0
+     */
+    private List<JobDone> getAllJobDoneBySpecifiedId(long id, String idSpecificator){
+        if (id < 0){
+            throw new IllegalArgumentException("id is invalid");
+        }
+
+        if (idSpecificator == null || (!idSpecificator.equals("jobTypeId") && !idSpecificator.equals("userId"))){
+            throw new IllegalArgumentException("idSpecificator has invalid value or is null");
+        }
+
         List<JobDone> jobDoneList = new ArrayList<JobDone>();
 
         try {
-            String xquery = "for $jobDone in /JobsDone/JobDone let $userId := $jobDone/userId where $userId = \""+ id + "\" return $jobDone";
+            String xquery = "for $jobDone in /JobsDone/JobDone let $" + idSpecificator + " := $jobDone/userId where $" + idSpecificator + " = \""+ id + "\" return $jobDone";
             ResourceSet result = service.query(xquery);
             ResourceIterator iterator = result.getIterator();
 

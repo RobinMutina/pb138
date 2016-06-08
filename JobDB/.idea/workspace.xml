@@ -2,26 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7e01e4b-2549-41fa-87d7-e64f54211d4d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/ResultDocument.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobDone.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobDone.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobType.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/User.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Exceptions/ServiceFailureException.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Exceptions/ServiceFailureException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Exceptions/ValidationException.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Exceptions/ValidationException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/DbConnection.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/DbConnection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/XMLTransformer.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/XMLTransformer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JobDB.iml" afterPath="$PROJECT_DIR$/JobDB.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobDoneManagerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobDoneManagerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobTypeManagerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobTypeManagerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/UserManagerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/UserManagerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Interfaces/JobTypeManager.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Interfaces/JobTypeManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Interfaces/UserManager.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Interfaces/UserManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Validators/JobDoneValidator.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Validators/JobDoneValidator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Validators/JobTypeValidator.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Validators/JobTypeValidator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Validators/UserValidator.java" afterPath="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Validators/UserValidator.java" />
     </list>
     <ignored path="JobDB.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -82,11 +67,11 @@
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobDoneManagerImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobTypeManagerImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/UserManagerImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/DbConnection.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/XMLTransformer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java" />
       </list>
     </option>
   </component>
@@ -100,6 +85,11 @@
       <MavenGeneralSettings>
         <option name="mavenHome" value="Bundled (Maven 3)" />
       </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
     </option>
   </component>
   <component name="ProjectFrameBounds">
@@ -149,6 +139,130 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="JobDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JobDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JobDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Validators" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JobDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JobDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Interfaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JobDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JobDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JobDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JobDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataAccess" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -708,12 +822,12 @@
       <workItem from="1464712129277" duration="9366000" />
       <workItem from="1464776790160" duration="7644000" />
       <workItem from="1465040131947" duration="9214000" />
-      <workItem from="1465388286766" duration="8113000" />
+      <workItem from="1465388286766" duration="10023000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83920000" />
+    <option name="totallyTimeSpent" value="85830000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1052,19 +1166,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17504051">
-          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-          <folding>
-            <element signature="docComment;method#getId#0;class#User#0" expanded="false" />
-            <element signature="docComment;method#setId#0;class#User#0" expanded="false" />
-            <element signature="method#setId#0;class#User#0" expanded="false" />
-            <element signature="method#equals#0;class#User#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Exceptions/ValidationException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.095623985">
@@ -1080,28 +1181,6 @@
           <folding>
             <element signature="e#849#850#0" expanded="true" />
             <element signature="e#879#880#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17504051">
-          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="29" />
-          <folding>
-            <element signature="docComment;method#setId#0;class#JobType#0" expanded="false" />
-            <element signature="method#setId#0;class#JobType#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobDone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0923825">
-          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-          <folding>
-            <element signature="method#setUserId#0;class#JobDone#0" expanded="false" />
-            <element signature="method#setJobTypeId#0;class#JobDone#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1180,14 +1259,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobTypeManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1458671">
-          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/UserManagerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1458671">
@@ -1196,53 +1267,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/DbConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4376013">
+          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/XMLTransformer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1458671">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="30" selection-end-column="3" />
+          <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
           <folding>
-            <element signature="docComment;field#URI#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;field#fileName#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;field#collection#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;field#driver#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;field#service#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#main#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#JobDoneDAO#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#JobDoneDAO#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#createJobDone#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#createJobDone#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#updateJobDone#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#updateJobDone#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#deleteJobDone#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#deleteJobDone#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#getJobDoneById#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getJobDoneById#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#getAllJobDone#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getAllJobDone#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#getAllJobDoneByUserId#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getAllJobDoneByUserId#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#getAllJobDoneByUserAtTime#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getAllJobDoneByUserAtTime#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#getUserTotalSalary#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getUserTotalSalary#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#getUserSalaryAtTime#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getUserSalaryAtTime#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#getJobDoneFromDocument#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getJobDoneFromDocument#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#createJobDoneElement#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#createJobDoneElement#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#getWageFromDocument#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getWageFromDocument#0;class#JobDoneDAO#0" expanded="false" />
-            <element signature="docComment;method#getWageFromDocument#1;class#JobDoneDAO#0" expanded="false" />
-            <element signature="method#getWageFromDocument#1;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#nodeToString#0;class#XMLTransformer#0" expanded="false" />
+            <element signature="method#nodeToString#0;class#XMLTransformer#0" expanded="false" />
+            <element signature="docComment;method#stringToDocument#0;class#XMLTransformer#0" expanded="false" />
+            <element signature="method#stringToDocument#0;class#XMLTransformer#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/JobTypeManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1458671">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobDone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.1831443">
+          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+          <folding>
+            <element signature="method#setUserId#0;class#JobDone#0" expanded="false" />
+            <element signature="method#setJobTypeId#0;class#JobDone#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/JobType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.84602916">
+          <caret line="109" column="26" selection-start-line="109" selection-start-column="26" selection-end-line="109" selection-end-column="26" />
+          <folding>
+            <element signature="docComment;class#JobType#0" expanded="false" />
+            <element signature="docComment;method#getId#0;class#JobType#0" expanded="false" />
+            <element signature="docComment;method#setId#0;class#JobType#0" expanded="false" />
+            <element signature="method#setId#0;class#JobType#0" expanded="false" />
+            <element signature="docComment;method#getName#0;class#JobType#0" expanded="false" />
+            <element signature="docComment;method#setName#0;class#JobType#0" expanded="false" />
+            <element signature="docComment;method#getPricePerHour#0;class#JobType#0" expanded="false" />
+            <element signature="docComment;method#setPricePerHour#0;class#JobType#0" expanded="false" />
+            <element signature="docComment;method#toString#0;class#JobType#0" expanded="false" />
+            <element signature="method#toString#0;class#JobType#0" expanded="false" />
+            <element signature="docComment;method#equals#0;class#JobType#0" expanded="false" />
+            <element signature="method#equals#0;class#JobType#0" expanded="false" />
+            <element signature="docComment;method#hashCode#0;class#JobType#0" expanded="false" />
+            <element signature="method#hashCode#0;class#JobType#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Entities/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17504051">
+          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+          <folding>
+            <element signature="docComment;method#getId#0;class#User#0" expanded="false" />
+            <element signature="docComment;method#setId#0;class#User#0" expanded="false" />
+            <element signature="method#setId#0;class#User#0" expanded="false" />
+            <element signature="method#equals#0;class#User#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/UserDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.058346838">
-          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="131" column="35" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
           <folding>
             <element signature="docComment;field#URI#0;class#UserDAO#0" expanded="false" />
             <element signature="docComment;field#fileName#0;class#UserDAO#0" expanded="false" />
@@ -1269,22 +1375,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/DbConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4376013">
-          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobTypeDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24473257">
-          <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.4165316">
+          <caret line="130" column="38" selection-start-line="130" selection-start-column="38" selection-end-line="130" selection-end-column="38" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#JobTypeDAO#0" expanded="false" />
             <element signature="docComment;field#URI#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="docComment;field#fileName#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="docComment;field#collection#0;class#JobTypeDAO#0" expanded="false" />
@@ -1299,7 +1395,9 @@
             <element signature="docComment;method#deleteJobType#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="method#deleteJobType#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="docComment;method#getJobType#0;class#JobTypeDAO#0" expanded="false" />
+            <element signature="method#getJobType#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="docComment;method#getAllJobTypes#0;class#JobTypeDAO#0" expanded="false" />
+            <element signature="method#getAllJobTypes#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="docComment;method#getJobTypeFromDocument#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="method#getJobTypeFromDocument#0;class#JobTypeDAO#0" expanded="false" />
             <element signature="docComment;method#createJobTypeElement#0;class#JobTypeDAO#0" expanded="false" />
@@ -1308,15 +1406,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/DB/XMLTransformer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/muni/fi/pb138/project/Impl/DataAccess/JobDoneDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1458671">
-          <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.31442463">
+          <caret line="269" column="0" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
           <folding>
-            <element signature="docComment;method#nodeToString#0;class#XMLTransformer#0" expanded="false" />
-            <element signature="method#nodeToString#0;class#XMLTransformer#0" expanded="false" />
-            <element signature="docComment;method#stringToDocument#0;class#XMLTransformer#0" expanded="false" />
-            <element signature="method#stringToDocument#0;class#XMLTransformer#0" expanded="false" />
+            <element signature="docComment;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;field#URI#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;field#fileName#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;field#collection#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;field#driver#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;field#service#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#main#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#JobDoneDAO#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#JobDoneDAO#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#createJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#createJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#updateJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#updateJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#deleteJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#deleteJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#getJobDoneById#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getJobDoneById#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#getAllJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getAllJobDone#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#getAllJobDoneByUserId#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getAllJobDoneByUserId#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#getAllJobDoneByJobTypeId#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getAllJobDoneByJobTypeId#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#getAllJobDoneBySpecifiedId#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getAllJobDoneBySpecifiedId#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#getAllJobDoneByUserAtTime#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getAllJobDoneByUserAtTime#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#getUserTotalSalary#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getUserTotalSalary#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#getUserSalaryAtTime#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getUserSalaryAtTime#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#getJobDoneFromDocument#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getJobDoneFromDocument#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#createJobDoneElement#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#createJobDoneElement#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#getWageFromDocument#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getWageFromDocument#0;class#JobDoneDAO#0" expanded="false" />
+            <element signature="docComment;method#getWageFromDocument#1;class#JobDoneDAO#0" expanded="false" />
+            <element signature="method#getWageFromDocument#1;class#JobDoneDAO#0" expanded="false" />
           </folding>
         </state>
       </provider>
