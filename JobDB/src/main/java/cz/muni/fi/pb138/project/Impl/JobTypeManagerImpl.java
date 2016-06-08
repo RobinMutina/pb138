@@ -8,7 +8,8 @@ import cz.muni.fi.pb138.project.Interfaces.JobTypeManager;
 import java.util.List;
 
 /**
- * Created by martin on 26.5.2016.
+ * implementation of JobTypeManager interface
+ * @author Martin Sevcik
  */
 public class JobTypeManagerImpl implements JobTypeManager {
 

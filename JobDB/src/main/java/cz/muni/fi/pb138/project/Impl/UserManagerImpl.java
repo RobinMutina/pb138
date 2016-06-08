@@ -10,7 +10,8 @@ import cz.muni.fi.pb138.project.Interfaces.UserManager;
 import java.util.List;
 
 /**
- * Created by martin on 26.5.2016.
+ * implementation of UserManager interface
+ * @author Martin Sevcik
  */
 public class UserManagerImpl implements UserManager {
 

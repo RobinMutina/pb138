@@ -11,7 +11,8 @@ import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 import java.util.List;
 
 /**
- *
+ * UserManager interface with the main operations
+ * for manipulating with a database getting adding modifying
  * @author Vladislav Malynych
  */
 public interface UserManager {

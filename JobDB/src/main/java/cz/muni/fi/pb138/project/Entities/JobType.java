@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- *
+ * representing JobType class
  * @author Vladislav Malynych
  */
 public class JobType {
@@ -17,10 +17,20 @@ public class JobType {
     private Long id = NOT_INITIALISED_ID;
     private String name;
     private BigDecimal pricePerHour;
-    
+
+    /**
+     * basic getter
+     * @return id
+     */
     public Long getId() {
         return id;
     }
+    /**
+     * basic setter
+     * @param id id
+     * @throws IllegalAccessException thrown when id is already set
+     * @throws IllegalArgumentException thrown when id is less than 0
+     */
     public void setId(Long id) throws IllegalAccessException {
         if (this.id.equals(NOT_INITIALISED_ID)) {
             if(id < 0L) {
@@ -31,26 +41,52 @@ public class JobType {
             throw new IllegalAccessException("id is already set");
         }
     }
-     
+
+    /**
+     * basic getter
+     * @return name
+     */
     public String getName() {
         return name;
     }
+    /**
+     * basic setter
+     * @param name name
+     */
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    /**
+     * basic getter
+     * @return pricePerHour
+     */
     public BigDecimal getPricePerHour() {
         return pricePerHour;
     }
+
+    /**
+     * basic setter
+     * @param pricePerHour pricePerHour
+     */
     public void setPricePerHour(BigDecimal pricePerHour) {
         this.pricePerHour = pricePerHour;
     }
-    
+
+    /**
+     * overridden toString method
+     * @return String JobType
+     */
     @Override
     public String toString() {
         return "JobType{" + "id=" + id + ", name=" + name + ", PricePerHour=" + pricePerHour + "}";
     }
 
+    /**
+     * overridden equals method
+     * @param obj JobType
+     * @return true if equal false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -66,6 +102,10 @@ public class JobType {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     * overridden hashCode method
+     * @return hash of JobType
+     */
     @Override
     public int hashCode() {
         int hash = 7;

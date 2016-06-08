@@ -4,7 +4,6 @@ import cz.muni.fi.pb138.project.Entities.JobDone;
 import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 import cz.muni.fi.pb138.project.Impl.DataAccess.DB.DbConnection;
-import cz.muni.fi.pb138.project.Impl.DataAccess.DB.ResultDocument;
 import cz.muni.fi.pb138.project.Impl.DataAccess.DB.XMLTransformer;
 import cz.muni.fi.pb138.project.Validators.JobDoneValidator;
 
@@ -27,18 +26,34 @@ import javax.xml.transform.TransformerException;
 
 
 /**
- * Created by martin on 26.5.2016.
+ * DAO operations for JobDone
+ * @author Martin Sevcik
  */
 public class JobDoneDAO {
 
+    /**
+     * representing URI
+     */
     public final static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc";
 
+    /**
+     * representing name of file
+     */
     private static final String fileName = "JobDone.xml";
 
+    /**
+     * representing collection
+     */
     private static final String collection = "db/PB138";
 
+    /**
+     * representing db driver
+     */
     private static String driver = "org.exist.xmldb.DatabaseImpl";
 
+    /**
+     * representing db service
+     */
     private XQueryService service;
 
     public static void main(String[] args) throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -51,6 +66,11 @@ public class JobDoneDAO {
         System.out.println(jb);
     }//TODO javadoc
 
+    /**
+     * non parametric constructor creates new db service
+     * @throws ServiceFailureException if error occurs
+     * @throws IllegalArgumentException if service is not created
+     */
     public JobDoneDAO() throws ServiceFailureException {
         this.service = DbConnection.getConnection(this.driver, this.URI, this.collection, this.fileName);
 
@@ -59,6 +79,11 @@ public class JobDoneDAO {
         }
     }
 
+    /**
+     * provides inserting jobDone into db
+     * @param jobDone inserted into db
+     * @throws ServiceFailureException if error occurs
+     */
     public void createJobDone(JobDone jobDone) throws ServiceFailureException {
         try {
             JobDoneValidator.canCreate(jobDone);
@@ -101,6 +126,11 @@ public class JobDoneDAO {
         }
     }
 
+    /**
+     * provides update of existing jobDone
+     * @param jobDone updated jobDone
+     * @throws ServiceFailureException if error occurs
+     */
     public void updateJobDone(JobDone jobDone) throws ServiceFailureException {
         try {
             JobDoneValidator.canUpdate(jobDone);
@@ -130,6 +160,11 @@ public class JobDoneDAO {
         }
     }
 
+    /**
+     * provides delete of existing jobDone
+     * @param id id of deleted jobDone
+     * @throws ServiceFailureException if error occurs
+     */
     public void deleteJobDone(long id) {
         if (id < 0){
             throw new IllegalArgumentException("id is invalid");
@@ -147,6 +182,13 @@ public class JobDoneDAO {
         }
     }
 
+    /**
+     * getter for jobDone from db
+     * @param id id of required jobDone
+     * @return User
+     * @throws IllegalArgumentException if id is less than 0
+     * @throws ServiceFailureException if error occurs
+     */
     public JobDone getJobDoneById(long id){
         if (id < 0){
             throw new IllegalArgumentException("id is invalid");
@@ -158,7 +200,7 @@ public class JobDoneDAO {
             ResourceIterator iterator = result.getIterator();
 
             while (iterator.hasMoreResources()){
-                return this.getJobDoneFromDocument(ResultDocument.getDocument(
+                return this.getJobDoneFromDocument(XMLTransformer.stringToDocument(
                         iterator.nextResource().getContent().toString()));
             }
 
@@ -169,6 +211,11 @@ public class JobDoneDAO {
         return null;
     }
 
+    /**
+     * getter for all jobsDone
+     * @return list of all jobsDone from db
+     * @throws ServiceFailureException if error occurs
+     */
     public List<JobDone> getAllJobDone(){
 
         List<JobDone> jobDoneList = new ArrayList<JobDone>();
@@ -181,7 +228,7 @@ public class JobDoneDAO {
             while (iterator.hasMoreResources()){
 
                 jobDoneList.add(this.getJobDoneFromDocument(
-                        ResultDocument.getDocument(iterator.nextResource().getContent().toString())));
+                        XMLTransformer.stringToDocument(iterator.nextResource().getContent().toString())));
             }
         } catch (XMLDBException | ParserConfigurationException | SAXException |
                 IOException | IllegalAccessException e) {
@@ -191,6 +238,13 @@ public class JobDoneDAO {
         return jobDoneList;
     }
 
+    /**
+     * getter for all jobsDone for specified user
+     * @param id id of jobDone
+     * @return list of jobsDone from db
+     * @throws ServiceFailureException if error occurs
+     * @throws IllegalArgumentException if id is less than 0
+     */
     public List<JobDone> getAllJobDoneByUserId(long id){
         if (id < 0){
             throw new IllegalArgumentException("id is invalid");
@@ -205,7 +259,7 @@ public class JobDoneDAO {
 
             while (iterator.hasMoreResources()){
 
-                jobDoneList.add(this.getJobDoneFromDocument(ResultDocument.getDocument(iterator.nextResource().getContent().toString())));
+                jobDoneList.add(this.getJobDoneFromDocument(XMLTransformer.stringToDocument(iterator.nextResource().getContent().toString())));
             }
         } catch (XMLDBException | ParserConfigurationException | SAXException |
                 IOException | IllegalArgumentException | IllegalAccessException e) {
@@ -215,6 +269,12 @@ public class JobDoneDAO {
         return jobDoneList;
     }
 
+    /**
+     * getter for all jobsDone for specified user and time
+     * @return list of jobsDone from db
+     * @throws ServiceFailureException if error occurs
+     * @throws IllegalArgumentException if id is less than 0 or time is null
+     */
     public List<JobDone> getAllJobDoneByUserAtTime(long id, LocalDateTime startTime, LocalDateTime endTime){
 
         if (id < 0){
@@ -245,6 +305,13 @@ public class JobDoneDAO {
         return jobDoneList;
     }
 
+    /**
+     * getter total salary
+     * @param id id of user
+     * @return total salary
+     * @throws ServiceFailureException if error occurs
+     * @throws IllegalArgumentException if id is less than 0
+     */
     public BigDecimal getUserTotalSalary(long id){
         if (id < 0){
             throw new IllegalArgumentException("id is invalid");
@@ -265,7 +332,7 @@ public class JobDoneDAO {
             ResourceIterator iterator = result.getIterator();
 
             while (iterator.hasMoreResources()){
-                totalWage.add(this.getWageFromDocument(ResultDocument.getDocument(
+                totalWage.add(this.getWageFromDocument(XMLTransformer.stringToDocument(
                         iterator.nextResource().getContent().toString())));
             }
 
@@ -275,6 +342,15 @@ public class JobDoneDAO {
         }
     }
 
+    /**
+     * getter total salary for specified time
+     * @param id id of user
+     * @param endTime end time
+     * @param startTime start time
+     * @return total salary
+     * @throws ServiceFailureException if error occurs
+     * @throws IllegalArgumentException if id is less than 0 or time is null
+     */
     public BigDecimal getUserSalaryAtTime(Long id, LocalDateTime startTime, LocalDateTime endTime){
         if (id < 0){
             throw new IllegalArgumentException("id is invalid");
@@ -302,7 +378,7 @@ public class JobDoneDAO {
             ResourceIterator iterator = result.getIterator();
 
             while (iterator.hasMoreResources()){
-                totalWage.add(this.getWageFromDocument(ResultDocument.getDocument(
+                totalWage.add(this.getWageFromDocument(XMLTransformer.stringToDocument(
                         iterator.nextResource().getContent().toString()), startTime, endTime));
             }
 
@@ -312,6 +388,14 @@ public class JobDoneDAO {
         }
     }
 
+    /**
+     * creates jobDone from xml
+     * @param document document containing jobDone
+     * @return jobDone
+     * @throws IllegalAccessException if error occurs during parsing
+     * @throws IllegalArgumentException if document is null
+     * @throws ServiceFailureException if error occurs
+     */
     private JobDone getJobDoneFromDocument(Document document) throws IllegalAccessException {
         if (document == null){
             throw new IllegalArgumentException("document is null");
@@ -345,6 +429,12 @@ public class JobDoneDAO {
         return jobDone;
     }
 
+    /**
+     * creates xml element jobDone
+     * @param jobDone jobDone
+     * @return xml representation of jobDone
+     * @throws ParserConfigurationException if creation of dBuilder fails
+     */
     private Element createJobDoneElement(JobDone jobDone) throws ParserConfigurationException {
         DocumentBuilderFactory dbFactory  = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -374,6 +464,11 @@ public class JobDoneDAO {
         return jobDoneElement;
     }
 
+    /**
+     * gets wage from document
+     * @param document xml representation of wage
+     * @return wage
+     */
     private BigDecimal getWageFromDocument(Document document) {
         if (document == null){
             throw new IllegalArgumentException("document is null");
@@ -413,6 +508,13 @@ public class JobDoneDAO {
         return pricePerHour.multiply(new BigDecimal((double) minutes / 60.0));
     }
 
+    /**
+     *
+     * @param document xml representation of wage
+     * @param startTimeInterval start time
+     * @param endTimeInterval end time
+     * @return wage
+     */
     private BigDecimal getWageFromDocument(Document document, LocalDateTime startTimeInterval, LocalDateTime endTimeInterval) {
         if (document == null){
             throw new IllegalArgumentException("document is null");

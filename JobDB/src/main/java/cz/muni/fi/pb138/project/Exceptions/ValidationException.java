@@ -1,7 +1,8 @@
 package cz.muni.fi.pb138.project.Exceptions;
 
 /**
- * Created by martin on 27.5.2016.
+ * representing ValidationException class
+ * @author Martin Sevcik
  */
 public class ValidationException extends Exception {
 

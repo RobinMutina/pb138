@@ -13,10 +13,20 @@ import org.xmldb.api.modules.XQueryService;
 import java.io.File;
 
 /**
- * Created by martin on 4.6.2016.
+ * Appi for connecting to database
+ * @author Martin Sevcik
  */
 public class DbConnection {
 
+    /**
+     * provides creation of new XQueryService
+     * @param driver representing db driver
+     * @param URI  representing db uri
+     * @param collection  representing db collection
+     * @param fileName  representing db filename
+     * @return new XQueryService
+     * @throws ServiceFailureException if error occurs
+     */
     public static XQueryService getConnection(String driver, String URI, String collection, String fileName){
         try {
             Class<?> cl = Class.forName(driver);

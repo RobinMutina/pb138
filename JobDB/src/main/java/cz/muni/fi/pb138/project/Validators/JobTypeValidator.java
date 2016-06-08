@@ -6,10 +6,16 @@ import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 import java.math.BigDecimal;
 
 /**
- * Created by martin on 26.5.2016.
+ * representing JobTypeValidator class
+ * @author Martin Sevcik
  */
 public class JobTypeValidator {
 
+    /**
+     * validates creating of jobType
+     * @param jobType jobType to validate
+     * @throws ValidationException thrown if validation fails
+     */
     public static void canCreate(JobType jobType) throws ValidationException {
         validation(jobType);
 
@@ -18,6 +24,11 @@ public class JobTypeValidator {
         }
     }
 
+    /**
+     * validates updating of jobType
+     * @param jobType jobType to validate
+     * @throws ValidationException thrown if validation fails
+     */
     public static void canUpdate(JobType jobType) throws ValidationException {
         validation(jobType);
 
@@ -26,6 +37,11 @@ public class JobTypeValidator {
         }
     }
 
+    /**
+     * basic validation for jobType
+     * @param jobType jobType to validate
+     * @throws ValidationException thrown if validation fails
+     */
     private static void validation(JobType jobType) throws ValidationException {
         if (jobType == null){
             throw new ValidationException("jobType is null");

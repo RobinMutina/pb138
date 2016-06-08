@@ -4,10 +4,16 @@ import cz.muni.fi.pb138.project.Entities.User;
 import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 
 /**
- * Created by martin on 26.5.2016.
+ * representing UserValidator class
+ * @author Martin Sevcik
  */
 public class UserValidator {
 
+    /**
+     * validates creating of user
+     * @param user user to validate
+     * @throws ValidationException thrown if validation fails
+     */
     public static void canCreate(User user) throws ValidationException {
         validation(user);
 
@@ -16,6 +22,11 @@ public class UserValidator {
         }
     }
 
+    /**
+     * validates updating of user
+     * @param user user to validate
+     * @throws ValidationException thrown if validation fails
+     */
     public static void canUpdate(User user) throws ValidationException {
         validation(user);
 
@@ -24,6 +35,11 @@ public class UserValidator {
         }
     }
 
+    /**
+     * basic validation for user
+     * @param user user to validate
+     * @throws ValidationException thrown if validation fails
+     */
     private static void validation(User user) throws ValidationException {
         if (user == null) {
             throw new ValidationException("user is null");

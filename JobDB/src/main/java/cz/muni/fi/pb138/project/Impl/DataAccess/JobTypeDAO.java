@@ -4,7 +4,6 @@ import cz.muni.fi.pb138.project.Entities.JobType;
 import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 import cz.muni.fi.pb138.project.Impl.DataAccess.DB.DbConnection;
-import cz.muni.fi.pb138.project.Impl.DataAccess.DB.ResultDocument;
 import cz.muni.fi.pb138.project.Impl.DataAccess.DB.XMLTransformer;
 import cz.muni.fi.pb138.project.Validators.JobTypeValidator;
 import org.w3c.dom.Document;
@@ -24,20 +23,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by martin on 26.5.2016.
+ * DAO operations for JobType
+ * @author Martin Sevcik
  */
 public class JobTypeDAO {
 
+    /**
+     * representing URI
+     */
     public final static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc";
 
+    /**
+     * representing name of file
+     */
     private static final String fileName = "JobType.xml";
 
+    /**
+     * representing collection
+     */
     private static final String collection = "db/PB138";
 
+    /**
+     * representing db driver
+     */
     private static String driver = "org.exist.xmldb.DatabaseImpl";
 
+    /**
+     * representing db service
+     */
     private XQueryService service;
 
+    /**
+     * non parametric constructor creates new db service
+     * @throws ServiceFailureException if error occurs
+     */
     public JobTypeDAO(){
         this.service = DbConnection.getConnection(this.driver, this.URI, this.collection, this.fileName);
 
@@ -46,6 +65,11 @@ public class JobTypeDAO {
         }
     }
 
+    /**
+     * provides inserting jobType into db
+     * @param jobType inserted into db
+     * @throws ServiceFailureException if error occurs
+     */
     public void createJobType(JobType jobType){
         try {
             JobTypeValidator.canCreate(jobType);
@@ -75,6 +99,11 @@ public class JobTypeDAO {
         }
     }
 
+    /**
+     * provides update of existing jobType
+     * @param jobType updated jobType
+     * @throws ServiceFailureException if error occurs
+     */
     public void updateJobType(JobType jobType) throws ServiceFailureException{
         try {
             JobTypeValidator.canUpdate(jobType);
@@ -94,6 +123,11 @@ public class JobTypeDAO {
         }
     }
 
+    /**
+     * provides delete of existing jobType
+     * @param id id of deleted jobType
+     * @throws ServiceFailureException if error occurs
+     */
     public void deleteJobType(long id){
         if (id < 0){
             throw new IllegalArgumentException("id is invalid");
@@ -111,6 +145,13 @@ public class JobTypeDAO {
         }
     }
 
+    /**
+     * getter for jobType from db
+     * @param id id of required jobType
+     * @return User
+     * @throws IllegalArgumentException if id is less than 0
+     * @throws ServiceFailureException if error occurs
+     */
     public JobType getJobType(long id){
         if (id < 0){
             throw new IllegalArgumentException("id is invalid");
@@ -122,7 +163,7 @@ public class JobTypeDAO {
             ResourceIterator iterator = result.getIterator();
 
             while (iterator.hasMoreResources()){
-                return this.getJobTypeFromDocument(ResultDocument.getDocument(
+                return this.getJobTypeFromDocument(XMLTransformer.stringToDocument(
                         iterator.nextResource().getContent().toString()));
             }
         } catch (XMLDBException | ParserConfigurationException | SAXException |
@@ -132,6 +173,11 @@ public class JobTypeDAO {
         return null;
     }
 
+    /**
+     * getter for all jobTypes
+     * @return list of all jobTypes from db
+     * @throws ServiceFailureException if error occurs
+     */
     public List<JobType> getAllJobTypes(){
         List<JobType> jobTypeList = new ArrayList<JobType>();
 
@@ -141,7 +187,7 @@ public class JobTypeDAO {
             ResourceIterator iterator = result.getIterator();
 
             while (iterator.hasMoreResources()) {
-                jobTypeList.add(getJobTypeFromDocument(ResultDocument.getDocument(
+                jobTypeList.add(getJobTypeFromDocument(XMLTransformer.stringToDocument(
                         iterator.nextResource().getContent().toString())));
             }
         } catch (XMLDBException | ParserConfigurationException | SAXException |
@@ -152,6 +198,14 @@ public class JobTypeDAO {
         return jobTypeList;
     }
 
+    /**
+     * creates user from xml
+     * @param document document containing user
+     * @return JobType
+     * @throws IllegalAccessException if error occurs during parsing
+     * @throws IllegalArgumentException if document is null
+     * @throws ServiceFailureException if error occurs
+     */
     private JobType getJobTypeFromDocument(Document document) throws IllegalAccessException {
         if (document == null){
             throw new IllegalArgumentException("document is null");
@@ -179,6 +233,12 @@ public class JobTypeDAO {
         return jobType;
     }
 
+    /**
+     * creates xml element jobType
+     * @param jobType jobType
+     * @return xml representation of jobType
+     * @throws ParserConfigurationException if creation of dBuilder fails
+     */
     private Element createJobTypeElement(JobType jobType) throws ParserConfigurationException {
         DocumentBuilderFactory dbFactory  = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Created by martin on 26.5.2016.
+ * implementation of JobDoneManager interface
+ * @author Martin Sevcik
  */
 public class JobDoneManagerImpl implements JobDoneManager {
 

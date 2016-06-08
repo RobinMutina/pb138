@@ -4,7 +4,6 @@ import cz.muni.fi.pb138.project.Entities.User;
 import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 import cz.muni.fi.pb138.project.Impl.DataAccess.DB.DbConnection;
-import cz.muni.fi.pb138.project.Impl.DataAccess.DB.ResultDocument;
 import cz.muni.fi.pb138.project.Impl.DataAccess.DB.XMLTransformer;
 import cz.muni.fi.pb138.project.Validators.UserValidator;
 import org.w3c.dom.Document;
@@ -23,20 +22,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by martin on 26.5.2016.
+ * DAO operations for User
+ * @author Martin Sevcik
  */
 public class UserDAO {
 
+
+    /**
+     * representing URI
+     */
     public final static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc";
 
+    /**
+     * representing name of file
+     */
     private static final String fileName = "User.xml";
 
+    /**
+     * representing collection
+     */
     private static final String collection = "db/PB138";
 
+    /**
+     * representing db driver
+     */
     private static String driver = "org.exist.xmldb.DatabaseImpl";
 
+    /**
+     * representing db service
+     */
     private XQueryService service;
 
+    /**
+     * non parametric constructor creates new db service
+     * @throws ServiceFailureException if error occurs
+     * @throws IllegalArgumentException if service is not created
+     */
     public UserDAO(){
         this.service = DbConnection.getConnection(this.driver, this.URI, this.collection, this.fileName);
 
@@ -45,6 +66,11 @@ public class UserDAO {
         }
     }
 
+    /**
+     * provides inserting user into db
+     * @param user inserted into db
+     * @throws ServiceFailureException if error occurs
+     */
     public void createUser(User user){
         try {
             UserValidator.canCreate(user);
@@ -74,6 +100,11 @@ public class UserDAO {
         }
     }
 
+    /**
+     * provides update of existing user
+     * @param user updated user
+     * @throws ServiceFailureException if error occurs
+     */
     public void updateUser(User user){
         try {
             UserValidator.canUpdate(user);
@@ -93,6 +124,11 @@ public class UserDAO {
         }
     }
 
+    /**
+     * provides delete of existing user
+     * @param id id of deleted user
+     * @throws ServiceFailureException if error occurs
+     */
     public void deleteUser(long id){
         if (id < 0){
             throw new IllegalArgumentException("id is invalid");
@@ -110,6 +146,13 @@ public class UserDAO {
         }
     }
 
+    /**
+     * getter for user from db
+     * @param id id of required user
+     * @return User
+     * @throws IllegalArgumentException if id is less than 0
+     * @throws ServiceFailureException if error occurs
+     */
     public User getUser(long id){
         if (id < 0){
             throw new IllegalArgumentException("id is invalid");
@@ -121,7 +164,7 @@ public class UserDAO {
             ResourceIterator iterator = result.getIterator();
 
             while (iterator.hasMoreResources()){
-                return this.getUserFromDocument(ResultDocument.getDocument(
+                return this.getUserFromDocument(XMLTransformer.stringToDocument(
                         iterator.nextResource().getContent().toString()));
             }
 
@@ -132,6 +175,11 @@ public class UserDAO {
         return null;
     }
 
+    /**
+     * getter for all users
+     * @return list of all users from db
+     * @throws ServiceFailureException if error occurs
+     */
     public List<User> getAllUsers(){
         List<User> userList = new ArrayList<User>();
         try {
@@ -140,7 +188,7 @@ public class UserDAO {
             ResourceIterator iterator = result.getIterator();
 
             while (iterator.hasMoreResources()) {
-                userList.add(getUserFromDocument(ResultDocument.getDocument(
+                userList.add(getUserFromDocument(XMLTransformer.stringToDocument(
                         iterator.nextResource().getContent().toString())));
             }
 
@@ -151,6 +199,14 @@ public class UserDAO {
         return userList;
     }
 
+    /**
+     * creates user from xml
+     * @param document document containing user
+     * @return User
+     * @throws IllegalAccessException if error occurs during parsing
+     * @throws IllegalArgumentException if document is null
+     * @throws ServiceFailureException if error occurs
+     */
     private User getUserFromDocument(Document document) throws IllegalAccessException {
         if (document == null){
             throw new IllegalArgumentException("document is null");
@@ -171,6 +227,12 @@ public class UserDAO {
         return user;
     }
 
+    /**
+     * creates xml element user
+     * @param user user
+     * @return xml representation of user
+     * @throws ParserConfigurationException if creation of dBuilder fails
+     */
     private Element createUserElement(User user) throws ParserConfigurationException {
         DocumentBuilderFactory dbFactory  = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

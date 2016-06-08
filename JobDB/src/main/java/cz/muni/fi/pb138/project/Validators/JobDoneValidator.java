@@ -4,10 +4,16 @@ import cz.muni.fi.pb138.project.Entities.JobDone;
 import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 
 /**
- * Created by martin on 26.5.2016.
+ * representing JobDoneValidator class
+ * @author Martin Sevcik
  */
 public class JobDoneValidator {
 
+    /**
+     * validates creating of jobDone
+     * @param jobDone jobDone to validate
+     * @throws ValidationException thrown if validation fails
+     */
     public static void canCreate(JobDone jobDone) throws ValidationException {
         validation(jobDone);
 
@@ -16,6 +22,11 @@ public class JobDoneValidator {
         }
     }
 
+    /**
+     * validates updating of jobDone
+     * @param jobDone jobDone to validate
+     * @throws ValidationException thrown if validation fails
+     */
     public static void canUpdate(JobDone jobDone) throws ValidationException {
         validation(jobDone);
 
@@ -24,6 +35,11 @@ public class JobDoneValidator {
         }
     }
 
+    /**
+     * basic validation for jobdone
+     * @param jobDone jobDone to validate
+     * @throws ValidationException thrown if validation fails
+     */
     private static void validation(JobDone jobDone) throws ValidationException {
         if (jobDone == null){
             throw new ValidationException("jobDone is null");
