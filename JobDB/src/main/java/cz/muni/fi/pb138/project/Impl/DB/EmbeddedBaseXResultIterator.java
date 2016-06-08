@@ -23,13 +23,11 @@ public class EmbeddedBaseXResultIterator implements Iterator, AutoCloseable{
     private ByteArrayOutputStream stream;
     private Item current;
     private boolean hasNext;
-    private Context context;
 
-    public EmbeddedBaseXResultIterator(String query, String collection)throws QueryException, IOException{
-        context = new Context();
 
-        new Open(collection).execute(context);
-        QueryProcessor proc = new QueryProcessor(query, context);
+    public EmbeddedBaseXResultIterator(String query, Context context) throws QueryException, IOException{
+
+        proc = new QueryProcessor(query, context);
 
             // Store the pointer to the result in an iterator:
             iter = proc.iter();
@@ -81,9 +79,6 @@ public class EmbeddedBaseXResultIterator implements Iterator, AutoCloseable{
         }
         if (ser != null){
             ser.close();
-        }
-        if (context != null){
-            context.close();
         }
     }
 }

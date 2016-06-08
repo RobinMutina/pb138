@@ -21,18 +21,23 @@ import java.util.function.Consumer;
  */
 public class SimpleRoundTrip {
     public static void main(String[] args){
-        //Maybe i will make all the api method static so this is not needed
-        // EDIT: that can't be done in java - interfaces cannot declare static methods ...
-        DbCoreApi dbApi = new DbCoreApi4EmbeddedBaseX();
+
+        DbCoreApi dbApi = DbCoreApi4EmbeddedBaseX.getInstance();
 
         //Checks if collection exists, and creates new one if needed
-        if (!dbApi.collectionExists("test")) {
+       if (!dbApi.collectionExists("test")) {
             try {
                 dbApi.createCollection("test", SimpleRoundTrip.class.getResource("test.xml").getPath());
             } catch (DbException e) {
                 throw new RuntimeException(e);
             }
-        }
+       }else {
+            try {
+                dbApi.openCollection("test");
+            } catch (DbException e) {
+                throw new RuntimeException(e);
+            }
+       }
 
         // id are generated randomly and checked for uniqueness, because xml dbs do not seem to provide any means of
         // generating new id's, tried generate-id from xslt but that didn't work as expected
@@ -52,8 +57,7 @@ public class SimpleRoundTrip {
                     "let $user :=   <User id='"+id+"'>"+
                                         "<name>Pako</name>"+
                                     "</User> \n"+
-                    "return insert node $user into $users\n",
-                    "test"
+                    "return insert node $user into $users\n"
             );
         } catch (DbException e) {
             throw new RuntimeException(e);
@@ -65,8 +69,7 @@ public class SimpleRoundTrip {
         try {
             result = dbApi.execXquery(
                     "let $user := //User[@id='"+id.toString()+"']\n" +
-                            "return $user",
-                    "test"
+                            "return $user"
             );
         } catch (DbException e) {
             throw new RuntimeException(e);
@@ -85,8 +88,7 @@ public class SimpleRoundTrip {
         // FIXME maybe create new interface witch would fuse both Iterator and Autoclosable or a new base class, cause this forces the use of concrete class
         try (EmbeddedBaseXResultIterator it = (EmbeddedBaseXResultIterator) dbApi.execXqueryIterated(
                         ("for $user in //User \n" +
-                        "return $user"),
-                    "test"))
+                        "return $user")))
         {
             it.forEachRemaining(new Consumer() {
                 @Override
@@ -114,13 +116,12 @@ public class SimpleRoundTrip {
      */
     public static Boolean isUniqueID(Long id){
         String result;
-        DbCoreApi dbApi = new DbCoreApi4EmbeddedBaseX();
+        DbCoreApi dbApi = DbCoreApi4EmbeddedBaseX.getInstance();
         // FIXME: optimize the query not to return whole user but somthing shorter, more efficient
         try {
             result = dbApi.execXquery(
                     "let $user := //User[@id='"+id.toString()+"']\n" +
-                            "return $user",
-                    "test"
+                            "return $user"
             );
         } catch (DbException e) {
             throw new RuntimeException(e);

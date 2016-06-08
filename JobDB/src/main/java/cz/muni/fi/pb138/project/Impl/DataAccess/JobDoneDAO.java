@@ -23,6 +23,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Consumer;
 
 
@@ -30,48 +31,33 @@ import java.util.function.Consumer;
  * Created by martin on 26.5.2016.
  */
 public class JobDoneDAO {
+    private static final DbCoreApi dbApi = DbCoreApi4EmbeddedBaseX.getInstance();
 
-    public static void main(String[] args) throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        JobDoneDAO jb = new JobDoneDAO();
-
-        System.out.println("SSSSSSSSSSSSSSSs");
-        JobDone jobDone = new JobDone();
-        jobDone.setEndTime(LocalDateTime.MAX);
-        jobDone.setStrartTime(LocalDateTime.MIN);
-        //jobDone.setId(1L);
-        jobDone.setJobTypeId(1L);
-        jobDone.setUserId(1L);
-        jb.createJobDone(jobDone);
-
-        System.out.println(jobDone);
-    }
-
-    private DbCoreApi dbApi;
-
-    private static final String classSpec = "jobDone";
-
-    public JobDoneDAO() throws ServiceFailureException {
-        this.dbApi = new DbCoreApi4EmbeddedBaseX();
-        if (!dbApi.collectionExists(classSpec)) {
+    public static void main(String[] args){
+        if (!dbApi.collectionExists("test2")) {
             try {
-                dbApi.createCollection(classSpec, JobDoneDAO.class.getResource("JobDone.xml").getPath());
+                dbApi.createCollection("test2", JobDoneDAO.class.getResource("JobDone.xml").getPath());
             } catch (DbException e) {
-                throw new ServiceFailureException(e);
+                throw new RuntimeException(e);
+            }
+        }else {
+            try {
+                dbApi.openCollection("test2");
+            } catch (DbException e) {
+                throw new RuntimeException(e);
             }
         }
 
+        JobDoneDAO jdd = new JobDoneDAO();
+        System.out.println(jdd.getNewUniqueID());
+        System.out.println(jdd.isUniqueID(0L));
     }
 
     public void createJobDone(JobDone jobDone) throws ServiceFailureException {
         try{
             JobDoneValidator.canCreate(jobDone);
 
-            long maxId = -1;
-            for (JobDone done : getAllJobDone()) {
-                if (done.getId() > maxId) {
-                    maxId = done.getId();
-                }
-            }
+            Long id = getNewUniqueID();
 
             UserDAO userDao = new UserDAO();
             JobTypeDAO jobTypeDAO = new JobTypeDAO();
@@ -84,10 +70,11 @@ public class JobDoneDAO {
                 throw new ServiceFailureException("Database doesn'contain jobType.");
             }
 
-            maxId++;
-            jobDone.setId(maxId);
+            jobDone.setId(id);
 
-            String query = "update insert " +
+            System.out.println(XMLTransformer.nodeToString(createJobDoneElement(jobDone)));
+
+            String query = "insert node " +
                     XMLTransformer.nodeToString(createJobDoneElement(jobDone)) +
                     " into /JobsDone";
             dbApi.execXquery(query);
@@ -96,6 +83,34 @@ public class JobDoneDAO {
             throw new ServiceFailureException("Error creating JobDone.", e);
         }
     }
+
+    Long getNewUniqueID(){
+        Random randomno = new Random();
+        Long id =  randomno.nextLong();
+        while (id < new Long(0) || !isUniqueID(id)){
+            id = randomno.nextLong();
+        }
+        return  id;
+    }
+
+    /**
+     * Utility funct to check if id is unique
+     * @param id
+     * @return true if the id unique, else false
+     */
+    public static Boolean isUniqueID(Long id) {
+        String result;
+        try {
+            result = dbApi.execXquery(
+                    "let $job := //JobDone[@id='" + id.toString() + "']\n" +
+                            "return fn:empty($job)"
+            );
+        } catch (DbException e) {
+            throw new RuntimeException(e);
+        }
+        return result.equals("true");
+    }
+
 
     public void updateJobDone(JobDone jobDone) throws ServiceFailureException {
         try{
@@ -187,8 +202,7 @@ public class JobDoneDAO {
         }
 
         try (EmbeddedBaseXResultIterator it = (EmbeddedBaseXResultIterator) dbApi.execXqueryIterated(
-                query,
-                classSpec))
+                query))
         {
 
             it.forEachRemaining(new Consumer() {

@@ -6,6 +6,7 @@ import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 import cz.muni.fi.pb138.project.Impl.DB.DbCoreApi4EmbeddedBaseX;
 import cz.muni.fi.pb138.project.Impl.DB.EmbeddedBaseXResultIterator;
+import cz.muni.fi.pb138.project.Interfaces.DbCoreApi;
 import cz.muni.fi.pb138.project.Validators.JobTypeValidator;
 import org.basex.query.value.item.Str;
 import org.w3c.dom.Document;
@@ -24,6 +25,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Consumer;
 
 /**
@@ -31,20 +33,35 @@ import java.util.function.Consumer;
  */
 public class JobTypeDAO {
 
-    private DbCoreApi4EmbeddedBaseX dbApi;
+    private static final DbCoreApi4EmbeddedBaseX dbApi = DbCoreApi4EmbeddedBaseX.getInstance();
 
-    private static final String classSpec = "jobType";
-
-    public JobTypeDAO(){
-        this.dbApi = new DbCoreApi4EmbeddedBaseX();
-        if (!dbApi.collectionExists(classSpec)) {
-            try {
-                dbApi.createCollection(classSpec, JobTypeDAO.class.getResource("JobType.xml").getPath());
-            } catch (DbException e) {
-                throw new ServiceFailureException(e);
-            }
+    Long getNewUniqueID(){
+        Random randomno = new Random();
+        Long id =  randomno.nextLong();
+        while (id < new Long(0) || !isUniqueID(id)){
+            id = randomno.nextLong();
         }
+        return  id;
     }
+
+    /**
+     * Utility funct to check if id is unique
+     * @param id
+     * @return true if the id unique, else false
+     */
+    public static Boolean isUniqueID(Long id) {
+        String result;
+        try {
+            result = dbApi.execXquery(
+                    "let $jobT := //JobType@id='" + id.toString() + "']\n" +
+                            "return fn:empty($jobT)"
+            );
+        } catch (DbException e) {
+            throw new RuntimeException(e);
+        }
+        return result.equals("true");
+    }
+
 
     public void createJobType(JobType jobType){
         try{
@@ -54,16 +71,9 @@ public class JobTypeDAO {
                 throw new IllegalArgumentException("DB does contain jobType");
             }
 
-            long maxId = -1;
+            long id = getNewUniqueID();
 
-            for (JobType type : getAllJobTypes()) {
-                if (type.getId() > maxId) {
-                    maxId = type.getId();
-                }
-            }
-
-            maxId++;
-            jobType.setId(maxId);
+            jobType.setId(id);
             String query = "update insert " + XMLTransformer.nodeToString(createJobTypeElement(jobType)) + " into /JobTypes";
 
             dbApi.execXquery(query);
@@ -131,8 +141,7 @@ public class JobTypeDAO {
 
         String xquery = "for $jobType in /JobTypes/JobType return $jobType";
         try (EmbeddedBaseXResultIterator it = (EmbeddedBaseXResultIterator) dbApi.execXqueryIterated(
-                xquery,
-                classSpec))
+                xquery))
         {
 
             it.forEachRemaining(new Consumer() {

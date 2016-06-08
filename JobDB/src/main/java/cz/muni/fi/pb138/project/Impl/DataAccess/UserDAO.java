@@ -22,6 +22,7 @@ import javax.xml.transform.TransformerException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Consumer;
 
 /**
@@ -29,20 +30,34 @@ import java.util.function.Consumer;
  */
 public class UserDAO {
 
-    private DbCoreApi4EmbeddedBaseX dbApi;
-
-    private static final String classSpec = "user";
-
-    public UserDAO(){
-        this.dbApi = new DbCoreApi4EmbeddedBaseX();
-        if (!dbApi.collectionExists(classSpec)) {
-            try {
-                dbApi.createCollection(classSpec, UserDAO.class.getResource("User.xml").getPath());
-            } catch (DbException e) {
-                throw new ServiceFailureException(e);
-            }
+    Long getNewUniqueID(){
+        Random randomno = new Random();
+        Long id =  randomno.nextLong();
+        while (id < new Long(0) || !isUniqueID(id)){
+            id = randomno.nextLong();
         }
+        return  id;
     }
+
+    /**
+     * Utility funct to check if id is unique
+     * @param id
+     * @return true if the id unique, else false
+     */
+    public static Boolean isUniqueID(Long id) {
+        String result;
+        try {
+            result = dbApi.execXquery(
+                    "let $user := //User[@id='" + id.toString() + "']\n" +
+                            "return fn:empty($user)"
+            );
+        } catch (DbException e) {
+            throw new RuntimeException(e);
+        }
+        return result.equals("true");
+    }
+
+    private static final DbCoreApi4EmbeddedBaseX dbApi = DbCoreApi4EmbeddedBaseX.getInstance();
 
     public void createUser(User user){
         try {
@@ -52,16 +67,9 @@ public class UserDAO {
                 throw new IllegalArgumentException("DB does contain jobType");
             }
 
-            long maxId = -1;
+            long id = getNewUniqueID();
 
-            for (User userIter : getAllUsers()) {
-                if (userIter.getId() > maxId) {
-                    maxId = userIter.getId();
-                }
-            }
-
-            maxId++;
-            user.setId(maxId);
+            user.setId(id);
             String query = "update insert " + XMLTransformer.nodeToString(createUserElement(user)) + " into /Users";
             dbApi.execXquery(query);
         }catch (DbException | ParserConfigurationException | ValidationException |
@@ -122,7 +130,7 @@ public class UserDAO {
 
         } catch (DbException | ParserConfigurationException | SAXException |
                 IOException | IllegalArgumentException | IllegalAccessException e){
-            throw new ServiceFailureException("Error getting all jobTypes.", e);
+              throw new ServiceFailureException("Error getting all jobTypes.", e);
         }
     }
 
@@ -131,8 +139,7 @@ public class UserDAO {
 
         String xquery = "for $user in /Users/User return $user";
         try (EmbeddedBaseXResultIterator it = (EmbeddedBaseXResultIterator) dbApi.execXqueryIterated(
-                xquery,
-                classSpec))
+                xquery))
         {
 
             it.forEachRemaining(new Consumer() {

@@ -9,31 +9,20 @@ import java.util.Iterator;
  */
 public interface DbCoreApi {
     /**
-     * Executes XQuery and retuns result as a string.
-     * @param query an XQuery (v3.0/3.1 for baseX), should contain collection() (or db:open which is baseX specific) to
-     *              open the database first
+     * Executes XQuery and returns result as a string. A collection must be opened first.
+     * @param query an XQuery (v3.0/3.1 for baseX)
      * @return result of the query
      * @throws DbException if something goes wrong
      */
     public String execXquery(String query) throws DbException;
 
     /**
-     * Executes XQuery and retuns result as a string.
-     * @param query an XQuery (v3.0/3.1 for baseX)
-     * @param collection designates collection to open and use in queries
-     * @return result of the query
-     * @throws DbException DbException if something goes wrong
-     */
-    public String execXquery(String query, String collection) throws DbException;
-
-    /**
      * Executes XQuery and retuns result as iterator over the result. Useful when using for clause in the query.
      * @param query an XQuery (v3.0/3.1 for baseX)
-     * @param collection designates collection to open and use in queries
      * @return iterator which serves the result in parts.
      * @throws DbException
      */
-    public Iterator<String> execXqueryIterated(String query, String collection) throws DbException;
+    public Iterator<String> execXqueryIterated(String query) throws DbException;
 
     /**
      * Creates a collection from xmls at location pointed to by path.
@@ -58,10 +47,13 @@ public interface DbCoreApi {
     public void dropColection(String name) throws DbException;
 
     /**
-     * Adds file to collection.
-     * @param name name of the collection
+     * Adds file to currently opened collection.
      * @param path to the file to add
      * @throws DbException
      */
-    public void addToCollection(String name, String path) throws DbException;
+    public void addToCollection(String path) throws DbException;
+
+    public void openCollection(String name) throws DbException;
+
+    public void closeCollection() throws DbException;
 }
