@@ -1,7 +1,7 @@
 package cz.muni.fi.pb138.project.Validators;
 
-import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 import cz.muni.fi.pb138.project.Entities.JobType;
+import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 
 import java.math.BigDecimal;
 

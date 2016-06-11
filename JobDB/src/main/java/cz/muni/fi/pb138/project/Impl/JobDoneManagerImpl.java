@@ -2,9 +2,11 @@ package cz.muni.fi.pb138.project.Impl;
 
 import cz.muni.fi.pb138.project.Entities.JobDone;
 import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
+import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 import cz.muni.fi.pb138.project.Impl.DataAccess.JobDoneDAO;
 import cz.muni.fi.pb138.project.Interfaces.JobDoneManager;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;

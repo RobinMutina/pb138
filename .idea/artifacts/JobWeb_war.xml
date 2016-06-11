@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="JobWeb:war">
-    <output-path>$PROJECT_DIR$/JobWeb/target</output-path>
-    <root id="archive" name="JobWeb-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="JobWeb:war exploded" />
-    </root>
-  </artifact>
-</component>
