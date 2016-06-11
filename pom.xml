@@ -18,6 +18,9 @@
                 <version>9.3.9.v20160517</version>
                 <configuration>
                     <war>${project.basedir}/JobWeb/target/JobWeb-1.0-SNAPSHOT.war</war>
+                    <httpConnector>
+                        <port>8081</port>
+                    </httpConnector>
                 </configuration>
             </plugin>
         </plugins>

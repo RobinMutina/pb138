@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class JobDoneManagerImpl implements JobDoneManager {
 
-    private JobDoneDAO jobDoneDAO;
+    private JobDoneDAO jobDoneDAO = new JobDoneDAO();
 
     /**
      * Creates new JobDone in the database.Id for the new user is automatically

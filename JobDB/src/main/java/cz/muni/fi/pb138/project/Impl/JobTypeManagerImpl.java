@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class JobTypeManagerImpl implements JobTypeManager {
 
-    private JobTypeDAO jobTypeDAO;
+    private JobTypeDAO jobTypeDAO = new JobTypeDAO();
 
     /**
      * Stores new job type into database. Id for the new job type is automatically
