@@ -1,10 +1,10 @@
 package cz.muni.fi.pb138.project.Impl.DataAccess;
 
+import cz.muni.fi.pb138.project.Exceptions.ValidationException;
+import cz.muni.fi.pb138.project.Impl.DataAccess.DB.XMLTransformer;
 import cz.muni.fi.pb138.project.Entities.JobType;
 import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
-import cz.muni.fi.pb138.project.Exceptions.ValidationException;
 import cz.muni.fi.pb138.project.Impl.DataAccess.DB.DbConnection;
-import cz.muni.fi.pb138.project.Impl.DataAccess.DB.XMLTransformer;
 import cz.muni.fi.pb138.project.Validators.JobTypeValidator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
