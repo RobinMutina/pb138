@@ -83,7 +83,7 @@ public class CreateSampleDocbook {
                     sectionElement.addElement("title").addText(user.getName());
                     
                     Element tableElement = sectionElement.addElement("table").addAttribute("frame","all");
-                    tableElement.addElement("title").addText("from:"+start.toString()+"to"+end.toString());
+                    tableElement.addElement("title").addText("from:"+start.toString()+", to"+end.toString());
                     
                     Element table = tableElement.addElement("tgroup").addAttribute("cols", "4").addAttribute("align", "left");
                     table.addElement("colspec").addAttribute("colnum", "1").addAttribute("colname", "c1").addAttribute("colwidth", "1*");
