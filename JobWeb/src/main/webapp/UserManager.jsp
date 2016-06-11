@@ -13,7 +13,7 @@
 <div class="list"></div>
 <ol> <%
     @SuppressWarnings("unchecked")
-    List<User> users = (List<User>)request.getAttribute("users");
+    List<User> users = (List<User>)request.getAttribute("guests");
     if (users != null) {
         for (User user : users) { %>
     <li> <%= user %> </li> <%
