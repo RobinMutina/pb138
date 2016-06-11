@@ -54,3 +54,6 @@ nbactions.xml
 
 # Created by .ignore support plugin (hsz.mobi)
 /JobDB/target/
+JobDB/JobDB.iml
+JobProject.iml
+*.idea
