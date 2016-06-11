@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class UserManagerImpl implements UserManager {
 
-    private UserDAO userDAO;
+    private UserDAO userDAO = new UserDAO();
 
     /**
      * Stores new user into database. Id for the new user is automatically
