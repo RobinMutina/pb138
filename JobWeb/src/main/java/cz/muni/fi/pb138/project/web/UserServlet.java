@@ -1,11 +1,7 @@
-package cz.muni.fi.pb138.web;
+package cz.muni.fi.pb138.project.web;
 
-import cz.muni.fi.pb138.project.Entities.User;
-import cz.muni.fi.pb138.project.Impl.DataAccess.UserDAO;
 import cz.muni.fi.pb138.project.Impl.UserManagerImpl;
 import cz.muni.fi.pb138.project.Interfaces.UserManager;
-import cz.muni.fi.pb138.project.Exceptions.ValidationException;
-import cz.muni.fi.pb138.project.Exceptions.ServiceFailureException;
 
 
 import javax.servlet.ServletException;

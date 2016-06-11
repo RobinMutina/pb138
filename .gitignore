@@ -57,3 +57,4 @@ nbactions.xml
 JobDB/JobDB.iml
 JobProject.iml
 *.idea
+JobWeb/target
