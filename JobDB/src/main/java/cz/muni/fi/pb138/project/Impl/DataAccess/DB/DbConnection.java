@@ -56,7 +56,8 @@ public class DbConnection {
             }
 
             return service;
-        }catch (XMLDBException | ClassNotFoundException | IllegalAccessException | InstantiationException e){
+        }catch (XMLDBException | ClassNotFoundException | IllegalArgumentException
+                | IllegalAccessException | InstantiationException e){
             throw new ServiceFailureException("Setting up database failed.", e);
         }
     }
