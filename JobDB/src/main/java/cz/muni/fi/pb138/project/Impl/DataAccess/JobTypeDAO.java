@@ -31,7 +31,7 @@ public class JobTypeDAO {
     /**
      * representing URI
      */
-    public final static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc";
+    private final static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc";
 
     /**
      * representing name of file
@@ -46,7 +46,7 @@ public class JobTypeDAO {
     /**
      * representing db driver
      */
-    private static String driver = "org.exist.xmldb.DatabaseImpl";
+    private static final String driver = "org.exist.xmldb.DatabaseImpl";
 
     /**
      * representing db service
