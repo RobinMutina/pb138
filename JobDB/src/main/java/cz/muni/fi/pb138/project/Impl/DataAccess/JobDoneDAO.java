@@ -56,16 +56,6 @@ public class JobDoneDAO {
      */
     private XQueryService service;
 
-    public static void main(String[] args) throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        LocalDateTime x = LocalDateTime.MAX;
-        String date = x.toLocalDate().toString();
-        String time = x.toLocalTime().toString();
-
-        JobDoneDAO jobDoneDAO = new JobDoneDAO();
-        List<JobDone> jb = jobDoneDAO.getAllJobDone();
-        System.out.println(jb);
-    }//TODO javadoc
-
     /**
      * non parametric constructor creates new db service
      * @throws ServiceFailureException if error occurs
