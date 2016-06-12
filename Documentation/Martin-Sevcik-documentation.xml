@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<article>
+	<articleinfo>
+		<author>
+			<title>Zhrnutie práce</title>
+        	<subtitle>Evidence příjmů (Web) Tým B</subtitle>
+            <firstname>Martin</firstname>
+            <surname>Ševčík</surname>
+        </author>
+
+        <section>
+        	<title>Zhrnutie práce</title>
+	        <para>
+	        	Moja úloha v projekte pozostávala z implementácie rozhrania pre prácu s databázou. Ďalej som sa podieľal na vytváraní wiki stránky projektu.
+	        </para>
+    	</section>        
+
+    	<section>
+        	<title>eXist-db</title>
+	        <para>
+	        	 Ako natívnu xml databázu som zvolil technológiu eXist-db. Táto technológia umožňuje prístup cez grafické užívateľské rozhranie, ktoré je veľmi intuitívne a obsahuje radu užitočnej funkcionality ako je zobrazovanie XML súborov obsahujúcich uložené dáta, tak ako aj možnosť písať vyhľadávacie výrazy. Táto spomenutá funkcionalita značne uľahčila prácu na projekte.
+	        </para>
+    	</section> 
+
+    	<section>
+        	<title>Implementácia</title>
+	        <para>
+	        	 UserManager, JobDoneManager a JobTypeManager sú rozhrania, ktoré som implementoval v rámci projektu. Implementácie týchto tried zabezpečujú komunikáciu medzi databázou a webovým rozhraním.
+	        </para>    
+	</articleinfo>
+</article>
