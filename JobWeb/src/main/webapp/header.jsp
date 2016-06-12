@@ -14,6 +14,6 @@
         <div class="menu">
             <a href="/CountBill.jsp">Fakturácia</a>
             <a href="/JobDoneManager.jsp">Odpracovaná práca</a>
-            <a href="/UserManager.jsp">Používatelia</a>
+            <a href="/users">Používatelia</a>
             <a href="/JobTypeManager.jsp">Druhy práce</a>
         </div>

@@ -78,7 +78,7 @@ public class UserDAO {
             throw new ServiceFailureException(e);
         }
 
-        if (this.getUser(user.getId()) != null){
+        if (user.getId()!= -1L && this.getUser(user.getId()) != null){
             throw new IllegalArgumentException("DB does contain jobType");
         }
 
