@@ -31,7 +31,7 @@ public class JobTypeDAO {
     /**
      * representing URI
      */
-    private final static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc";
+    private static final String URI = "xmldb:exist://localhost:8080/exist/xmlrpc";
 
     /**
      * representing name of file
