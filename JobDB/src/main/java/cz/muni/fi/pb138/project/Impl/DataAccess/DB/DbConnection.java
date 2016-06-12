@@ -43,7 +43,8 @@ public class DbConnection {
 
             XMLResource document = (XMLResource)col.getResource(fileName);
             if (document == null){
-                document.setContent(new File(fileName));
+                document = (XMLResource)col.createResource(fileName, "XMLResource");
+                document.setContent(fileName);
                 col.storeResource(document);
             }
 
