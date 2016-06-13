@@ -38,7 +38,7 @@
         <c:forEach items="${jobtypes}" var="jobtype">
             <option value="${jobtype.id}">${jobtype.name}</option>
         </c:forEach>
-    <select>
+    </select>
     <input type="datetime-local" name="from"/>
     <input type="datetime-local" name="to"/>
     <input class="button" type="submit" value="Add"/>

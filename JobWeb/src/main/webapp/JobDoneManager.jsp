@@ -2,14 +2,21 @@
 <%@include file="header.jsp" %>
         <h3>Pridanie odpracovanej práce</h3>
         <form action="">
-            <span>Užívateľské ID:</span><input type="number" name="userName">
-        </form>
-        <form action="">
-            <span>Typ práce:</span><input type="text" name="jobType">
-        </form>
-        <form action="">
+            <span>Odoberateľ</span>
+            <select name="userName">
+                <c:forEach items="${users}" var="user">
+                    <option value="${user.id}">${user.name}</option>
+                </c:forEach>
+            </select><br>
+            <span>Typ práce:</span>
+            <select name="jobTypeId">
+                <c:forEach items="${jobtypes}" var="jobtype">
+                    <option value="${jobtype.id}">${jobtype.name}</option>
+                </c:forEach>
+            </select>
             <span>Začiatok práce:</span><input type="datetime-local" value="Submit"><br>
-            <span>Koniec práce:</span><input type="datetime-local" value="Submit">
+            <span>Koniec práce:</span><input type="datetime-local" value="Submit"><br>
+            <input class="button" type="submit" value="Pridaj">
         </form>
-        <input class="button" type="submit" value="Pridaj">
+
 <%@include file="footer.jsp" %>
