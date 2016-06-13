@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<h3>Zoznam používateľov</h3>
+<h3>Zoznam odoberateľov</h3>
 
 <div class="list">
     <ol>
@@ -18,7 +18,7 @@
     </ol>
 </div>
 
-<h3>Pridanie nového používateľa</h3>
+<h3>Pridať nového odoberateľa</h3>
 
 <form action="${pageContext.request.contextPath}/users/add" method="post">
     <span>Meno:</span><input type="text" name="userName">
