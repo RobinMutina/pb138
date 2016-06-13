@@ -2,7 +2,7 @@
 <%@include file="header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <h3>Pridanie odpracovanej práce</h3>
-        <form action="">
+        <form action="${pageContext.request.contextPath}/jobmanager/add" method="post">
 
             <span>Odoberateľ</span>
             <select name="userName">
@@ -18,8 +18,8 @@
                 </c:forEach>
             </select>
             <br/>
-            <span>Začiatok práce:</span><input type="datetime-local" value="Submit"><br>
-            <span>Koniec práce:</span><input type="datetime-local" value="Submit"><br>
+            <span>Začiatok práce:</span><input name="start" type="datetime-local" value="Submit"><br>
+            <span>Koniec práce:</span><input name="end" type="datetime-local" value="Submit"><br>
             <input class="button" type="submit" value="Pridaj">
         </form>
 
