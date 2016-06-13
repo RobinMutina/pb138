@@ -15,13 +15,23 @@ import java.nio.file.Path;
  * Created by xtomasch on 6/2/16.
  */
 public class DocbookToPDFConverter {
-
+    private static String pathFO;
+    private static String pathXSL;
     private static FopFactory fopFactory;
 
-    public DocbookToPDFConverter(){
+    public DocbookToPDFConverter(String OS){
+        if (OS.contains("Windows")){
+            pathFO = "src/main/resources/cz/muni/fi/pb138/project/Utilities/fopCfg.xml";
+            pathXSL = "src/main/resources/cz/muni/fi/pb138/project/Utilities/docbook-xsl/fo/docbook.xsl";
+        }
+        else{
+            pathFO = "JobDB/src/main/resources/cz/muni/fi/pb138/project/Utilities/fopCfg.xml";
+            pathXSL = "JobDB/src/main/resources/cz/muni/fi/pb138/project/Utilities/docbook-xsl/fo/docbook.xsl";
+        }
+        
         if (fopFactory == null){
             try {
-                File cfgFile = new File("src/main/resources/cz/muni/fi/pb138/project/Utilities/fopCfg.xml");
+                File cfgFile = new File(pathFO);
                 fopFactory = FopFactory.newInstance(cfgFile);
             } catch(Exception e) {
                 //FIXME: throw more apropriate exceptions in whole class
@@ -33,7 +43,7 @@ public class DocbookToPDFConverter {
     public void convert(String XMLcontent, String resultPdfPath){
 
         String FOcontent = new XSLTProcessor().applyXSL(
-                XMLcontent,"src/main/resources/cz/muni/fi/pb138/project/Utilities/docbook-xsl/fo/docbook.xsl");
+                XMLcontent,pathXSL);
 
         OutputStream out = null;
 
