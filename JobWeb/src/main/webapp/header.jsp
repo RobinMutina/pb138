@@ -12,8 +12,8 @@
     <div class="card">
         <h2>Evidence příjmů</h2>
         <div class="menu">
-            <a href="/CountBill.jsp">Fakturácia</a>
+            <a href="/CountBill.jsp">Prehľad faktúr</a>
             <a href="/JobDoneManager.jsp">Odpracovaná práca</a>
-            <a href="/users">Používatelia</a>
-            <a href="/JobTypeManager.jsp">Druhy práce</a>
+            <a href="/users">Odoberatelia</a>
+            <a href="/jobtypes">Druhy práce</a>
         </div>

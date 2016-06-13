@@ -2,7 +2,7 @@
 <%@include file="header.jsp" %>
         <h3>Pridanie odpracovanej práce</h3>
         <form action="">
-            <span>Užívatel:</span><input type="text" name="userName">
+            <span>Užívateľské ID:</span><input type="number" name="userName">
         </form>
         <form action="">
             <span>Typ práce:</span><input type="text" name="jobType">

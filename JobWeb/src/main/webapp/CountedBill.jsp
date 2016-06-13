@@ -1,4 +1,7 @@
+<%@include file="header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<h3>Užívateľ: </h3>
 <h3>Faktúra za obdobie:</h3>
     <span>Začiatok obdobia</span>
     <span>-</span>

@@ -77,7 +77,7 @@ public class JobTypeDAO {
             throw new ServiceFailureException(e);
         }
 
-        if (this.getJobType(jobType.getId()) != null){
+        if (jobType.getId()!= -1L && this.getJobType(jobType.getId()) != null){
             throw new IllegalArgumentException("DB does contain jobType");
         }
 
