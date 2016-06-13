@@ -22,8 +22,8 @@
                 <input type="hidden" name="jobid" value="${job.key.id}"/>
                 <tr>
                     <td><c:out value="${job.value.name}"/></td>
-                    <td><c:out value="${job.key.startTime}"/></td>
-                    <td><c:out value="${job.key.endTime}"/></td>
+                    <td><input type="datetime-local" value="${job.key.startTime}" disabled/></td>
+                    <td><input type="datetime-local" value="${job.key.endTime}" disabled/></td>
                     <td><input class="button" type="submit" value="Delete"/></td>
                 </tr>
             </form>
