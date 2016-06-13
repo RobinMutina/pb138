@@ -59,35 +59,7 @@ public class JobTypeServlet extends HttpServlet {
                 jobTypeManager.createJobType(jt);
                 showJobTypeList(request, response);
                 break;
-            case "/update":
 
-                //getting POST parametgetParameterers from form
-                String name = request.getParameter("jobName");
-                BigDecimal pricePerHour = null;
-                try {
-                    pricePerHour = new BigDecimal(request.getParameter("jobPrice"));
-                }
-                catch (Exception e){
-                    request.setAttribute("error", "Je nutné vyplnit všetky hodnoty!");
-                    log.debug("Form data invalid");
-                    showJobTypeList(request, response);
-                    return;}
-                //form data validity check
-                if (name == null || name.isEmpty()) {
-                    request.setAttribute("error", "Je nutné vyplnit všetky hodnoty!");
-                    log.debug("Form data invalid");
-                    showJobTypeList(request, response);
-                    return;
-                }
-                JobType jt =  new JobType();
-                jt.setName(name);
-                jt.setPricePerHour(pricePerHour);
-                jobTypeManager.createJobType(jt);
-                showJobTypeList(request, response);
-                break;
-            default:
-                log.error("Unknown action " + action);
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Unknown action " + action);
 
 
             default:
