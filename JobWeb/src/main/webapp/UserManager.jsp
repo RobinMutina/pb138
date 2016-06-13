@@ -16,7 +16,12 @@
 <div class="list"></div>
 <ol>
     <c:forEach items="${guests}" var="user">
-        <li> <c:out value="${user.name}"/> </li>
+        <c:set value="${user.id}" var="uid"/>
+        <li>
+         <a href="<c:url value="${pageContext.request.contextPath}/user"><c:param name="id" value="${uid}"/></c:url>">
+            <c:out value="${user.name}"/>
+         </a>
+        </li>
     </c:forEach>
 </ol>
 <%@include file="footer.jsp" %>
