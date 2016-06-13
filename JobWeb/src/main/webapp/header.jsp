@@ -13,7 +13,7 @@
         <h2>Evidence příjmů</h2>
         <div class="menu">
             <a href="/CountBill.jsp">Prehľad faktúr</a>
-            <a href="/jobdone">Výkaz práce</a>
+            <a href="/jobmanager">Výkaz práce</a>
             <a href="/users">Odoberatelia</a>
             <a href="/jobtypes">Druhy práce</a>
         </div>
