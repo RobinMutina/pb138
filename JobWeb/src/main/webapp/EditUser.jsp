@@ -24,11 +24,25 @@
                     <td><input type="text" value="${job.value.name}"/></td>
                     <td><input type="datetime-local" value="${job.key.startTime}"/></td>
                     <td><input type="datetime-local" value="${job.key.endTime}"/></td>
-                    <td><input class="button" type="submit" value="Update"/>td
+                    <td><input class="button" type="submit" value="Update"/></td>
                 </tr>
-            <form>
+            </form>
         </c:forEach>
     </table>
 </div>
+
+<h3>Nová pracovná položka<h3>
+
+<form action="${pageContext.request.contextPath}/user/addjob" method="post">
+    <input type="hidden" name="id" value="${user.id}"/>
+    <select name="jobTypeId">
+        <c:forEach items="${jobtypes}" var="jobtype">
+            <option value="${jobtype.id}">${jobtype.name}</option>
+        </c:forEach>
+    <select>
+    <input type="datetime-local" name="from"/>
+    <input type="datetime-local" name="to"/>
+    <input class="button" type="submit" value="Add"/>
+</form>
 
 <%@include file="footer.jsp" %>

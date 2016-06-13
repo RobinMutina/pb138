@@ -81,7 +81,7 @@ public class JobDoneDAO {
             throw new ServiceFailureException(e);
         }
 
-        if (this.getJobDoneById(jobDone.getId()) != null){
+        if (jobDone.getId()!= -1L && this.getJobDoneById(jobDone.getId()) != null){
             throw new IllegalArgumentException("DB does contain jobDone");
         }
 

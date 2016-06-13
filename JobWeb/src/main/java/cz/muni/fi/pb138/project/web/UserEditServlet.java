@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +67,26 @@ public class UserEditServlet extends HttpServlet{
                 userManager.deleteUser(id);
                 response.sendRedirect("/users");
                 break;
+            case "/addjob":
+                System.out.println("/addjob");
+                Long jobTypeId = Long.parseLong(request.getParameter("jobTypeId"));
+
+                System.out.println(jobTypeId);
+                String from = request.getParameter("from");
+                String to = request.getParameter("to");
+                JobDone jobDone= new JobDone();
+                DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+                LocalDateTime startTime = LocalDateTime.parse(from, formatter);
+                System.out.println(startTime.toString());
+                LocalDateTime endTime = LocalDateTime.parse(to, formatter);
+                System.out.println(endTime.toString());
+                jobDone.setStrartTime(startTime);
+                jobDone.setEndTime(endTime);
+                jobDone.setJobTypeId(jobTypeId);
+                jobDone.setUserId(id);
+                new JobDoneManagerImpl().createJobDone(jobDone);
+                showUser(request, response,id);
+                break;
             default:
                 log.error("Unknown action " + action);
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Unknown action " + action);
@@ -84,6 +106,7 @@ public class UserEditServlet extends HttpServlet{
         }
         request.setAttribute("user", u);
         request.setAttribute("jobs", jobtotype);
+        request.setAttribute("jobtypes", jobTypeManager.getAllJobTypes());
         request.getRequestDispatcher("/EditUser.jsp").forward(request, response);
     }
 
