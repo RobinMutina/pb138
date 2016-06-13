@@ -4,7 +4,7 @@
 
 
 <h3>Zoznam odoberateľov</h3>
-
+<p>Po kliknutí na odoberateľa mu môžete priamo vykázať prácu</p>
 <div class="list">
     <ol>
         <c:forEach items="${users}" var="user">

@@ -3,6 +3,10 @@ body{
     text-align: center;
 }
 
+p{
+    font-family: 'Open Sans', sans-serif;
+}
+
 h2,h3{
     font-family: 'Open Sans', sans-serif;
 }
@@ -10,6 +14,15 @@ h2,h3{
 form{
     font-family: 'Open Sans', sans-serif;
 }
+select{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    color: #444;
+    padding: 3px;
+    width: 40%;
+    margin-bottom: 7px;
+}
+
 form > span{
     float: left;
     width: 30%;
@@ -23,7 +36,7 @@ form > input[type = text], form > input[type = datetime-local], form > input[typ
     border: 1px solid #dadada;
     color: #888;
     height: 20px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     margin-right: 6px;
     margin-top: 2px;
     outline: 0 none;
@@ -36,6 +49,14 @@ form > input[type = text], form > input[type = datetime-local], form > input[typ
     -webkit-box-shadow: inset 0px 1px 4px #ececec;
     
 }
+.list >a{
+    color: #1a1a1a;
+    text-decoration: none;
+}
+.list >a:hover{
+    color: #888;
+}
+
 
 .button{
     background: #35a13d;
@@ -57,6 +78,7 @@ form > input[type = text], form > input[type = datetime-local], form > input[typ
     text-decoration: none;
     margin-left: 5px;
     margin-bottom: 20px;
+    margin-bottom: 15px;
 
 }
 

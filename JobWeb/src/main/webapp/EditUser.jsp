@@ -7,14 +7,14 @@
     <input type="hidden" name="id" value="${user.id}"/>
     <input class="button" type="submit" value="Edit">
 </form>
-<form action="${pageContext.request.contextPath}/user/delete" method="post">
+<!--<form action="${pageContext.request.contextPath}/user/delete" method="post">
     <input type="submit" class="delete" value="delete">
     <input type="hidden" name="id" value="${user.id}"/>
-</form>
+</form>-->
 
-<h3>Výkaz práce</h3>
+<h3>Výkaz práce od odoberateľa</h3>
 
-<div class="list">
+<div class="">
     <table>
         <c:forEach items="${jobs}" var="job">
             <form action="${pageContext.request.contextPath}/user/deletejob" method="post">
@@ -31,11 +31,12 @@
     </table>
 </div>
 
-<h3>Nová pracovná položka<h3>
+<h3>Evidovať novú prácu<h3>
 
 <form action="${pageContext.request.contextPath}/user/addjob" method="post">
     <input type="hidden" name="id" value="${user.id}"/>
-    <select name="jobTypeId">
+    <span>Typ práce:</span>
+    <select name="jobTypeId"><br>
         <c:forEach items="${jobtypes}" var="jobtype">
             <option value="${jobtype.id}">${jobtype.name}</option>
         </c:forEach>

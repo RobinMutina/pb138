@@ -4,7 +4,7 @@
         <h3>Pridanie odpracovanej práce</h3>
         <form action="">
 
-            <span>Odoberateľ</span>
+            <span>Odoberateľ: </span>
             <select name="userName">
                 <c:forEach items="${users}" var="user">
                     <option value="${user.id}">${user.name}</option>

@@ -2,7 +2,7 @@
 <%@include file="header.jsp" %>
 <h3>Fakturácia za obdobie</h3>
 <form action="">
-    <span>Užívateľské ID:</span><input type="text" name="userName">
+    <span>Odoberateľ:</span><input type="text" name="userName">
 </form>
 <form action="">
     <span>Začiatok obdobia:</span><input type="datetime-local" value="Submit"><br>
