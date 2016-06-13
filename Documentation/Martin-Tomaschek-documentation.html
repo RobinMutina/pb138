@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zhrnutie práce</title>
+</head>
+<body>
+
+<div class="header">
+    <h1>Evidence příjmů (Web) <em>Tým B</em></h1>
+    <h2>Zhrnutie práce</h2>
+    <div class="author">
+        <h3>Autor:</h3>
+        <h4><span class="firstname">Martin</span> <span>Tomaschek</span></h4>
+    </div>
+    <div class="page-navigation">
+        <h3>Navigácia</h3>
+        <ul>
+            <li>
+                <a href="#idc111113">Zhrnutie práce</a>
+            </li>
+            <li>
+                <a href="#idc111112">BaseX a DbCoreApi</a>
+            </li>
+            <li>
+                <a href="#idc111111">Docbook to PDF</a>
+            </li>
+            <li>
+                <a href="#idc111110">Maven a Jetty</a>
+            </li>
+            <li>
+                <a href="#idc111109">Web</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<article class="content" id="idc111113">
+    <header class="article-header">
+        <h2>Zhrnutie práce</h2>
+    </header>
+
+    <div class="article-body">
+        <p>V projekte som imlementoval konverziu z docbook do PDF, časť webového rozhrania a alternatívnu implementáciu databázových služieb a taktiež napísal väčsinu kofigurácie maven systému.</p>
+    </div>
+</article>
+
+<article class="content" id="idc111112">
+    <header class="article-header">
+        <h2>BaseX a DbCoreApi</h2>
+    </header>
+
+    <div class="article-body">
+        <p>V úvodných fázach projektu som vytvoril rozhranie DbCoreApi ako abstrakciu nad zvolenou xml databzou. To to rozhranie som implementoval pre databázu BaseX v embeded scenáry. Neskôr bolo rozhraniu DbCoreApi prispôsobená DAO vrsta (aj zásluhou Martina Ševčíka) avšak, toto riešenie bolo opustené v prospech súčasnéhej priamej implementácie v DAO v kombinácii s ExistDB, ktorá bola v tej dobe kompletnejšia. Terajší stav je plne funkčný a s malými zmenami može nahradiť použité rozhranie. Výhody embedded riešenia sú hlavne jednoduchosť nasadenia -nič nie treba inštalovat ani spúštať paralerne s projektom. Dostupné v repozitáry vo vetve BaseX.</p>
+    </div>
+</article>
+
+<article class="content" id="idc111111">
+    <header class="article-header">
+        <h2>Docbook to PDF</h2>
+    </header>
+
+    <div class="article-body">
+        <p>Vytvoril som základnú konverziu z docbook formátu do pdf. Použitá je knižnica Apache Fop v kombinácii s xslt transformáciou (DocBook XSL Stylesheets) do formátu fo. Táto funkcionalita prešla pod správu Vladislava Malynyč.</p>
+    </div>
+</article>
+
+<article class="content" id="idc111110">
+    <header class="article-header">
+        <h2>Maven a Jetty</h2>
+    </header>
+
+    <div class="article-body">
+        <p> Projekt je rozdelený na dva moduly, čo spôsobuje menšie problémy s použitím maven jetty pluginu ale tie je možné obísť postupom uvedením na wiky projektu. Maven sa stará o správu závislostí, pričom vačšinu artefaktov získava z maven central repozitára. Len niektoré závisloti ExistDb a Exist samotný je umiestnený v lokálnom repozitáry, nakoľko nie sú dostupné online (len v beta verzii 3)</p>
+    </div>
+</article>
+<article class="content" id="idc111109">
+    <header class="article-header">
+        <h2>Web</h2>
+    </header>
+
+    <div class="article-body">
+        <p>Webové rozhranie je realizované pomocou servletov, jsp, jstl. Mojím podielom je časť servletov a asociovaných jsp.</p>
+    </div>
+</article>
+
+</body>
+</html>

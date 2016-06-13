@@ -28,6 +28,7 @@
         	<title>Implementácia</title>
 	        <para>
 	        	 UserManager, JobDoneManager a JobTypeManager sú rozhrania, ktoré som implementoval v rámci projektu. Implementácie týchto tried zabezpečujú komunikáciu medzi databázou a webovým rozhraním.
-	        </para>    
+	        </para>
+		</section>
 	</articleinfo>
 </article>
