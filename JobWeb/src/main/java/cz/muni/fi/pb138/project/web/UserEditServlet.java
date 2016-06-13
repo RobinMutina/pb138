@@ -87,6 +87,11 @@ public class UserEditServlet extends HttpServlet{
                 new JobDoneManagerImpl().createJobDone(jobDone);
                 showUser(request, response,id);
                 break;
+            case "/deletejob":
+                Long jobId = Long.parseLong(request.getParameter("jobid"));
+                new JobDoneManagerImpl().deleteJobDone(jobId);
+                showUser(request, response, id);
+                break;
             default:
                 log.error("Unknown action " + action);
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Unknown action " + action);

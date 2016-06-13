@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JobDB/JobDB.iml" filepath="$PROJECT_DIR$/JobDB/JobDB.iml" />
       <module fileurl="file://$PROJECT_DIR$/JobProject.iml" filepath="$PROJECT_DIR$/JobProject.iml" />
-      <module fileurl="file://$PROJECT_DIR$/JobProject.iml" filepath="$PROJECT_DIR$/JobProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/JobWeb/JobWeb.iml" filepath="$PROJECT_DIR$/JobWeb/JobWeb.iml" />
     </modules>
   </component>

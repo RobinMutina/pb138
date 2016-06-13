@@ -19,7 +19,7 @@ import java.time.LocalDate;
 /**
  * Created by Marcel on 11. 6. 2016.
  */
-@WebServlet(urlPatterns = {"/jobtypes/*","/jobtypemanager/*"})
+@WebServlet(urlPatterns = {"/jobtypes/*","/jobtypemanager/*", "jobdone/*"})
 public class JobTypeServlet extends HttpServlet {
     private final static Logger log = LoggerFactory.getLogger(JobTypeServlet.class);
 
@@ -80,5 +80,6 @@ public class JobTypeServlet extends HttpServlet {
     private void showJobTypeList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         request.setAttribute("jobTypes", jobTypeManager.getAllJobTypes());
         request.getRequestDispatcher("/JobTypeManager.jsp").forward(request, response);
+        request.getRequestDispatcher("/JobDoneManager.jsp").forward(request, response);
     }
 }
