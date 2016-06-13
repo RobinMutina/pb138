@@ -35,11 +35,12 @@ public class UserEditServlet extends HttpServlet{
         //action specified by pathInfo
         String action = request.getPathInfo();
         log.debug("POST ... {}",action);
+        Long id = Long.parseLong(request.getParameter("id"));
         switch (action) {
             case "/update":
                 //getting POST parameters from form
                 String name = request.getParameter("userName");
-                Long id = Long.parseLong(request.getParameter("id"));
+
                 //form data validity check
                 if (name == null || name.isEmpty()) {
                     request.setAttribute("error", "Je nutné vyplnit všechny hodnoty!");
@@ -51,6 +52,10 @@ public class UserEditServlet extends HttpServlet{
                 u.setName(name);
                 userManager.updateUser(u);
                 showUser(request, response,id);
+                break;
+            case "/delete":
+                userManager.updateUser(userManager.getUser(id));
+                response.sendRedirect("/users");
                 break;
             default:
                 log.error("Unknown action " + action);
