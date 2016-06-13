@@ -62,7 +62,7 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showUserList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        request.setAttribute("guests", userManager.getAllUsers());
+        request.setAttribute("users", userManager.getAllUsers());
         request.getRequestDispatcher("/UserManager.jsp").forward(request, response);
     }
 }
