@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<article>
+    <articleinfo>
+        <author>
+            <title>Zhrnutie práce</title>
+            <subtitle>Evidence příjmů (Web) Tým B</subtitle>
+            <firstname>Martin</firstname>
+            <surname>Tomaschek</surname>
+        </author>
+
+        <section>
+            <title>Zhrnutie práce</title>
+            <para>
+                V projekte som imlementoval konverziu z docbook do PDF, časť webového rozhrania a alternatívnu implementáciu databázových služieb a taktiež napísal väčsinu kofigurácie maven systému.
+            </para>
+        </section>
+
+        <section>
+            <title>BaseX a DbCoreApi</title>
+            <para>
+                V úvodných fázach projektu som vytvoril rozhranie DbCoreApi ako abstrakciu nad zvolenou xml databzou. To to rozhranie som implementoval pre databázu BaseX v embeded scenáry. Neskôr bolo rozhraniu DbCoreApi prispôsobená DAO vrsta (aj zásluhou Martina Ševčíka) avšak, toto riešenie bolo opustené v prospech súčasnéhej priamej implementácie v DAO v kombinácii s ExistDB, ktorá bola v tej dobe kompletnejšia. Terajší stav je plne funkčný a s malými zmenami može nahradiť použité rozhranie. Výhody embedded riešenia sú hlavne jednoduchosť nasadenia -nič nie treba inštalovat ani spúštať paralerne s projektom. Dostupné v repozitáry vo vetve BaseX.
+            </para>
+        </section>
+
+        <section>
+        <title>Docbook to PDF</title>
+        <para>
+            Vytvoril som základnú konverziu z docbook formátu do pdf. Použitá je knižnica Apache Fop v kombinácii s xslt transformáciou (DocBook XSL Stylesheets) do formátu fo. Táto funkcionalita prešla pod správu Vladislava Malynyč.
+        </para>
+        </section>
+
+        <section>
+            <title>Maven a Jetty</title>
+            <para>
+                Projekt je rozdelený na dva moduly, čo spôsobuje menšie problémy s použitím maven jetty pluginu ale tie je možné obísť postupom uvedením na wiky projektu. Maven sa stará o správu závislostí, pričom vačšinu artefaktov získava z maven central repozitára. Len niektoré závisloti ExistDb a Exist samotný je umiestnený v lokálnom repozitáry, nakoľko nie sú dostupné online (len v beta verzii 3)
+            </para>
+        </section>
+
+        <section>
+            <title>Web</title>
+            <para>
+                Webové rozhranie je realizované pomocou servletov, jsp, jstl. Mojím podielom je časť servletov a asociovaných jsp.
+            </para>
+        </section>
+    </articleinfo>
+</article>
