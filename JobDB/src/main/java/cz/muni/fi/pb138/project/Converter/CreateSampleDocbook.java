@@ -107,7 +107,7 @@ public class CreateSampleDocbook {
                     Element foot = table.addElement("tfoot");
                     Element footrow = foot.addElement("row");
                     footrow.addElement("entry").addAttribute("namest", "c3").addAttribute("nameend", "c4").addAttribute("align", "center")
-                            .addText("Total Salary:"+jobdonemanager.getUserSalaryAtTime(user.getId(), start, end));
+                            .addText("Total Salary:"+jobdonemanager.getUserSalaryAtTime(user.getId(), start, end).intValue());
                     
                     Element body = table.addElement("tbody");
                     
