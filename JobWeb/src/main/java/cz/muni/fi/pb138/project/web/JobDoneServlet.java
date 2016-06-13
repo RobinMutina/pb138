@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter;
  */
 @WebServlet(urlPatterns = {"/jobs/*", "/jobmanager/*"})
 public class JobDoneServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         show(request, response);
@@ -32,25 +33,65 @@ public class JobDoneServlet extends HttpServlet {
         String action = request.getPathInfo();
         switch (action) {
             case "/add":
-                Long jobTypeId = Long.parseLong(request.getParameter("jobTypeId"));
-                Long userId = Long.parseLong(request.getParameter("userName"));
+                Long jobTypeId;
+                Long userId;
+                LocalDateTime startTime;
+                LocalDateTime endTime;
+                JobDone jobDone;
+
+                try {
+                    jobTypeId = Long.parseLong(request.getParameter("jobTypeId"));
+                }catch (Exception e){
+                    request.setAttribute("ErrMsg","Neplatne pole typ prace, chyba: " + e.getMessage());
+                    show(request,response);
+                    return;
+                }
+
+                try {
+                    userId = Long.parseLong(request.getParameter("userName"));
+                }catch (Exception e){
+                    request.setAttribute("ErrMsg","Neplatne pole odberatel, chyba:" + e.getMessage());
+                    show(request,response);
+                    return;
+                }
+
                 DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-                LocalDateTime startTime = LocalDateTime.parse(request.getParameter("start"), formatter);
-                LocalDateTime endTime = LocalDateTime.parse(request.getParameter("end"), formatter);
-                JobDone jobDone = new JobDone();
+
+                try {
+                    startTime = LocalDateTime.parse(request.getParameter("start"), formatter);
+                }catch (Exception e){
+                    request.setAttribute("ErrMsg","Neplatne pole zaciatok prace, chyba:" + e.getMessage());
+                    show(request,response);
+                    return;
+                }
+                try {
+                    endTime = LocalDateTime.parse(request.getParameter("end"), formatter);
+                }catch (Exception e){
+                    request.setAttribute("ErrMsg","Neplatne pole koniec prace, chyba:" + e.getMessage());
+                    show(request,response);
+                    return;
+                }
+
+                jobDone = new JobDone();
                 jobDone.setUserId(userId);
                 jobDone.setJobTypeId(jobTypeId);
                 jobDone.setStrartTime(startTime);
                 jobDone.setEndTime(endTime);
-                new JobDoneManagerImpl().createJobDone(jobDone);
+
+                try {
+                    new JobDoneManagerImpl().createJobDone(jobDone);
+                    request.setAttribute("ScsMsg","Nova praca zadana");
+                }catch (Exception e){
+                    request.setAttribute("ErrMsg","Nepodarilo sa vytvorit zaznam v DB:" + e.getMessage());
+                }
                 show(request,response);
                 break;
             default:
-
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Unknown action " + action);
 
         }
     }
+
 
     private void show(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         request.setAttribute("jobtypes", new JobTypeManagerImpl().getAllJobTypes());
