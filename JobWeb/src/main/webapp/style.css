@@ -3,7 +3,7 @@ body{
     text-align: center;
 }
 
-p{
+p, div{
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -68,6 +68,18 @@ form > input[type = text], form > input[type = datetime-local], form > input[typ
     text-shadow: 1px 1px 1px rgba(20, 110, 32, 0.84);
     cursor: pointer;
 }
+.buttondel{
+    background: #a11819;
+    border: none;
+    padding: 7px 15px 7px 15px;
+    color: #fff;
+    box-shadow: 1px 1px 5px #b6b6b6;
+    border-radius: 3px;
+    text-shadow: 1px 1px 1px rgba(110, 3, 6, 0.84);
+    cursor: pointer;
+}
+
+
 
 .button:hover{
     background: rgba(119, 164, 106, 0.95);

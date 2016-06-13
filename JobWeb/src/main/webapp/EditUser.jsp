@@ -7,14 +7,14 @@
     <input type="hidden" name="id" value="${user.id}"/>
     <input class="button" type="submit" value="Edit">
 </form>
-<form action="${pageContext.request.contextPath}/user/delete" method="post">
+<!--<form action="${pageContext.request.contextPath}/user/delete" method="post">
     <input type="submit" class="delete" value="delete">
     <input type="hidden" name="id" value="${user.id}"/>
-</form>
+</form>-->
 
 <h3>Výkaz práce</h3>
 
-<div class="list">
+<div class="">
     <table>
         <c:forEach items="${jobs}" var="job">
             <form action="${pageContext.request.contextPath}/user/deletejob" method="post">
@@ -24,7 +24,7 @@
                     <td><c:out value="${job.value.name}"/></td>
                     <td><input type="datetime-local" value="${job.key.startTime}" disabled/></td>
                     <td><input type="datetime-local" value="${job.key.endTime}" disabled/></td>
-                    <td><input class="button" type="submit" value="Delete"/></td>
+                    <td><input class="buttondel" type="submit" value="Delete"/></td>
                 </tr>
             </form>
         </c:forEach>
