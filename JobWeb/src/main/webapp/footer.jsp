@@ -2,6 +2,6 @@
 </div>
 </body>
 <footer>
-<p>Niečo pekné</p>
+<p></p>
 </footer>
 </html>
