@@ -54,7 +54,7 @@ public class UserEditServlet extends HttpServlet{
                 showUser(request, response,id);
                 break;
             case "/delete":
-                userManager.updateUser(userManager.getUser(id));
+                userManager.deleteUser(id);
                 response.sendRedirect("/users");
                 break;
             default:

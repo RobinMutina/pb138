@@ -8,5 +8,9 @@
     <input type="hidden" name="id" value="${user.id}"/>
     <input class="button" type="submit" value="Edit">
 </form>
+<form action="${pageContext.request.contextPath}/user/delete" method="post">
+    <input type="submit" class="delete" value="delete">
+    <input type="hidden" name="id" value="${user.id}"/>
+</form>
 
 <%@include file="footer.jsp" %>
