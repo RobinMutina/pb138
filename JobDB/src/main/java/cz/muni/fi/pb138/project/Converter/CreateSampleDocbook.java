@@ -83,6 +83,7 @@ public class CreateSampleDocbook {
                     sectionElement.addElement("title").addText("Vlad Malynych");
                     
                     Element tableElement = sectionElement.addElement("table").addAttribute("frame","all");
+                    tableElement.addElement("title").addText("from:"+start.toString()+", to"+end.toString());
                     tableElement.addElement("title").addText("from:"+"12.12.45"+"to"+"12.45.15");
                     
                     Element table = tableElement.addElement("tgroup").addAttribute("cols", "4").addAttribute("align", "left");
