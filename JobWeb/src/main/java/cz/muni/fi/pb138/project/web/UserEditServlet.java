@@ -1,7 +1,12 @@
 package cz.muni.fi.pb138.project.web;
 
+import cz.muni.fi.pb138.project.Entities.JobDone;
+import cz.muni.fi.pb138.project.Entities.JobType;
 import cz.muni.fi.pb138.project.Entities.User;
+import cz.muni.fi.pb138.project.Impl.JobDoneManagerImpl;
+import cz.muni.fi.pb138.project.Impl.JobTypeManagerImpl;
 import cz.muni.fi.pb138.project.Impl.UserManagerImpl;
+import cz.muni.fi.pb138.project.Interfaces.JobTypeManager;
 import cz.muni.fi.pb138.project.Interfaces.UserManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +17,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xtomasch on 6/13/16.
@@ -67,8 +75,15 @@ public class UserEditServlet extends HttpServlet{
 
     private void showUser(HttpServletRequest request, HttpServletResponse response, Long id) throws ServletException, IOException{
         User u = userManager.getUser(id);
+        JobTypeManager jobTypeManager = new JobTypeManagerImpl();
         System.out.println(u.getName());
+        List<JobDone> jobdone = new JobDoneManagerImpl().getAllJobDoneByUserId(u.getId());
+        Map<JobDone,JobType> jobtotype = new HashMap<>();
+        for (JobDone j: jobdone) {
+            jobtotype.put(j,jobTypeManager.getJobType(j.getJobTypeId()));
+        }
         request.setAttribute("user", u);
+        request.setAttribute("jobs", jobtotype);
         request.getRequestDispatcher("/EditUser.jsp").forward(request, response);
     }
 
