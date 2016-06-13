@@ -17,13 +17,14 @@
 <div class="list">
     <table>
         <c:forEach items="${jobs}" var="job">
-            <c:set value="${jd.id}" var="jid"/>
-            <form>
+            <form action="${pageContext.request.contextPath}/user/deletejob" method="post">
+                <input type="hidden" name="id" value="${user.id}"/>
+                <input type="hidden" name="jobid" value="${job.key.id}"/>
                 <tr>
-                    <td><input type="text" value="${job.value.name}"/></td>
-                    <td><input type="datetime-local" value="${job.key.startTime}"/></td>
-                    <td><input type="datetime-local" value="${job.key.endTime}"/></td>
-                    <td><input class="button" type="submit" value="Update"/></td>
+                    <td><c:out value="${job.value.name}"/></td>
+                    <td><c:out value="${job.key.startTime}"/></td>
+                    <td><c:out value="${job.key.endTime}"/></td>
+                    <td><input class="button" type="submit" value="Delete"/></td>
                 </tr>
             </form>
         </c:forEach>
