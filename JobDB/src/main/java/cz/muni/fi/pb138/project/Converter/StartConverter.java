@@ -27,7 +27,11 @@ public class StartConverter {
             pathPDF = "JobDB/GeneratedPDF/jobsdone.pdf";
         }
     }
-    
+    /**
+     * Just for testing not for use
+     * @param args args
+     * @throws Exception 
+     */
     public static void main(String[] args) throws Exception{
         LocalDateTime start = LocalDateTime.of(2011, 11, 25, 06, 02);
         LocalDateTime end = LocalDateTime.of(2018, 11, 25, 06, 02);
@@ -41,18 +45,45 @@ public class StartConverter {
         
         DocbookToPDFConverter test = new DocbookToPDFConverter(OS);
         test.convert(XMLcontent,pathPDF);
+        
+//        new CreateSampleDocbook(OS).generateDocBookForUser(0L,start,end);
+//        
+//        String XMLcontent = org.apache.commons.io.FileUtils.readFileToString(new File(pathXML));
+//        
+//        DocbookToPDFConverter conv = new DocbookToPDFConverter(OS);
+//        conv.convert(XMLcontent,pathPDF);
     }
+    
     /**
-     * Generates docbook xml file from data in specified time, and converts it to PDF.
+     * Generates docbook xml file for all users from data in specified time, and converts it to PDF.
      * Generated pdf file is in source folder GeneratedPDF/jobsdone.pdf
      * @param start start time
      * @param end end time
      */
-    public void convert(LocalDateTime start, LocalDateTime end) throws Exception{
+    public void convertAll(LocalDateTime start, LocalDateTime end) throws Exception{
         String OS = System.getProperty("os.name");
         setPath(OS);
         
         new CreateSampleDocbook(OS).generateDocBook(start,end);
+        
+        String XMLcontent = org.apache.commons.io.FileUtils.readFileToString(new File(pathXML));
+        
+        DocbookToPDFConverter conv = new DocbookToPDFConverter(OS);
+        conv.convert(XMLcontent,pathPDF);
+    }
+    
+    /**
+     * Generates docbook xml file for one user from data in specified time, and converts it to PDF.
+     * @param id user id
+     * @param start start time
+     * @param end end time
+     * @throws Exception 
+     */
+    public void convertOneUser(Long id, LocalDateTime start, LocalDateTime end) throws Exception{
+        String OS = System.getProperty("os.name");
+        setPath(OS);
+        
+        new CreateSampleDocbook(OS).generateDocBookForUser(id,start,end);
         
         String XMLcontent = org.apache.commons.io.FileUtils.readFileToString(new File(pathXML));
         

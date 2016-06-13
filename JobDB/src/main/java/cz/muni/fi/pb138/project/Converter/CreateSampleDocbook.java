@@ -128,6 +128,59 @@ public class CreateSampleDocbook {
             e.printStackTrace();
         }
     }
+    
+    public void generateDocBookForUser(Long id, LocalDateTime start,LocalDateTime end) {
+        try {
+            User user = usermanager.getUser(id);
+            document = DocumentHelper.createDocument();
+            Element root = document.addElement("article");
+            Element info = root.addElement("articleinfo");
+            info.addElement("title").addText("Jobs Done at specified time");
+            
+                    ArrayList<JobDone> jobsdone = (ArrayList)jobdonemanager.getAllJobDoneByUserAtTime(user.getId(), start, end);
+                    if(!jobsdone.isEmpty()){
+                    Element sectionElement = root.addElement("section");
+                    sectionElement.addElement("title").addText(user.getName());
+                    
+                    Element tableElement = sectionElement.addElement("table").addAttribute("frame","all");
+                    tableElement.addElement("title").addText("Time from: "+start.toString()+", to: "+end.toString());
+                    
+                    Element table = tableElement.addElement("tgroup").addAttribute("cols", "4").addAttribute("align", "left");
+                    table.addElement("colspec").addAttribute("colnum", "1").addAttribute("colname", "c1").addAttribute("colwidth", "1*");
+                    table.addElement("colspec").addAttribute("colnum", "2").addAttribute("colname", "c2").addAttribute("colwidth", "1*");
+                    table.addElement("colspec").addAttribute("colnum", "3").addAttribute("colname", "c3").addAttribute("colwidth", "1*");
+                    table.addElement("colspec").addAttribute("colnum", "4").addAttribute("colname", "c4").addAttribute("colwidth", "1*");
+                    
+                    Element head = table.addElement("thead");
+                    Element headrow = head.addElement("row");
+                    headrow.addElement("entry").addAttribute("align", "center").addText("Job Type");
+                    headrow.addElement("entry").addAttribute("align", "center").addText("Start");
+                    headrow.addElement("entry").addAttribute("align", "center").addText("End");
+                    headrow.addElement("entry").addAttribute("align", "center").addText("PricePerHour");
+                    
+                    Element foot = table.addElement("tfoot");
+                    Element footrow = foot.addElement("row");
+                    footrow.addElement("entry").addAttribute("namest", "c3").addAttribute("nameend", "c4").addAttribute("align", "center")
+                            .addText("Total Salary:"+jobdonemanager.getUserSalaryAtTime(user.getId(), start, end).intValue());
+                    
+                    Element body = table.addElement("tbody");
+                    
+                    for(JobDone jobdone : jobsdone){
+                        JobType jobtype = jobtypemanager.getJobType(jobdone.getJobTypeId());
+                        Element bodyrow = body.addElement("row");
+                            bodyrow.addElement("entry").addAttribute("align", "center").addText(jobtype.getName());
+                            bodyrow.addElement("entry").addAttribute("align", "center").addText(jobdone.getStartTime().toString());
+                            bodyrow.addElement("entry").addAttribute("align", "center").addText(jobdone.getEndTime().toString());
+                            bodyrow.addElement("entry").addAttribute("align", "center").addText(jobtype.getPricePerHour().toString());
+                    }
+            }
+            writeToXML(document);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public void writeToXML(Document document) throws IOException {
