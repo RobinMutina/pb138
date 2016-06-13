@@ -14,18 +14,20 @@ import java.time.LocalDateTime;
  * @author Vladislav Malynych
  */
 public class StartConverter {
-    private static String pathXML;
-    private static String pathPDF;
-    
-    private static void setPath(String OS){
-        if (OS.contains("Windows")){
-            pathXML = "src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
-            pathPDF = "GeneratedPDF/jobsdone.pdf";
-        }
-        else{
-            pathXML = "JobDB/src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
-            pathPDF = "JobDB/GeneratedPDF/jobsdone.pdf";
-        }
+    private String pathXML;
+    private String pathPDF;
+    private Boolean netb;
+
+    public StartConverter(){
+        pathXML = "src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
+        pathPDF = "GeneratedPDF/jobsdone.pdf";
+        netb = true;
+    }
+
+    private void changePath(){
+        pathXML = "JobDB/src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
+        pathPDF = "JobDB/GeneratedPDF/jobsdone.pdf";
+        netb = false;
     }
     /**
      * Just for testing not for use
@@ -33,25 +35,25 @@ public class StartConverter {
      * @throws Exception 
      */
     public static void main(String[] args) throws Exception{
+        
+        String pathXML1 = "src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
+        String pathPDF1 = "GeneratedPDF/jobsdone.pdf";
+        Boolean netb1 = true;
+        
         LocalDateTime start = LocalDateTime.of(2011, 11, 25, 06, 02);
         LocalDateTime end = LocalDateTime.of(2018, 11, 25, 06, 02);
-       
-        String OS = System.getProperty("os.name");
-        setPath(OS);
+
+        if ((new CreateSampleDocbook().generateDocBook(start, end)) == false){
+            pathXML1 = "JobDB/src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
+            pathPDF1 = "JobDB/GeneratedPDF/jobsdone.pdf";
+            netb1 = false;
+        }
         
-        new CreateSampleDocbook(OS).generateDocBook(start,end);
-        
-        String XMLcontent = org.apache.commons.io.FileUtils.readFileToString(new File(pathXML));
-        
-        DocbookToPDFConverter test = new DocbookToPDFConverter(OS);
-        test.convert(XMLcontent,pathPDF);
-        
-//        new CreateSampleDocbook(OS).generateDocBookForUser(0L,start,end);
-//        
-//        String XMLcontent = org.apache.commons.io.FileUtils.readFileToString(new File(pathXML));
-//        
-//        DocbookToPDFConverter conv = new DocbookToPDFConverter(OS);
-//        conv.convert(XMLcontent,pathPDF);
+        String XMLcontent = org.apache.commons.io.FileUtils.readFileToString(new File(pathXML1));
+
+        DocbookToPDFConverter test = new DocbookToPDFConverter(netb1);
+        test.convert(XMLcontent,pathPDF1);
+
     }
     
     /**
@@ -61,15 +63,13 @@ public class StartConverter {
      * @param end end time
      */
     public void convertAll(LocalDateTime start, LocalDateTime end) throws Exception{
-        String OS = System.getProperty("os.name");
-        setPath(OS);
-        
-        new CreateSampleDocbook(OS).generateDocBook(start,end);
-        
+        if ((new CreateSampleDocbook().generateDocBook(start, end)) == false){
+            changePath();
+        }
         String XMLcontent = org.apache.commons.io.FileUtils.readFileToString(new File(pathXML));
-        
-        DocbookToPDFConverter conv = new DocbookToPDFConverter(OS);
-        conv.convert(XMLcontent,pathPDF);
+
+        DocbookToPDFConverter test = new DocbookToPDFConverter(netb);
+        test.convert(XMLcontent,pathPDF);
     }
     
     /**
@@ -80,14 +80,12 @@ public class StartConverter {
      * @throws Exception 
      */
     public void convertOneUser(Long id, LocalDateTime start, LocalDateTime end) throws Exception{
-        String OS = System.getProperty("os.name");
-        setPath(OS);
-        
-        new CreateSampleDocbook(OS).generateDocBookForUser(id,start,end);
-        
+        if ((new CreateSampleDocbook().generateDocBookForUser(id,start, end)) == false){
+            changePath();
+        }
         String XMLcontent = org.apache.commons.io.FileUtils.readFileToString(new File(pathXML));
-        
-        DocbookToPDFConverter conv = new DocbookToPDFConverter(OS);
-        conv.convert(XMLcontent,pathPDF);
+
+        DocbookToPDFConverter test = new DocbookToPDFConverter(netb);
+        test.convert(XMLcontent,pathPDF);
     }
 }
