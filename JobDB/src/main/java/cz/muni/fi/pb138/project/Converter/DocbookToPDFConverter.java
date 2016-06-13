@@ -20,8 +20,8 @@ public class DocbookToPDFConverter {
     private static String pathXSL;
     private static FopFactory fopFactory;
 
-    public DocbookToPDFConverter(String OS){
-        if (OS.contains("Windows")){
+    public DocbookToPDFConverter(Boolean netb){
+        if (netb){
             pathFO = "src/main/resources/cz/muni/fi/pb138/project/Utilities/fopCfg.xml";
             pathXSL = "src/main/resources/cz/muni/fi/pb138/project/Utilities/docbook-xsl/fo/docbook.xsl";
         }

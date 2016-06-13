@@ -57,25 +57,26 @@ public class CreateSampleDocbook {
     private JobTypeManager jobtypemanager;
     private UserManager usermanager;
     private String path;
+    private Boolean netb;
     
-    public CreateSampleDocbook(String OS){
-        if (OS.contains("Windows")){
-            path = "src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
-        }
-        else{
-            path = "JobDB/src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
-        }
+    public CreateSampleDocbook(){
+        path = "src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
+        netb = true;
         jobdonemanager = new JobDoneManagerImpl();
         jobtypemanager = new JobTypeManagerImpl();
         usermanager = new UserManagerImpl();
     }
+    private void changePath(){
+        path = "JobDB/src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
+        netb = false;
+    }
+
     /**
      *  Generates docbook considering data in the database and time
      * @param start start time
      * @param end end time
      */
-
-    public void generateDocBook(LocalDateTime start,LocalDateTime end) {
+    public boolean generateDocBook(LocalDateTime start,LocalDateTime end) {
         try {
             ArrayList<User> users = (ArrayList)usermanager.getAllUsers();
             document = DocumentHelper.createDocument();
@@ -127,9 +128,10 @@ public class CreateSampleDocbook {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return netb;
     }
     
-    public void generateDocBookForUser(Long id, LocalDateTime start,LocalDateTime end) {
+    public boolean generateDocBookForUser(Long id, LocalDateTime start,LocalDateTime end) {
         try {
             User user = usermanager.getUser(id);
             document = DocumentHelper.createDocument();
@@ -180,12 +182,19 @@ public class CreateSampleDocbook {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return netb;
     }
 
 
     public void writeToXML(Document document) throws IOException {
         // lets write to a file
-        XMLWriter writer = new XMLWriter(new FileWriter(path));
+        XMLWriter writer;
+        try {
+            writer = new XMLWriter(new FileWriter(path));
+        }catch(Exception ex){
+            changePath();
+            writer = new XMLWriter(new FileWriter(path));
+        }
         writer.write(document);
         writer.close();
 
