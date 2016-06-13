@@ -53,8 +53,16 @@ import org.w3c.dom.Node;
 public class CreateSampleDocbook {
 
     private static Document document;
-    private static DataSource dataSource; 
-
+    private String path;
+    
+    public CreateSampleDocbook(String OS){
+        if (OS.contains("Windows")){
+            path = "src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
+        }
+        else{
+            path = "JobDB/src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
+        }
+    }
     /**
      *
      * @param start
@@ -64,26 +72,18 @@ public class CreateSampleDocbook {
      * @throws TransformerException
      */
 
-    public void generateDocBook(LocalDateTime start,LocalDateTime end) {
-        UserManager usermanager = new UserManagerImpl();
-        JobDoneManager jobdonemanager = new JobDoneManagerImpl();
-        JobTypeManager jobtypemanager = new JobTypeManagerImpl();
-        ArrayList<JobDone> allJobDone;
-        ArrayList<User> allUsers = (ArrayList)usermanager.getAllUsers();
+    public void generateDocBook() {
         try {
             document = DocumentHelper.createDocument();
             Element root = document.addElement("article");
             Element info = root.addElement("articleinfo");
             info.addElement("title").addText("Jobs Done at specified time");
-            for(User user : allUsers){
-                allJobDone = (ArrayList)jobdonemanager.getAllJobDoneByUserAtTime(user.getId(), start, end);
-                if (!allJobDone.isEmpty()){
-                    
+            for(int j = 0;j<5;j++){
                     Element sectionElement = root.addElement("section");
-                    sectionElement.addElement("title").addText(user.getName());
+                    sectionElement.addElement("title").addText("Vlad Malynych");
                     
                     Element tableElement = sectionElement.addElement("table").addAttribute("frame","all");
-                    tableElement.addElement("title").addText("from:"+start.toString()+"to"+end.toString());
+                    tableElement.addElement("title").addText("from:"+"12.12.45"+"to"+"12.45.15");
                     
                     Element table = tableElement.addElement("tgroup").addAttribute("cols", "4").addAttribute("align", "left");
                     table.addElement("colspec").addAttribute("colnum", "1").addAttribute("colname", "c1").addAttribute("colwidth", "1*");
@@ -101,18 +101,50 @@ public class CreateSampleDocbook {
                     Element foot = table.addElement("tfoot");
                     Element footrow = foot.addElement("row");
                     footrow.addElement("entry").addAttribute("namest", "c3").addAttribute("nameend", "c4").addAttribute("align", "center")
-                            .addText("Total Salary:"+jobdonemanager.getUserSalaryAtTime(user.getId(), start, end));
+                            .addText("Total Salary:"+"1545");
                     
                     Element body = table.addElement("tbody");
-                    for(JobDone jobdone : allJobDone){
-                        JobType jobtype = jobtypemanager.getJobType(jobdone.getJobTypeId());
+                    for(int i=0;i<7;i++){
                         Element bodyrow = body.addElement("row");
-                            bodyrow.addElement("entry").addAttribute("align", "center").addText(jobtype.getName());
-                            bodyrow.addElement("entry").addAttribute("align", "center").addText(jobdone.getStartTime().toString());
-                            bodyrow.addElement("entry").addAttribute("align", "center").addText(jobdone.getEndTime().toString());
-                            bodyrow.addElement("entry").addAttribute("align", "center").addText(jobtype.getPricePerHour().toString());
+                            bodyrow.addElement("entry").addAttribute("align", "center").addText("Work");
+                            bodyrow.addElement("entry").addAttribute("align", "center").addText("12:00");
+                            bodyrow.addElement("entry").addAttribute("align", "center").addText("13:00");
+                            bodyrow.addElement("entry").addAttribute("align", "center").addText("141");
                     }
-                }
+            }
+                for(int j = 0;j<5;j++){
+                    Element sectionElement = root.addElement("section");
+                    sectionElement.addElement("title").addText("Vasya Voedylo");
+                    
+                    Element tableElement = sectionElement.addElement("table").addAttribute("frame","all");
+                    tableElement.addElement("title").addText("from:"+"2.06.85"+"to"+"19.45.95");
+                    
+                    Element table = tableElement.addElement("tgroup").addAttribute("cols", "4").addAttribute("align", "left");
+                    table.addElement("colspec").addAttribute("colnum", "1").addAttribute("colname", "c1").addAttribute("colwidth", "1*");
+                    table.addElement("colspec").addAttribute("colnum", "2").addAttribute("colname", "c2").addAttribute("colwidth", "1*");
+                    table.addElement("colspec").addAttribute("colnum", "3").addAttribute("colname", "c3").addAttribute("colwidth", "1*");
+                    table.addElement("colspec").addAttribute("colnum", "4").addAttribute("colname", "c4").addAttribute("colwidth", "1*");
+                    
+                    Element head = table.addElement("thead");
+                    Element headrow = head.addElement("row");
+                    headrow.addElement("entry").addAttribute("align", "center").addText("Job Type");
+                    headrow.addElement("entry").addAttribute("align", "center").addText("Start");
+                    headrow.addElement("entry").addAttribute("align", "center").addText("End");
+                    headrow.addElement("entry").addAttribute("align", "center").addText("PricePerHour");
+                    
+                    Element foot = table.addElement("tfoot");
+                    Element footrow = foot.addElement("row");
+                    footrow.addElement("entry").addAttribute("namest", "c3").addAttribute("nameend", "c4").addAttribute("align", "center")
+                            .addText("Total Salary:"+"565");
+                    
+                    Element body = table.addElement("tbody");
+                    for(int i=0;i<7;i++){
+                        Element bodyrow = body.addElement("row");
+                            bodyrow.addElement("entry").addAttribute("align", "center").addText("Developer");
+                            bodyrow.addElement("entry").addAttribute("align", "center").addText("15:44");
+                            bodyrow.addElement("entry").addAttribute("align", "center").addText("20:69");
+                            bodyrow.addElement("entry").addAttribute("align", "center").addText("69");
+                    }
             }
 
             writeToXML(document);
@@ -126,9 +158,7 @@ public class CreateSampleDocbook {
 
     public void writeToXML(Document document) throws IOException {
         // lets write to a file
-        XMLWriter writer = new XMLWriter(
-                new FileWriter("src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml")
-        );
+        XMLWriter writer = new XMLWriter(new FileWriter(path));
         writer.write(document);
         writer.close();
 
