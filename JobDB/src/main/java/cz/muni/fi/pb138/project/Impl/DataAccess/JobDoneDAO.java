@@ -357,7 +357,7 @@ public class JobDoneDAO {
             ResourceIterator iterator = result.getIterator();
 
             while (iterator.hasMoreResources()){
-                totalWage.add(this.getWageFromDocument(XMLTransformer.stringToDocument(
+                totalWage = totalWage.add(this.getWageFromDocument(XMLTransformer.stringToDocument(
                         iterator.nextResource().getContent().toString())));
             }
 
@@ -403,7 +403,7 @@ public class JobDoneDAO {
             ResourceIterator iterator = result.getIterator();
 
             while (iterator.hasMoreResources()){
-                totalWage.add(this.getWageFromDocument(XMLTransformer.stringToDocument(
+                totalWage = totalWage.add(this.getWageFromDocument(XMLTransformer.stringToDocument(
                         iterator.nextResource().getContent().toString()), startTime, endTime));
             }
 
