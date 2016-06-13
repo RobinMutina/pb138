@@ -89,8 +89,7 @@ form > input[type = text], form > input[type = datetime-local], form > input[typ
     color: inherit;
     text-decoration: none;
     margin-left: 5px;
-    margin-bottom: 20px;
-    margin-bottom: 15px;
+
 
 }
 
@@ -106,6 +105,7 @@ form > input[type = text], form > input[type = datetime-local], form > input[typ
     text-transform: uppercase;
     font-family: 'Open Sans', sans-serif;
     font-size: 15px;
+    margin-bottom: 15px;
 }
 .card {
     color: #1a1a1a;
@@ -133,4 +133,19 @@ form > input[type = text], form > input[type = datetime-local], form > input[typ
     color: rgba(186, 29, 34, 0.79);
     font-size: 12px;
     margin: 0 auto;
+}
+
+.error{
+    background-color: #ff5111;
+    padding: 10px;
+    font-family: 'Open Sans', sans-serif;
+    color: #ffffff;
+}
+
+.succes{
+    background-color: #07b921;
+    padding: 10px;
+    font-family: 'Open Sans', sans-serif;
+    color: #ffffff;
+
 }
