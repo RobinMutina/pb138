@@ -19,7 +19,7 @@ form > span{
     color: #1a1a1a;
     font-size: 15px;
 }
-form > input[type = text], form > input[type = datetime-local]{
+form > input[type = text], form > input[type = datetime-local], form > input[type = number]{
     border: 1px solid #dadada;
     color: #888;
     height: 20px;
