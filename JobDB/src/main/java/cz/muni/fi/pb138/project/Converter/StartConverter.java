@@ -20,13 +20,13 @@ public class StartConverter {
 
     public StartConverter(){
         pathXML = "src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
-        pathPDF = "GeneratedPDF/jobsdone.pdf";
+        pathPDF = "src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdone.pdf";
         netb = true;
     }
 
     private void changePath(){
         pathXML = "JobDB/src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
-        pathPDF = "JobDB/GeneratedPDF/jobsdone.pdf";
+        pathPDF = "JobDB/src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdone.pdf";
         netb = false;
     }
     /**
@@ -37,7 +37,7 @@ public class StartConverter {
     public static void main(String[] args) throws Exception{
         
         String pathXML1 = "src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
-        String pathPDF1 = "GeneratedPDF/jobsdone.pdf";
+        String pathPDF1 = "src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdone.pdf";
         Boolean netb1 = true;
         
         LocalDateTime start = LocalDateTime.of(2011, 11, 25, 06, 02);
@@ -45,7 +45,7 @@ public class StartConverter {
 
         if ((new CreateSampleDocbook().generateDocBook(start, end)) == false){
             pathXML1 = "JobDB/src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdocbook.xml";
-            pathPDF1 = "JobDB/GeneratedPDF/jobsdone.pdf";
+            pathPDF1 = "JobDB/src/main/resources/cz/muni/fi/pb138/project/Examples/jobsdone.pdf";
             netb1 = false;
         }
         
