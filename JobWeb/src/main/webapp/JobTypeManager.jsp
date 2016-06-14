@@ -3,12 +3,12 @@
 <%@include file="header.jsp" %>
 
      <c:if test="${not empty ErrMsg}">
-         <div style="border: solid 1px red; background-color: yellow; padding: 10px">
+         <div class="error">
              <c:out value="${ErrMsg}"/>
          </div>
      </c:if>
      <c:if test="${not empty ScsMsg}">
-         <div style="background-color: green; padding: 10px">
+         <div class="succes">>
              <c:out value="${ScsMsg}"/>
          </div>
      </c:if>
