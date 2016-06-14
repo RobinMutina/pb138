@@ -4,6 +4,7 @@ import cz.muni.fi.pb138.project.Entities.JobDone;
 import cz.muni.fi.pb138.project.Impl.JobDoneManagerImpl;
 import cz.muni.fi.pb138.project.Impl.JobTypeManagerImpl;
 import cz.muni.fi.pb138.project.Impl.UserManagerImpl;
+import cz.muni.fi.pb138.project.web.Util.JobDoneWithJTandU;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -96,6 +97,7 @@ public class JobDoneServlet extends HttpServlet {
     private void show(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         request.setAttribute("jobtypes", new JobTypeManagerImpl().getAllJobTypes());
         request.setAttribute("users", new UserManagerImpl().getAllUsers());
+        request.setAttribute("jobs", JobDoneWithJTandU.getAllJobs());
         request.getRequestDispatcher("/JobDoneManager.jsp").forward(request, response);
     }
 }
