@@ -42,13 +42,13 @@ public class JobTypeServlet extends HttpServlet {
                     pricePerHour = new BigDecimal(request.getParameter("jobPrice"));
                 }
                 catch (Exception e){
-                    request.setAttribute("error", "Je nutné vyplnit všetky hodnoty!");
+                    request.setAttribute("ErrMsg","Chyba pri spracovaní ceny za hodinu: " +e.getMessage() );
                     log.debug("Form data invalid");
                     showJobTypeList(request, response);
                     return;}
                 //form data validity check
                 if (name == null || name.isEmpty()) {
-                    request.setAttribute("error", "Je nutné vyplnit všetky hodnoty!");
+                    request.setAttribute("ErrMsg", "Neplatne meno");
                     log.debug("Form data invalid");
                     showJobTypeList(request, response);
                     return;
@@ -56,11 +56,90 @@ public class JobTypeServlet extends HttpServlet {
                 JobType jt =  new JobType();
                 jt.setName(name);
                 jt.setPricePerHour(pricePerHour);
-                jobTypeManager.createJobType(jt);
+                try {
+                    jobTypeManager.createJobType(jt);
+                    request.setAttribute("SucsMsg","Novy typ prace bol vytvoreny");
+                }catch (Exception e){
+                    request.setAttribute("ErrMsg","Nepodarilo vytvorit novy typ prace, chyba: " + e.getMessage());
+                    showJobTypeList(request,response);
+                    return;
+                }
                 showJobTypeList(request, response);
                 break;
 
+            case "/update":
+                //if u change the value on button you have to update this ... sry
+                Long jobTypeId = Long.parseLong(request.getParameter("jobtypeid"));
+                if (request.getParameter("formButton").equals("Delete")){
+                    System.out.println("delete");
+                    try {
+                        jobTypeManager.deleteJobType(jobTypeId);
+                    }catch (Exception e){
+                        String emsg;
+                        if(e.getCause()!=null){
+                            emsg = e.getMessage() + "; "+ e.getCause().getMessage();
+                        }else{
+                            emsg =e.getMessage();
+                        }
+                        request.setAttribute("ErrMsg","Nepodarilo sa zmazat typ prace, chyba: " + emsg);
+                        showJobTypeList(request,response);
+                        return;
+                    }
+                    showJobTypeList(request,response);
+                }else{
+                    System.out.println("update");
+                    String jobTypeName = request.getParameter("jobtypename");
+                    if (jobTypeName == null ||jobTypeName.isEmpty()){
+                        request.setAttribute("ErrMsg", "Neplatne meno");
+                        showJobTypeList(request, response);
+                        return;
+                    }
+                    System.out.println("update - jobtypename " + jobTypeName);
+                    BigDecimal jobTypePPH = null;
+                    try {
+                        jobTypePPH = new BigDecimal(request.getParameter("jobtypepph"));
+                    }
+                    catch (Exception e){
+                        String emsg;
+                        if(e.getCause()!=null) {
+                            emsg = e.getMessage() + "; " + e.getCause().getMessage();
+                        }else{
+                            emsg = e.getMessage();
+                        }
+                        request.setAttribute("ErrMsg", "Chyba pri spracovaní ceny za hodinu: " + emsg );
+                        showJobTypeList(request, response);
+                        return;
+                    }
+                    System.out.println("update - pph " + jobTypePPH);
 
+                    JobType jobType =  new JobType();
+                    jobType.setName(jobTypeName);
+                    jobType.setPricePerHour(jobTypePPH);
+                    try {
+                        jobType.setId(jobTypeId);
+                    }catch (Exception e){
+                        //should never happen
+                        throw new RuntimeException(e);
+                    }
+                    try{
+                        jobTypeManager.updateJobType(jobType);
+                        request.setAttribute("ScsMsg","Typ prace bol prepisany");
+                    }catch (Exception e){
+                        String emsg;
+                        if(e.getCause()!=null) {
+                            emsg = e.getMessage() + "; " + e.getCause().getMessage();
+                        }else{
+                            emsg =e.getMessage();
+                        }
+                        request.setAttribute("ErrMsg","Nepodarilo sa prepisat typ prace, chyba: " + emsg);
+                        showJobTypeList(request,response);
+                        return;
+                    }
+                    System.out.println("update - complete");
+                    showJobTypeList(request,response);
+                }
+
+                break;
 
             default:
                 log.error("Unknown action " + action);
@@ -80,6 +159,5 @@ public class JobTypeServlet extends HttpServlet {
     private void showJobTypeList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         request.setAttribute("jobTypes", jobTypeManager.getAllJobTypes());
         request.getRequestDispatcher("/JobTypeManager.jsp").forward(request, response);
-        request.getRequestDispatcher("/JobDoneManager.jsp").forward(request, response);
     }
 }

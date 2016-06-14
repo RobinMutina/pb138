@@ -61,7 +61,7 @@ public class JobTypeManagerImpl implements JobTypeManager {
 
             jobTypeDAO.deleteJobType(id);
         } catch (IllegalArgumentException | ServiceFailureException ex){
-            throw new ServiceFailureException("Creation of jobType failed.", ex);
+            throw new ServiceFailureException("Deletion of jobType failed.", ex);
         }
     }
 
