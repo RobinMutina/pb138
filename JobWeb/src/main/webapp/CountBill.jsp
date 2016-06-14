@@ -3,7 +3,7 @@
 <h3>Fakturácia za obdobie</h3>
 <form action="${pageContext.request.contextPath}/convert/create" method="post">
     <span>Začiatok obdobia:</span><input type="datetime-local" name="from"><br>
-    <span>Koniec obdobia:</span><input type="datetime-local" name="to">
+    <span>Koniec obdobia:</span><input type="datetime-local" name="to"><br>
     <input class="button" type="submit" value="Vyfaktúruj">
 </form>
 <%@include file="footer.jsp" %>
