@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<article>
+    <articleinfo>
+        <author>
+            <title>Zhrnutie práce</title>
+            <subtitle>Evidence příjmů (Web) Tým B</subtitle>
+            <firstname>Marcel</firstname>
+            <surname>Otruba</surname>
+        </author>
+
+        <section>
+            <title>Zhrnutie práce</title>
+            <para>
+                Na projekte som sa podielal tvorením užívateľského webového rozhrania a jeho grafickým spracovaním.
+            </para>
+        </section>
+
+        <section>
+            <title>Webové rozhranie</title>
+            <para>
+                Webové rozhranie je generované pomocou ServletAPI, JSP, JSTL a beží na Servlet containery Jetty. Dáta do JSP stránok sú získavané pomocou Servletov.
+            </para>
+        </section>
+
+        <section>
+            <title>Grafické rozhranie</title>
+            <para>
+                HTML stránky sú štýlované pomocou CSS. Užívateľské grafické prostredie som vytváral tak, aby bolo dostatočne prehľadné, ale zároveň pôsobilo sviežim, moderným dojmom.
+            </para>
+        </section>
+    </articleinfo>
+</article>

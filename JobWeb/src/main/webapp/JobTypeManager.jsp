@@ -25,7 +25,7 @@
                         <td><input name="jobtypename" type="text" value="${jobType.name}"/></td>
                         <td><input name="jobtypepph" type="text" value="${jobType.pricePerHour}"/></td>
                         <td><input name="formButton" class="button" type="submit" value="Update"/></td>
-                        <td><input name="formButton" class="button" type="submit" value="Delete"/></td>
+                        <td><input name="formButton" class="buttondel" type="submit" value="Delete"/></td>
                     </tr>
                 </form>
             </c:forEach>

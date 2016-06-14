@@ -35,13 +35,15 @@
 
 <form action="${pageContext.request.contextPath}/user/addjob" method="post">
     <input type="hidden" name="id" value="${user.id}"/>
+    <span>Typ práce:</span>
     <select name="jobTypeId">
         <c:forEach items="${jobtypes}" var="jobtype">
             <option value="${jobtype.id}">${jobtype.name}</option>
         </c:forEach>
     </select>
-    <input type="datetime-local" name="from"/>
-    <input type="datetime-local" name="to"/>
+    <br>
+    <span>Začiatok práce:</span><input type="datetime-local" name="from"/><br>
+    <span>Koniec práce:</span><input type="datetime-local" name="to"/><br>
     <input class="button" type="submit" value="Add"/>
 </form>
 
