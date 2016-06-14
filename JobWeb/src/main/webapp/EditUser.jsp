@@ -12,7 +12,7 @@
     <input type="hidden" name="id" value="${user.id}"/>
 </form>-->
 
-<h3>Výkaz práce</h3>
+<h3>Výkaz práce odoberateľovi</h3>
 
 <div class="">
     <table>

@@ -35,15 +35,5 @@
             <input class="button" type="submit" value="Pridaj">
         </form>
 
-        <ol>
-        <c:forEach items="${jobs}" var="job">
-            <li>
-                <c:out value="${job.user.name}"/>
-                <c:out value="${job.jobType.name}"/>
-                <input type="datetime-local" value="${job.jobDone.startTime}" disabled/>
-                <input type="datetime-local" value="${job.jobDone.endTime}" disabled/>
-                </li>
-        </c:forEach>
-        </ol>
 
 <%@include file="footer.jsp" %>
