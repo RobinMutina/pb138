@@ -15,8 +15,8 @@
 
     <h3>Zoznam druhov práce</h3>
 
-    <div class="list">
-        <table>
+    <div class="">
+        <table style="margin: 0 auto;">
             <c:forEach items="${jobTypes}" var="jobType">
             <c:set value="${jobType.id}" var="jtid"/>
                 <form action="${pageContext.request.contextPath}/jobtypes/update" method="post">

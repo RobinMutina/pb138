@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<article>
+	<articleinfo>
+		<author>
+			<title>Work Generalizing</title>
+        	<subtitle>Evidence příjmů (Web) Tým B</subtitle>
+            <firstname>Vladislav</firstname>
+            <surname>Malynych</surname>
+        </author>
+
+        <section>
+        	<title>Work dividing</title>
+	        <para>
+	        	My work was to create basic structure of the project, and implement a program that will get information(period of time) and will generate a new DocBook standartized file to be generated in an understandable form.
+	        </para>
+    	</section>        
+
+    	<section>
+        	<title>Resources</title>
+	        <para>
+	        	To make a project structure was created UseCase, Class and EntityRelation diagrams by the means of UML.
+	        </para>
+                <para>
+	        	For easy work with files was used dom4j library.
+	        </para>
+    	</section> 
+
+    	<section>
+        	<title>Implementation</title>
+	        <para>
+	        	At first was created a model of the project, and interfaces according to it. Then was created a classes for generating xml and it's converting, also it includes compatibility features. Finally was done a web page for generating PDF file.
+	        </para>    
+	</articleinfo>
+</article>
